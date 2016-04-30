@@ -11,9 +11,9 @@ their names are jbibtex.pdf, jbtxdoc.pdf, and so on.
 
 ## Character encoding
 
-All the text files containing Japanese characters in ptex-texmf are
-encoded in ISO-2022-JP. This is because ISO-2022-JP encoded texts
-are most suitable for the traditional pTeX engine.
+All the text files containing Japanese characters are encoded in
+ISO-2022-JP. This is because ISO-2022-JP encoded texts are most suitable
+for the pBibTeX program.
 
 ## License
 
