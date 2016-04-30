@@ -1,0 +1,1090 @@
+\documentstyle{jarticle} 
+\def\dg{\gt}
+\def\dm{\mn}
+\voffset=-2.3cm
+\hoffset=-2.3cm
+\textwidth=16.6cm
+\textheight=25cm
+
+\def\JTeX{\leavevmode\lower .5ex\hbox{J}\kern-.17em\TeX}
+\def\JLaTeX{\leavevmode\lower.5ex\hbox{J}\kern-.17em\LaTeX}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\def\JBibTeX{\leavevmode\lower .5ex\hbox{{\rm J}}\kern-0.15em\BibTeX}
+\def\trnote#1{\footnote{\parindent=16pt\hskip-15pt\hang\indent 訳注：#1\parindent=10pt}}
+
+\title{B\kern-.05em{\large I}\kern-.025em{\large B}\kern-.08em\TeX ing：
+B\kern-.05em{\large I}\kern-.025em{\large B}\kern-.08em\TeX の使い方
+\footnote{翻訳の部分は原著者の許可を得て配布するものであり，翻訳について，
+\JBibTeX\ に関する記述については松井に問い合わせられたい．}
+\ $^,$\footnote{\JBibTeX\ (version 0.30)の説明も含む．}}
+\author{Oren Patashnik(訳：松井正一)}
+\date{January 31, 1988(翻訳版：1991年1月1日)}
+
+\begin{document}
+\baselineskip=17pt
+
+\maketitle
+
+\section{概要}
+
+[この文書は\BibTeX\ version 1.00が完成した時に拡充される．
+タイプミス，欠落，不正確な部分，特に，分かりにくい部分について，
+著者まで連絡されたい({\tt patashnik@SCORE.STANFORD.EDU}, 日本語および
+\JBibTeX\ に関する部分は{\tt matsui@denken.or.jp})．
+改善に関する意見を歓迎する．]
+
+これは\BibTeX\ version 0.99a\trnote{version 0.99a以降の
+意味であり，\JBibTeX の基になっている0.99cも含まれる．}
+の利用者のためのものであり\trnote{\JBibTeX 利用者のためでもある．
+\JBibTeX については\cite{jbibtex}も参照されたい．}，
+参考文献スタイルの設計者(製作者)はこの文書を読んだ後，製作者のためだけに
+書かれている ``Designing \BibTeX\ Styles''~\cite{btxhak}を読む必要がある．
+
+本稿は以下の3節からなる．
+第\ref{相違点} 節で \BibTeX のversion 0.98iと0.99aの相違点を，
+各々に対応する標準スタイルファイルの相違点とともに述べる．
+第\ref{latex-appendix} 節は\LaTeX\ book~\cite{latex}の付録B.2の修正であり，
+第\ref{odds-and-ends} 節で他の文書には書かれていない一般的事項，特殊事項に
+ついて述べる．
+本稿の読者は\LaTeX\ bookの関連する節に精通していることが望まれる．
+
+この文書は\BibTeX\ を走らせる作業を助けるための入力例としての役割も持つ．
+多くの文書と同じくこの文書も参考文献の引用を含んでいる．参考文献リストを
+作るためには，
+この文書自身を処理するためには，
+先ず({\tt aux}ファイルを作るために)\LaTeX\ を実行し，
+次に({\tt bbl}ファイルを作るために)\BibTeX\ を実行し，
+最後に\LaTeX をもう2回実行する(1回は{\tt bbl}ファイル中の情報を
+取り込むためであり，もう1回は前方参照を解決するためである)．
+めったに起こらないことではあるが，さらにもう1回
+\BibTeX/\LaTeX\ を走らせなければならないこともある.
+
+\BibTeX\ version 0.99aは，closed参考文献書式を標準としている．
+\LaTeX\ version 2.09とともに使う必要がある\trnote{\JBibTeX\ は
+\JLaTeX\ とともに使う．}．
+open参考文献書式にするためにはオプション文書スタイルの{\tt openbib}
+を使う必要がある．
+(open書式では主ブロックの間で改行が行われるが，closedでは行われない．)
+
+{\dg 注意}：\BibTeX\ 0.99aでは古いスタイルファイルは使えない，同様に
+\BibTeX\ 0.98iでは新しいスタイルファイルは使えない． 
+(しかし新しい\BibTeX\ で古いデータベースファイルを使うことはできる．)
+
+{\dg インプリメンタへの注意}：\BibTeX\ には
+参考文献スタイルファイルの入力ディレクトリのための{\tt TEXINPUTS:}と，
+データベースファイルの入力ディレクトリのための{\tt BIBINPUTS:}
+の2つの論理名\trnote{UNIX/MS-DOSではそれぞれ{\tt TEXINPUTS}と
+{\tt BIBINPUTS}の環境変数}が用意されている．
+
+\vskip\baselineskip
+{\dg\bf\JBibTeX\ での注意点}：
+漢字コード系は{\tt BIBTERMCODE, BIBFILECODE}の2つの
+環境変数で変更可能であり，\JTeX\ の \verb|\kanjiterminaltype, \kanjifiletype|に
+指定するのと同じものを指定する．UNIX版ではサイト毎に標準コードが設定されて
+いるはずであり，MS-DOS版ではSJISが標準である．
+
+\newpage
+\section{変更点}
+\label{相違点}
+本節では\BibTeX\ versions 0.98iと0.99aの違いと，各々のバージョンに対応する
+スタイルの違いについて述べる．0.98iと0.99aの間には
+多くの相違点があるが0.99と1.00の間ではもっとずっと少なくなるであろう．
+
+\subsection{\BibTeX\ の新機能}
+\label{features}
+
+以下に\BibTeX\ の新機能とその使い方を列挙する\trnote{\JBibTeX\ の機能でも
+ある．}．
+
+\begin{enumerate}
+
+\item
+個々の文献毎に \verb|\cite|,  \verb|\nocite|を明示的に指定
+しなくても， `\verb|\nocite{*}|' コマンドひとつで，
+データベース中のすべての文献を並べたリストを作ることができる．
+これは，このコマンドを
+使った場所で，データベース中のすべてのエントリをその
+順番で \verb|\nocite|することに相当する．
+
+\item
+\label{concat}
+フィールド(あるいは{\tt @STRING}の定義中で)文字列の連結を指定できる．
+例えば，次のように定義しておくと，
+\begin{verbatim}
+    @STRING( WGA = " World Gnus Almanac" )
+\end{verbatim}
+別々ではあるが似たような{\tt title}エントリを簡単に作れる．
+\begin{verbatim}
+  @BOOK(almanac-66,
+    title = 1966 # WGA,
+    .  .  .
+  @BOOK(almanac-67,
+    title = 1967 # WGA,
+\end{verbatim}
+次のような使い方も可能である．
+\begin{verbatim}
+    month = "1~" # jan,
+\end{verbatim}
+この時，スタイルファイル中での{\tt jan}の省略形の定義によって異なるが，
+{\tt bbl}ファイル中では `\verb|1~Jan.|' あるいは
+`\verb|1~January|' のようになる．
+(フィールドのデータ長には上限があるが) `{\tt\#}' によって
+任意の数の文字列を連結できる．
+`{\tt\#}' の前後には，スペース\trnote{漢字コードの
+スペース(空白)ではダメ!}か改行を置くことを忘れてはならない．
+
+\item
+\BibTeX\ に新たな相互参照機能を付け加えた．これを例にそって説明する．
+文書中に \verb|\cite{no-gnats}|と指定し，
+データベース中に次の2つのエントリがあるとしよう．
+\begin{verbatim}
+  @INPROCEEDINGS(no-gnats,
+    crossref = "gg-proceedings",
+    author = "Rocky Gneisser",
+    title = "No Gnats Are Taken for Granite",
+    pages = "133-139")
+  .  .  .
+  @PROCEEDINGS(gg-proceedings,
+    editor = "Gerald Ford and Jimmy Carter",
+    title = "The Gnats and Gnus 1988 Proceedings",
+    booktitle = "The Gnats and Gnus 1988 Proceedings")
+\end{verbatim}
+この時，次に述べる2つのことがおこる．
+第1に，特別な意味を持つフィールド{\tt crossref}は，{\tt no-gnats}
+エントリで欠落しているフィールドを，
+引用している{\tt gg-proceedings}から継承することを\BibTeX に
+伝える．先の例でいえば{\tt editor}と{\tt booktitle}の2つを
+継承する．
+ただし，標準のスタイルでは{\tt booktitle}フィールドは
+{\tt PROCEEDINGS}型のエントリでは意味を持たない．
+この例の{\tt gg-proceedings}エントリの{\tt booktitle}フィールドは，
+これを参照している
+ものがこのフィールドを継承できるようにするためだけのものである．
+この会議の論文がどんなに多くデータベース中にあっても，
+この{\tt booktitle}フィールドは1回だけ書けばよい．
+
+第2に, {\tt gg-proceedings}エントリを \verb|\cite|あるい
+は \verb|\nocite|で引用している
+2つ以上の論文が参照していると, このエントリ
+自身が \verb|\cite|あるいは \verb|\nocite|されていなくても，
+\BibTeX は自動的に{\tt gg-proceedings}エントリを参考文献リストに
+加える．つまり{\tt no-gnats}の他に1つ以上の論文が\linebreak {\tt gg-proceedings}を
+参照していると，自動的に参考文献リストに加えられる．
+
+ただし，上記の結果となることを保証するためには，
+相互参照されているエントリは，
+それを引用しているすべてのエントリよりデータベースファイル中で
+後ろになければならない．
+従って，相互参照されているエントリは最後に置くことになる．
+(さらに，残念なことだが，ネストされた相互参照
+はうまく扱えない．すなわち，相互参照している先がさらに他を参照している
+場合にはうまく動作しないことがある．)
+
+
+最後の注意：
+この相互参照機能は，現在でも利用できる，古い\BibTeX の
+参照の機能とは全く関係がない．
+すなわち，次のような使い方は新しい機能から何の影響も受けない．
+\begin{verbatim}
+    note = "Jones \cite{jones-proof} improves the result"
+\end{verbatim}
+
+
+\item
+\BibTeX\ はアクセント付き文字(accented character)を扱えるようになった．
+例えば次のような2つのフィールドからなるエントリがあり，
+\begin{verbatim}
+    author = "Kurt G{\"o}del",
+    year = 1931,
+\end{verbatim}
+参考文献スタイルとして{\tt alpha}を使ったとすると，
+\BibTeX\ はこのエントリのラベルをあなたの望み通りに [G{\"o}d31] とする．
+このような結果を得るためには\verb|{\"o}|あるいは\verb|{\"{o}}|のように
+アクセント付き文字列を中括弧(ブレース; \verb|{}|)で囲んでやる必要がある．
+さらに，このために使う中括弧は，フィールドやエントリの区切り以外の中括弧の
+中に含まれてはならないし，中括弧の中の一番最初の文字はバックスラッシュ
+でなければならない．従ってこの例でいえば\verb|{G{\"{o}}del}|
+でも\verb|{G\"{o}del}|でもうまくゆかない．
+
+この機能は\LaTeX~bookの表3.1と表3.2にある，バックスラッシュの付かない
+外国文字(foreign symbols)を除く，すべてのアクセント付き文字を扱うことができる．
+この機能は利用者が定義する「アクセント付き文字」でも使える．すぐ後で例を示す．
+ラベルの文字数を数える場合には，\BibTeX\ は中括弧の中の
+文字列をまとめて1文字と数える．
+
+
+\item
+\BibTeX\ はハイフン付きの人名も扱うことができる．例えば，次のような
+エントリ，
+\begin{verbatim}
+    author = "Jean-Paul Sartre",
+\end{verbatim}
+で{\tt abbrv}スタイルを使うと，結果は `J.-P. Sartre' となる．
+
+\item
+\label{preamble}
+データベースファイル中に\verb|@PREAMBLE|を書くことができる．
+コマンドは，文字列からなり，名前と等号記号がないことを
+除けば\verb|@STRING|と同じである．以下に例を示す．
+\begin{verbatim}
+    @PREAMBLE{ "\newcommand{\noopsort}[1]{} "
+             # "\newcommand{\singleletter}[1]{#1} " }
+\end{verbatim}
+(ここでも文字列連結の機能が使われていることに注意しよう)．
+標準のスタイルでは，ここに書いた文字列(多くの場合\LaTeX\ のマクロ)
+をそのまま{\tt bbl}ファイルに書き出す．
+上に示した \verb|\noopsort|コマンドを例に，使い方を示す．
+
+ソーティングする(アルファベット順に並べる)ことを考えよう．
+\BibTeX\ は割とうまく並べてくれるが，条件によっては\BibTeX\ が
+混乱することがある．
+データベースの中に同一著者による2巻からなる本のエントリがあり，
+参考文献リストでは第1巻が第2巻の直前に並んで欲しいとしよう．
+さらに第1巻には1973年に発刊された第2版があり，第2巻には第1版しかなく
+その発刊は1971年であったとしよう．
+標準スタイル{\tt plain}は著者名と発刊年でソートキーを作り，
+第2巻の方が発刊が早いために，\BibTeX\ を助けてやらない限り，第2巻
+の方が先にならんでしまう．
+このためにはこの2つの{\tt year}フィールドを次のようにする．
+\begin{verbatim}
+    year = "{\noopsort{a}}1973"
+    .  .  .
+    year = "{\noopsort{b}}1971"
+\end{verbatim}
+\verb|\noopsort|の定義から，
+\LaTeX\ は年としては本当の年以外は印刷しない．
+しかし\BibTeX\ は \verb|\noopsort|の指定が `a', `b' を
+修飾するものとみなすので，ソートの時にはあたかも `a1973' と `b1971'
+が年のように扱う．`a' は `b' より前なので，望み通り第1巻が第2巻の前に並ぶ．
+ところで，もしこの著者の別の著作がデータベース中にある場合には
+他の著作との関係を正しくするために\verb|{\noopsort{1968a}}1973|と
+\verb|{\noopsort{1968b}}1971|といったように書かねばならないこともある．
+(ここでは第1巻の第1版の発刊年が1968年であることから，これで正しい
+場所に並ぶものと考えている．)
+
+使える\verb|@PREAMBLE|コマンドの数には上限があるが，\verb|@PREAMBLE|
+の数を1つのデータベースにつき1つにしておけば，上限を超えることはない．
+したがって，項目\ref{concat} で述べた，文字列の連結機能を使えば
+この制限は大した問題ではない．
+
+\item
+\BibTeX\ のソーティング算法は安定(stable)なものとなった．つまり，
+2つの異なるエントリが同一のソートキーを持つ場合には，
+引用順に並ぶようになった．
+(参考文献スタイルがこれらのソートキー，通常は著者名の後に年と
+表題を付加したもの，を作る\trnote{日本語用のスタイルでは，
+yomiというフィールドがあればそれを著者名の代わりに使うことで，読みの
+アルファベット順に並ぶようにしている．})
+
+\item
+\BibTeX\ はファイル名の小文字/大文字変換を行わないようになった．
+これにより，例えばUNIXシステム上に\BibTeX\ をインストールするのが簡単になった．
+
+\item
+コマンドラインの{\tt aux}ファイル名の処理を行うコードを付加することが
+簡単に行えるようになった．
+
+\end{enumerate}
+
+
+\subsection{標準スタイルの変更点}
+
+本節では，一般利用者に関係する標準スタイル
+({\tt plain}, {\tt unsrt}, {\tt alpha}, {\tt abbrv})
+の変更点について述べる\trnote{対応する日本語用のスタイルは
+各々{\tt jplain}, {\tt junsrt},{\tt jalpha}, {\tt jabbrv}である．}．
+スタイル作成者に関係した変更点は
+``Designing \BibTeX\ Styles''~\cite{btxhak}に述べられている．
+
+\begin{enumerate}
+
+\item
+一般にソーティングは先ず ``author'' で，次に年，最後に表題で行う．
+古いバージョンでは年が使われていなかった．
+(しかし{\tt alpha}スタイルでは先ずラベル
+でソートした後，上記のソートを行う)．
+authorの前後に引用符が付いているのは，editor, organizationなどの
+他のフィールドが使われることもあるからである．
+
+\item
+多くの不必要なタイ(\verb|~|)を取り除いた．
+これにより，参考文献リストをフォーマットした時に，
+\LaTeX\ から出力される `\hbox{\tt Underfull} \verb|\hbox|'
+の数が少なくなった．
+
+\item
+イタリック指定(\hbox{\verb|{\it ...}|})を
+強調指定(\hbox{\verb|{\em ...}|})に置き換えた．
+出力は変化しないはずである．
+
+\item
+{\tt alpha}スタイルでは，ラベルを作る際に著者名のいくつかを省略した
+ことを示す記号を `*' から `$^{+}$' に変更した．
+しかし，以前の形式の方が好き，あるいはこんな記号が不要な場合でも
+スタイルファイルの修正は不要である．
+{\tt alpha}スタイルが(\verb|\thebibliography| environmentの直前に)
+{\tt bbl}ファイルに書き出す \verb|\etalchar|
+コマンドを，前節の第\ref{preamble} 項目で述べたように，
+データベース中の{\tt @PREAMBLE}を使って，
+\LaTeX\ の \verb|\renewcommand|を用いて定義し直せば，`$^{+}$'
+の形式を変更できる．
+
+\item
+{\tt abbrv}スタイルでは，月名として`March'と`Sep.'
+の替わりに`Mar.'と`Sept.'を使うようになった．
+
+\item
+標準スタイルでは，
+\BibTeX\ の新しい相互参照機能を使っている場合には，
+他の文献を参照しているエントリに対しては，
+参照先に記述されているフィールドのほとんど全てを
+省略し， \verb|\cite|を使って参照を示すようになっている．
+
+これは参照元が大部な著作の一部分である場合に使う．
+このような状況としては以下の5つが考えられる．
+(1) {\tt INPROCEEDINGS}
+(あるいは{\tt CONFERENCE}, どちらも同じこと)
+が{\tt PROCEEDINGS}を参照している;
+(2) {\tt BOOK}, (3) {\tt INBOOK},
+あるいは(4) {\tt INCOLLECTION}
+が{\tt BOOK}を参照している
+(複数巻からなる書物の中のある1巻が参照している);
+(5) {\tt ARTICLE}が{\tt ARTICLE}を参照している．
+(この場合には，参照されているものは実は論文誌全体であるが，
+エントリ型として{\tt JOURNAL}がないからこうする．
+この時には論文誌の{\tt author}と{\tt title}がないという
+警告メッセージが出力されるが，このメッセージは無視すればよい)．
+
+\item
+{\tt MASTERSTHESIS}と{\tt PHDTHESIS}
+エントリ型では，任意フィールドとして{\tt type}を書けるようになった．
+これにより，
+\begin{verbatim}
+    type = "{Ph.D.} dissertation"
+\end{verbatim}
+とデータベース中に書くことで，標準の `PhD thesis' の替わりに
+`Ph.D.\ dissertation' とできるようになった．
+
+\item
+同様に{\tt INBOOK}と{\tt INCOLLECTION}
+エントリ型では，任意フィールドとして{\tt type}を書けるようになった．
+これを使えば，次のようにデータベースに書いておけば，
+標準の `chapter~1.2' の替わりに，`section~1.2' とできる．
+\begin{verbatim}
+    chapter = "1.2",
+    type = "Section"
+\end{verbatim}
+
+\item
+{\tt BOOKLET}, {\tt MASTERSTHESIS},
+{\tt TECHREPORT}エントリ型では，
+{\tt BOOK}の{\tt title}のようにではなく，
+{\tt ARTICLE}の{\tt title}のように，
+表題をフォーマット(タイプセット)するようになった．
+
+\item
+{\tt PROCEEDINGS}と{\tt INPROCEEDINGS}
+エントリ型では，{\tt address}フィールドを出版社，主催者の住所を
+示すために使うのではなく，会議の開催された場所を示すために使うように
+なった．
+出版社，開催者の住所を入れたいのであれば，
+{\tt publisher}か{\tt organization}フィールドに入れること．
+
+\item
+{\tt BOOK}, {\tt INBOOK}, {\tt INCOLLECTION},
+{\tt PROCEEDINGS}エントリ型では，{\tt volume}だけを
+許すのではなく，
+{\tt volume}か{\tt number}のいずれか一方を許すようになった．
+
+\item
+{\tt INCOLLECTION}エントリ型では，{\tt series}と{\tt edition}
+フィールドを許すようになった．
+
+\item
+{\tt INPROCEEDINGS}と{\tt PROCEEDINGS}
+エントリ型では，
+{\tt volume}または{\tt number}と
+{\tt series}を許すようになった．
+
+\item
+{\tt UNPUBLISHED} エントリ型では，日付情報を後に付けて，
+{\tt note}フィールドを1つのブロックとして出力するようになった．
+
+\item
+{\tt MANUAL}エントリ型では，{\tt author}フィールドが
+空であれば，{\tt organization}フィールドを第1ブロックとして
+出力するようになった．
+
+\item
+{\tt MISC}エントリ型では，全ての任意フィールド
+(すなわち全てのフィールド)が空の時には
+警告メッセージを出力するようになった．
+
+\end{enumerate}
+
+\subsection{\JBibTeX\ の標準スタイル}
+
+\JBibTeX\ の標準スタイルとしては{\tt plain, alpha, abbrv, unsrt}に対応して
+{\tt jplain, jalpha, jabbrv,\linebreak junsrt}が作成されている．また情報処理学会
+論文誌{\tt tipsj}, 情報処理学会欧文論文誌{\tt jipsj}, 電子情報通信学会論文誌{\tt tieice}, 
+日本オペレーションズリサーチ学会論文誌{\tt jorsj},
+人工知能学会{\tt jsai}, ソフトウェア学会誌{\tt jssst}用のスタイルも作成されて
+いる．これらのスタイルで行なっている日本語対応は以下の通りである({\tt jipsj}
+は英語なので，変更は必ずしも日本語対応のためだけではない)．
+
+\begin{enumerate}
+\item 著者名が日本語かどうかで名前のフォーマットの方法を変える．
+
+\item 著作名に日本語が含まれる場合には強調指定を付けない．
+
+\item ページ範囲指定を{\tt Page}, {\tt Pages}から{\tt p.}, {\tt pp.}に
+変更した．ナンバー指定，ボリューム指定を{\tt No.}, {\tt Vol.}に変更した．
+
+\item ソーティングキーを作る時には，{\tt yomi}フィールドがあればその情報を
+著者名，編集者名の代りに使う．
+\end{enumerate}
+
+\section{データベースのエントリ}
+\label{latex-appendix}
+
+本節は\LaTeX\ book~\cite{latex},
+\copyright~1986, by Addison-Wesley の付録B.2の単なる修正版である．
+基本構成は同じであり，細目が少し変更されている．
+
+\subsection{エントリの型}
+
+参考文献をデータベースに登録する場合に一番最初に決めなければ
+ならないことは，その型(種類)である．完全な決まったやり方はないが，
+\BibTeX\ ほとんどすべての文献を合理的に扱うためのエントリの型を
+用意している．
+
+文献の出版形態が異なればそれが持っている情報も異なる．
+論文誌に発表されたものには論文誌の巻数(volume)と番号(number)があるが，
+本の場合にはこれらは通常意味がない．
+従って異なったエントリ型毎に異なったフィールドがある．
+エントリの型毎にフィールドは以下の3つに分類される．
+\begin{description}
+
+\item[必須]
+これが欠落していると警告メッセージが出力され，まれにではあるが
+文献リストが変な形に出力される．
+もし必須な情報が意味を持たないのであれば，間違った型を指定しているのである．
+必須な情報が意味を持つのであるが，他のフィールドにそれが記述されている
+場合には警告メッセージを無視すればよい．
+
+\item[任意]
+このフィールドは，もしあれば使われるが，何の問題もなしに省略できる．
+もしこれらのフィールドの情報が読者を助けるのであれば，
+これを省略しない方がよい．
+
+\item[無視される]
+このフィールドは無視される．
+\BibTeX\ は必須あるいは任意のフィールド以外は無視するから，{\tt bib}ファイル
+には好きなフィールドを書いてよい．
+参考文献リストには出力されないかもしれないが，
+文献に関連するすべての情報を{\tt bib}ファイルに書いておくとよい．
+例えば，論文のアブストラクトをコンピュータのファイルにとっておくのであれば，
+{\tt bib}ファイル中の{\tt abstract}フィールドに入れておけばよい．
+{\tt bib}ファイルはアブストラクトを入れて置くにちょうどよい場所であり，
+アブストラクト付きの文献リストを作成するスタイルを作ることもできる．
+
+{\dg 注意}：フィールド名をミススペルするとそのフィールドは無視される．
+特に任意フィールドの場合には\BibTeX\ は警告メッセージを出さないから，
+タイプミスに注意しなければならない．
+
+\end{description}
+
+以下で各々のエントリの型について説明を行う．
+同時に，文献リストの項目として並べられる順番に
+(エントリ型によっては特定のフィールドのあるなしで若干順番が異なることもあるが)
+必須フィールド，任意フィールドを示す．
+これらエントリの型は，{\em Scribe}システムのためにBrian Reidが
+採用したvan~Leunen~\cite{van-leunen}の分類と同じものである．
+個々のフィールドの意味については次節で説明する．
+標準以外のスタイルでは任意フィールドのいくつかを無視することがある．
+{\tt bib}ファイル中ではエントリの型の前に{\tt @}文字を
+付けるのを忘れてはならない．
+
+
+\begin{description}
+\sloppy
+
+\item[article\hfill] 論文誌中の論文，雑誌の記事．
+必須フィールド：{\tt author}, {\tt title}, {\tt journal},
+{\tt year}.
+任意フィールド：{\tt volume}, {\tt number},
+{\tt pages}, {\tt month}, {\tt note}.
+
+\item[book\hfill] 出版主体が明確な本．
+必須フィールド：{\tt author}または{\tt editor},
+{\tt title}, {\tt publisher}, {\tt year}.
+任意フィールド：{\tt volume}または{\tt number}, {\tt series},
+{\tt address}, {\tt edition}, {\tt month},
+{\tt note}.
+
+\item[booklet\hfill] 印刷，製本されているが，出版者あるいはスポンサー
+の名前がないもの．
+必須フィールド：{\tt title}.
+任意フィールド：{\tt author}, {\tt howpublished},
+{\tt address}, {\tt month}, {\tt year}, {\tt note}.
+
+\item[conference\hfill] {\tt INPROCEEDINGS}と同じ．
+{\em Scribe\/}との互換性のため．
+
+\item[inbook\hfill] 章(あるいは節などの)本の一部分かつ/または(and/or)
+本のあるページ範囲．
+必須フィールド：{\tt author}あるいは{\tt editor}, {\tt title},
+{\tt chapter}かつ/または{\tt pages}, {\tt publisher},
+{\tt year}.
+任意フィールド：{\tt volume}または{\tt number}, {\tt series},
+{\tt type}, {\tt address},
+{\tt edition}, {\tt month}, {\tt note}.
+
+\item[incollection\hfill] それ自身の表題を持つ本の一部．
+必須フィールド：{\tt author}, {\tt title}, {\tt booktitle},
+{\tt publisher}, {\tt year}.
+任意フィールド：{\tt editor}, {\tt volume}または{\tt number},
+{\tt series}, {\tt type}, {\tt chapter}, {\tt pages},
+{\tt address}, {\tt edition}, {\tt month}, {\tt note}.
+
+\item[inproceedings\hfill] 会議録中の論文．
+必須フィールド：{\tt author}, {\tt title}, {\tt booktitle},
+{\tt year}.
+任意フィールド：{\tt editor}, {\tt volume}または{\tt number},
+{\tt series}, {\tt pages}, {\tt address}, {\tt month},
+{\tt organization}, {\tt publisher}, {\tt note}.
+
+\item[manual\hfill] マニュアル．
+必須フィールド：{\tt title}.
+任意フィールド：{\tt author}, {\tt organization},
+{\tt address}, {\tt edition}, {\tt month}, {\tt year},
+{\tt note}.
+
+\item[mastersthesis\hfill] 修士論文．
+必須フィールド：{\tt author}, {\tt title}, {\tt school},
+{\tt year}.
+任意フィールド：{\tt type}, {\tt address}, {\tt month},
+{\tt note}.
+
+\item[misc\hfill] 他のどれも当てはまらない時に使う．
+必須フィールド：なし．
+任意フィールド：{\tt author}, {\tt title}, {\tt howpublished},
+{\tt month}, {\tt year}, {\tt note}.
+
+\item[phdthesis\hfill] 博士論文．
+必須フィールド：{\tt author}, {\tt title}, {\tt school},
+{\tt year}.
+任意フィールド：{\tt type}, {\tt address}, {\tt month},
+{\tt note}.
+
+\item[proceedings\hfill] 会議録．
+必須フィールド：{\tt title}, {\tt year}.
+任意フィールド：{\tt editor}, {\tt volume}または{\tt number},
+{\tt series}, {\tt address}, {\tt month},
+{\tt organization}, {\tt publisher}, {\tt note}.
+
+
+\item[techreport\hfill] 学校などで発行されているテクニカルレポートであり，
+通常は通番を持つ．
+必須フィールド：{\tt author},
+{\tt title}, {\tt institution}, {\tt year}.
+任意フィールド：{\tt type}, {\tt number}, {\tt address},
+{\tt month}, {\tt note}.
+
+\item[unpublished\hfill] 正式には主版されていないが，著者，表題のある著作物．
+必須フィールド：{\tt author}, {\tt title}, {\tt note}.
+任意フィールド：{\tt month}, {\tt year}.
+
+\end{description}
+
+上に示したフィールドに加えて，各々のエントリ型では任意フィールドとして
+{\tt key}があり，スタイルによっては並べ替え，相互参照，
+あるいは \verb|\bibitem|を作るのに使われる．
+また，「著者」情報が欠けているエントリに対しては必ず{\tt key}フィールド
+を入れておかないといけない．
+「著者」は通常は{\tt author}フィールドに書くが，
+エントリの型によっては，{\tt editor}フィールド
+であったり，あるいは{\tt organization}フィールドであったりもする
+(第\ref{odds-and-ends} 節でもっと詳しく説明する)．
+{\tt key}フィールドを \verb|\cite|に現れるデータベースのエントリの 最初に書くキーと混同してはならない．この項目が ``key'' という名前
+なのは{\it Scribe}との互換性のためである．
+
+\vskip\baselineskip
+{\dg\bf \JBibTeX\ での注意}：\JBibTeX\ の標準スタイルでは
+以下に示されているフィールドの他に，任意フィールドとして，
+漢字コード表記された著者名の「読み」を書くためのフィールドとして
+{\tt yomi}がある．
+
+\subsection{フィールド}
+
+標準スタイルで認識されるフィールドを以下に示す．
+標準スタイルでは無視されるが，この他の任意のフィールドを
+書いてもよい\trnote{\JBibTeX\ の標準スタイル用に{\tt yomi}フィールドが
+追加されている．}
+
+\begin{description}
+
+\item[address\hfill]
+通常は{\tt publisher}などの住所を書く．
+van~Leunenは，大きな出版社に対してはこれを省略することを勧めている．
+他方，小さな出版社に対しては，読者の便を考えて，完全な住所を書くとよい．
+
+\item[annote\hfill]
+注釈．
+標準のスタイルでは使われないが，他の注釈つきの参考文献スタイルで使われる．
+
+\item[author\hfill]
+著者名であり，\LaTeX\ bookに説明されているように書く\trnote{\JBibTeX\ では，
+漢字コード著者名の姓と名の間にはスペース(半角でも全角でも)を置くことが
+望ましい(スペースがないと{\tt jabbrv}スタイルなど省略形が基本のスタイルの
+時に姓だけにならない)．}．
+
+\item[booktitle\hfill]
+一部分を引用する本の表題．
+記述の方法については\LaTeX\ bookを参照のこと．
+エントリ型が本({\tt book})の場合には{\tt title}を使う．
+
+\item[chapter\hfill]
+章(あるいは節などの)番号．
+
+\item[crossref\hfill]
+参照する文献のデータベースキー．
+
+\item[edition\hfill]
+本の版---例えば ``Second''．
+(日本語以外では)順序数で書くこと，また最初の文字は上記の例のように
+大文字のこと．必要であれば標準スタイルが自動的に小文字に変換する．
+
+\item[editor\hfill]
+編集者の名前を\LaTeX\ bookの説明のように書く．
+{\tt author}フィールドもある場合には，ここには論文が載っている
+本あるいは論文集の編集者名を書く\trnote{\JBibTeX\ では，
+編集者名の姓と名の間にはスペースを置くことが望ましい(スペースが
+ないと{\tt jabbrv}スタイルの時に姓だけにならない)．}．
+
+\item[howpublished\hfill]
+この奇妙な著作がどのようにして出版されたか．
+最初の文字は大文字でなければならない．
+
+\item[institution\hfill]
+テクニカルレポートのスポンサー名．
+
+\item[journal\hfill]
+論文誌の名前．
+多くの論文誌の省略形が用意されている．
+{\it Local Guide}を参照のこと．
+
+\item[key\hfill]
+著者に関する情報(第\ref{odds-and-ends} 節参照)がない時に
+ソーティング，相互参照，ラベル作成の処理に使われる．
+このフィールドを，データベースエントリの
+最初の項目である \verb|\cite|で使うキーと混同してはならない．
+
+\item[month\hfill]
+著作物が出版された月．未出版であれば書かれた月．
+\LaTeX\ bookの付録B.1.3に示されている3文字の省略形を使うこと\trnote{
+念のために列挙すると{\tt jan, feb, mar, apr, may, jun, 
+jul, aug, sep, oct, nov, dec}}．
+
+\item[note\hfill]
+読者を助ける付加的な情報を記述する．
+最初の文字は大文字でなければならない．
+
+\item[number\hfill]
+論文誌，雑誌，テクニカルレポートあるいは一連の著作の番号．
+通常，論文誌，雑誌の特定の号は巻数と番号で識別され，テクニカルレポート
+を発行している機関はレポートに番号を振っている．またシリーズの
+本にも番号がある．
+
+\item[organization\hfill]
+会議のスポンサーあるいはマニュアル{\tt manual}を出版した機関の名称．
+
+\item[pages\hfill]
+{\tt 42--111}, {\tt 7,41,73--97}, {\tt 43+}などの(いくつかの)ページあるいは
+ページ範囲(最後の例は後続ページが単純な範囲でないことを示す)．
+{\em Scribe}互換のデータベースの維持を簡単にするため，標準のスタイルでは
+{\tt 7-33}のようなダッシュ1つの形式を\TeX\ での数値範囲の指定形式である
+{\tt 7--33}のようなダッシュ2つに自動的に変換する．
+
+\item[publisher\hfill]
+出版主体の名称．
+
+\item[school\hfill]
+修士論文，博士論文が書かれた(提出された)大学名．
+
+\item[series\hfill]
+一連の書物のシリーズ名，セット名．
+本全体を引用する場合には，{\tt title}フィールドにその本の
+表題を書き，任意フィールドである{\tt series}にシリーズ名
+あるいは複数巻の書物の題名を書く．
+
+\item[title\hfill]
+著作の表題．\LaTeX\ bookの説明のようにタイプセットされる．
+
+\item[type\hfill]
+テクニカルレポートの種類---例えば ``Research Note''．
+
+\item[volume\hfill]
+論文誌あるいは複数巻の書物の巻数．
+
+\item[year\hfill]
+著作物が出版された年．未出版であれば書かれた年．
+標準スタイルは，`{(about 1984)}' のような，どんな形でも{\tt year}フィールド
+に許すが，区切り文字以外の最後の4文字は，
+通常は{\tt 1984}のような4つの数字から構成されていなくてはならない．
+
+\item[yomi\hfill]{\dg\bf\JBibTeX\ のみで意味を持つ}．
+著者(編集者)名が日本語文字の時にソート，ラベル作成がうまくいくように
+漢字コード氏名の代りに使うフィールドであり，ローマ字表記した姓名を著者名などと
+同じ書き方で記述する(ひらがなで書いて五十音順にソートしたりもできる)．
+例を示す．
+\begin{verbatim}
+         author="松井 正一 and 高橋 誠",
+         yomi="Shouichi Matsui and Makoto Takahasi"
+\end{verbatim}
+\end{description}
+\newpage
+
+\section{ヒント}
+\label{odds-and-ends}
+
+本節では，他では詳しく説明されていない事項を解説する．
+簡単なものから順に説明する．
+その前に先ず口上を述べたい．
+
+参考文献のタイプセットスタイルの選択の余地は少ない．論文誌$X$は$Y$の
+スタイルを指定するし，また別の論文誌は別のものを指定する．
+しかし，選択の余地があるのであれば，{\tt plain}標準スタイルを使うことを
+勧める．
+このスタイルは，他のものより具体的で生き生きした，より良い著作と
+なるとvan~Leunen~\cite{van-leunen}は主張している．
+
+他方で，
+{\em The Chicago Manual of Style\/}~\cite{chicago},
+は引用が本文中に `(Jones, 1986)' のように
+現れる「著者-年月日形式(author-date)」を推奨している．
+しかし，私はこのような方式は関連する/しない情報が散乱するだけでなく，
+本文が漠然とし，たいしたことではないかも知れないが受動態や曖昧な文が多くなると
+考える．さらにコンピュータタイプセットの出現により，
+「これが最も実用的な方法である」といった議論は
+まったく意味のないものとなったと考える．
+例えば，{\em Chicago Manual\/}の401ページの中ごろに述べられている，
+「{\tt plain}のようなスタイルの欠点は，タイプした後では，
+引用文献の追加・削除のためには，
+参考文献リストの修正だけでなく，本文中の番号の修正が必要なことである」
+といった主張はまったくの時代錯誤といえる．
+\LaTeX\ を使えば欠点ではないことは明らかである．
+
+最後に，
+「著者名-年月日形式」の論理的欠陥はそのためのプログラムを作成してみると
+非常に明白になる．例えば，多数の参考文献リストを普通にアルファベット順
+に並べた時に，`(Aho et~al., 1983b)' が `(Aho et~al., 1983a)' の半ページ
+も後に並ぶことがある．
+これを修正するともっと悪くなることもある．
+なんてこった．
+(悲しいことに，私はそういったスタイルをプログラムしたことがある．
+阿呆な出版者のせいで，あるいは私の主張に同調せずに，このような
+スタイルを使いたいのであれば，
+この方式のスタイルはRochester style collectionから入手可能である．)
+
+前口上が長くなってしまったが，私の気分は良くなり，血圧も正常に戻った．
+以下に標準スタイルで\BibTeX\ を使う時のヒントを示す(標準以外のスタイルでも
+多くの事柄があてはまる)．
+
+\begin{enumerate}
+
+\item
+\BibTeX\ のスタイル設計言語を使えば，参考文献のリスト作成以外にも，
+一般的なデータベース操作のためのプログラムを作ることができる．
+これを使ってデータベース中のすべての文献のデータベースキー/著者の
+索引を生成するプログラムを作ることは，この言語に精通していれば簡単な
+ことである．
+どんなツールが用意されているかについては{\em Local Guide\/}
+を参照されたい．
+
+\item
+標準スタイルで使っている13個のエントリ型でほとんどの文献をうまく
+フォーマットできるが，13個だけでなんでもうまくできるわけではない．
+したがって，エントリ型の使い分けを工夫するとよい(しかし，
+余りにいろんな型を試してみないとうまくいかないのは，
+エントリの型が間違っていることが多い)．
+
+\item
+フィールド名は厳格に考えなくてよい．
+例えば，出版者の住所を{\tt address}フィールドではなく，
+名前とともに{\tt publisher}フィールドに入れることもできる．
+あるいは，複雑な形式の文献には{\tt note}フィールドをうまく使うことで
+対処できる．
+
+\item
+警告メッセージは深刻に考える必要はない．
+例えば{\em The 1966 World Gnus Almanac}のように，表題に年が
+入っている文献では，{\tt year}フィールドは省略した方がよく，
+\BibTeX\ の警告メッセージは無視してよい．
+
+\item
+{\tt author}, {\tt editor}の名前が余りに多い時には名前リストを
+``and others'' で終りにしておけば，標準スタイルでは
+``et~al.'' に自動的に変換される\trnote{\JBibTeX では，
+漢字コード著者なら ``ほか'' に変換される．}．
+
+\item
+一般に，\BibTeX\ が大文字を小文字に自動的に変換するのを
+止めさせたかったら，中括弧({\tt \{ \}})で囲めばよい．
+しかし，左中括弧に続く最初の文字がバックスラッシュであると，
+変換されることもある．
+「特殊文字」のところで再び説明する．
+
+\item
+{\em Scribe\/}との互換性のため，データベースファイル中に {\tt @COMMENT}
+コマンドを書くことができる．
+\BibTeX\ はデータベースファイル中ではエントリの内側
+以外ならどこにでもコメントを書くことを許すから，
+実際にはこのコマンドは不要である．
+あるエントリをコメントアウトするには，単にエントリの型の
+前の{\tt @}文字を取り除けばよい．
+
+\item
+標準スタイルファイル中には計算機科学関係の論文誌の
+省略形がいくつか入れてあるが，これはあくまでも例である．
+これと異なる論文誌の省略形は {\tt @STRING}コマンドを
+使って，個人のデータベースで定義するのがよい．
+そして\LaTeX\ の \verb|\bibliography|指定の最初の引数として，
+この省略形の入ったデータベースを記述すればよい．
+
+\item
+「月」に関しては，自分で月名を書かずに，3文字の省略形を使うのがよい．
+そうすれば整合的な形式となる．
+「日」の情報も含めたい場合には{\tt month}フィールドに書く．例えば，
+\begin{verbatim}
+    month = jul # "~4,"
+\end{verbatim}
+とすれば，望みの結果が得られる．
+
+\item
+(参考文献が引用順に列挙される) {\tt unsrt}スタイルを \verb|\nocite{*}|
+(データベースのすべての文献が列挙される)と
+共に使う場合には，文書中の \verb|\nocite{*}|コマンドの位置で
+引用文献の並ぶ順番が決まる．
+第\ref{features} 節で示した規則によれば，
+コマンドが文書の先頭にあれば，データベース中の順番そのものになり，
+最後にあれば， \verb|\cite|あるいは \verb|\nocite|で明示的に引用した
+文献が引用順に並び，その後にそれ以外のものがデータベース中の順番で
+並ぶ．
+
+\item
+学位を授与するのは大学であり学部ではないから，
+学位論文に対しては，van Leunenは学位の後に学部名を書かないことを
+推奨している．
+学部名を書いた方が読者が論文を見つけやすいと考えるのであれば，
+学部名は{\tt address}フィールドに書くとよい．
+
+\item
+{\tt MASTERSTHESIS}と{\tt PHDTHESIS}のエントリ形は
+{\em Scribe\/}との互換性のために付けた名称であり，
+{\tt MINORTHESIS}と{\tt MAJORTHESIS}の方が良い名前かも知れない．
+従ってアメリカ以外での学位論文ではこのことを念頭におくこと．
+
+\item
+ある著者の2つの著作の著者名が若干異なる場合の対処の方法．
+2つの論文が次のようであったとしよう．
+\begin{verbatim}
+    author = "Donald E. Knuth"
+    .  .  .
+    author = "D. E. Knuth"
+\end{verbatim}
+2つのやり方が考えられる．
+(1)このままにする，(2)これは同一人物であるであることがはっきりと
+分かっているので，著者の好みの形式(例えば，`Donald~E.\ Knuth')に統一する．
+最初の方法では文献の並ぶ順番が正しくなくなるかもしれないし，
+2番目の方法では名前を少し変えたことで，誰かが電子的に検索した時に
+へまをやるかもしれない．
+私好みの第3の方法がある．
+2番目の論文のフィールドを次のように変換する．
+\begin{verbatim}
+    author = "D[onald] E. Knuth"
+\end{verbatim}
+\BibTeX\ はかぎ括弧がないとしてソートするし，
+かぎ括弧によって読者は完全な「名」は元の論文にはなかったと考える
+から，前述の問題が解決できる．
+もちろん `D[onald]~E.\ Knuth' はみっともないという別の問題が生ずるが，
+私はこの場合には正確さのためには美しさを犠牲にしてよいと考える．
+
+\item
+\LaTeX\ のコメント文字 `{\tt\%}' はデータベースファイル中では
+コメント文字ではない．
+
+\item
+前節でふれた「著者」についてもっと詳しく説明しよう．
+ほとんどすべてのエントリでは「著者」は単に{\tt author}フィールドの
+情報である．
+しかしながら，
+{\tt BOOK}と{\tt INBOOK}エントリ型では，
+{\tt author}に著者がなければ{\tt editor}フィールドが使われ，
+{\tt MANUAL}では，
+{\tt author}に著者がなければ{\tt organization}フィールドが使われ，
+{\tt PROCEEDINGS}では，
+{\tt editor}に著者なければ{\tt organization}フィールドが使われる．
+
+\item
+ラベルの作成の時に，{\tt alpha}スタイルでは上述の「著者」を使うが，
+{\tt MANUAL}と{\tt PROCEEDINGS}エントリ型では
+{\tt key}フィールドが{\tt organization}フィールドより優先する．
+これは次のような場合に役立つ．
+\begin{verbatim}
+   organization = "The Association for Computing Machinery",
+   key = "ACM"
+\end{verbatim}
+{\tt key}フィールドがないと{\tt alpha}スタイルは{\tt organization}フィールド
+の情報から3文字のラベルを作る．
+{\tt alpha}スタイルは `{\tt The}' を取り除くが，それでも
+ラベルは `\hbox{[Ass86]}' となってしまい，仕組み通りではあるが，有益な
+ものではない．
+上のように{\tt key}フィールドを入れることで，もっとよいラベル
+`\hbox{[ACM86]}' とできる．
+
+しかし，{\tt organization}フィールドを無効にするために
+{\tt key}フィールドが常に必要なわけではない．
+例えば，
+\begin{verbatim}
+    organization = "Unilogic, Ltd.",
+\end{verbatim}
+としておけば，{\tt alpha}スタイルは `\hbox{[Uni86]}' といった
+合理的なラベルを生成する．
+
+\item
+第\ref{features} 節でアクセント付き文字を説明した．
+\BibTeX\ にとってはアクセント付き文字は，
+トップレベルの左中括弧の直後の文字がバックスラッシュである
+中括弧で括られている文字列，すなわち
+「特殊文字」の特別な場合にすぎない．
+例えば，
+\begin{verbatim}
+    author = "\AA{ke} {Jos{\'{e}} {\'{E}douard} G{\"o}del"
+\end{verbatim}
+には `\verb|{\'{E}douard}|' と `\verb|{\"o}|'の2つの特殊文字がある．
+(上の例で，フィールドの区切り文字であるダブルクオートを
+中括弧で置き換えたものでも同じことである)．
+一般に\BibTeX\ は特殊文字中の\TeX\ あるいは\LaTeX\ コマンドに対しては
+何の操作もほどこさないが，そうでない場合には操作を{\dg ほどこす}．
+したがって表題を小文字に変換するスタイルでは
+\begin{verbatim}
+    The {\TeX BOOK\NOOP} Experience
+\end{verbatim}
+を
+\begin{verbatim}
+    The {\TeX book\NOOP} experience
+\end{verbatim}
+に変換する．
+(しかし，`{\tt The}' は表題の最初の単語であるので
+それはそのままである)．
+
+特殊文字はアクセント付き文字を扱うのに役立ち，
+\BibTeX\ にあなたの望み通りの順番で文献を並べさせるのに役立つ．
+また\BibTeX\ は特殊文字をすべてをまとめて1文字と数えるから，ラベルの中に
+文字を追加するのに役立つ．
+\BibTeX\ とともに配布されている{\tt XAMPL.BIB}ファイル中にすべての使い方の
+例がある．
+
+\item
+本節の最後の項目として({\tt author}, {\tt editor}フィールドの中に
+記述する)名前について，\LaTeX\ bookの付録Bより少し詳しく説明する．
+以下では「名前」は個人に対応するものとしよう．
+(複数の著者を1つのフィールドに入れるには，中括弧に入れないで，
+前後にスペースを入れて ``and'' でつなぐ．
+ここでは1つの名前だけを考える)．
+
+名前は，姓(Last)，von, 名(First)とJrの4つの部分からなり，
+それぞれは(空かもしれないが)文字列(トークン)のリストからなる．
+空でない名前の姓は空でない，すなわち1つの文字列からなる名前
+は姓だけのものとなる\trnote{漢字コード表記された名前では，姓と名の間に
+スペース(半角でも全角でも)を入れておけば，Family nameとLast-tokenから
+なるものとされ，スペースがなければLast-tokenのみからなるとされる．}．
+
+
+Per Brinch~Hansenの名前は次のようにタイプしなければならない．
+\begin{verbatim}
+    "Brinch Hansen, Per"
+\end{verbatim}
+この名前の名は ``Per'' の1つのトークンからなり，
+姓は ``Brinch'' と ``Hansen'' の2つのトークンからなり，
+von, Jrの部分はない．
+もし次のようにタイプしたとすると，
+\begin{verbatim}
+    "Per Brinch Hansen"
+\end{verbatim}
+\BibTeX\ は(誤って)，``John~Paul Jones'' の名トークンが ``Paul'' であるのと
+同じように ``Brinch'' が名のトークンであると考え，2つの名トークンと
+1つの姓トークンからなるものとする．
+
+もう1つ例を示そう．
+\begin{verbatim}
+    "Charles Louis Xavier Joseph de la Vall{\'e}e Poussin"
+\end{verbatim}
+この名前には4つの名トークンと，2つのvonトークンと，2つの姓トークンがある．
+vonパートは小文字で始まることから，\BibTeX\ は各々の部分がどこから始まり，
+どこで終るかがわかる．
+
+一般に中括弧のレベルが0のところで小文字で始まるものはvonトークンとされる．
+技術的には「特殊文字」は中括弧のレベル0であるから，\TeX\ のコマンド
+文字列の大文字，小文字を保つようなダミーの特殊文字を使うことで，
+\BibTeX\ がvonトークンとして扱うように/扱わないようにできる．
+
+まとめると，\BibTeX\ は名前の書き方として次の3つの形式を許す．
+\begin{verbatim}
+    "First von Last"
+    "von Last, First"
+    "von Last, Jr, First"
+\end{verbatim}
+Jrパートがある場合，あるいは姓が複数の構成要素からなる場合以外では
+一番最初の書き方を使うのが普通である．
+
+\item
+\JBibTeX\ では漢字コード名の場合には姓と名の間にスペース(半角でも全角でも)を
+置くことを標準とするが，スペースがなくても，{\tt jabbrv}スタイルなどで出力
+される名前が姓のみにならないなどの問題しか生じない．また，複数の氏名を並べる
+時には \verb*| and | の代わりに，全角の句点 ``，'' あるいは ``、'' を使う
+こともできる．
+
+\item アルファベット順でなく，五十音順にソートしたければ{\tt yomi}フィールドに
+「ひらがな」で「読み」を書いておけばよい．
+{\tt jplain}, {\tt jabbrv}でアルファベット表記の著者はアルファベット順に
+並べ，その後に日本語著者名のものを五十音順に並べたい場合などに，
+ひらがな表記の読みを使えばよい．
+
+ただし{\tt jalpha}スタイルではラベルをうまく作り出すには工夫が必要である．
+{\tt jalpha}スタイルを使った時には，五十音順にソートすることはないであろうが，
+次の例のようにすればよい．
+
+{\baselineskip=11pt
+\begin{verbatim}
+  @preamble{ "\newcommand{\noop}[1]{}" }
+  @BOOK{sym,
+        editor="Janusz S. Kowalik",
+        title="Coupling Symbolic and Numerical Computing in Expert Systems",
+        publisher="North-Holland", year=1986}
+  @BOOK{dss,
+        editor="Clyde W. Holsapple and Andrew B. Whinston",
+        title="Decision Support Systems: Theory and Application",
+        publisher="North-Holland", year=1987}
+  @INCOLLECTION{goto,
+        author="後藤英一", title="計算機による数式処理とは",
+        yomi="{\noop{ごとう}後}藤",
+        crossref="reduce", pages="4--6", year=1986 }
+  @UNPUBLISHED{磯崎,
+        author="磯崎 秀樹",title="How To Use {\JLaTeX}",
+        yomi="{\noop{いそざき}磯}崎",
+        note="memo for {\JLaTeX}", year=1987}
+\end{verbatim}
+}
+
+こうしておけば，各々のラベルは[Kow86], [HW87], 
+[後藤86], [磯崎87]となり，アルファベット順に[HW87], [Kow86]と並んだ後に，
+五十音順に[磯崎87], [後藤86]と並ぶ．
+\end{enumerate}
+
+\bibliography{jbtxdoc}
+\bibliographystyle{jplain}
+\end{document}

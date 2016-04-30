@@ -1,0 +1,672 @@
+\documentstyle[tables]{jarticle}
+\def\dg{\gt}
+\def\dm{\mc}
+\voffset=-2.3cm
+\hoffset=-2.3cm
+\textheight=25.5cm
+\textwidth=16.6cm
+
+\def\JTeX{\leavevmode\lower .5ex\hbox{J}\kern-.17em\TeX}
+\def\JLaTeX{\leavevmode\lower.5ex\hbox{J}\kern-.17em\LaTeX}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\def\JBibTeX{\leavevmode\lower .6ex\hbox{J}\kern-0.15em\BibTeX}
+
+\def\myftnote#1{\footnote{\parindent=16pt\hskip-15pt\hang\indent#1\parindent=10pt}}
+
+
+\def\tstrut{\vrule height 2.346ex depth 0.908ex width 0pt}
+\thicksize=0.7pt
+\thinsize=0.3pt
+
+\setcounter{topnumber}{3}
+\setcounter{bottomnumber}{3}
+\setcounter{totalnumber}{6}
+\renewcommand{\topfraction}{0.99}
+\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\textfraction}{0.01}
+
+\title{日本語\BibTeX：\JBibTeX}
+\author{松井　正一 {\tt\ (matsui@denken.or.jp)}\\
+\normalsize (財)電力中央研究所 情報システム部 (〒100 千代田区大手町1-6-1) }
+\date{1991年1月1日}
+\begin{document}
+\baselineskip=16pt
+
+\maketitle
+
+\begin{abstract}
+
+\JBibTeX は\BibTeX\ 0.99cを基に
+{\tt bib, bst}ファイル中に漢字コードを使えるように変更を加えたものである．
+
+このメモでは，先ず最初に\BibTeX の概要を簡単に説明した後，
+日本語化に対しての基本的な考え方，主な変更点，
+日本語に対応するように作成したスタイルについて
+説明する．
+\end{abstract}
+
+\section{はじめに}
+
+\TeX をNTTの斉藤氏が日本語化してくれたおかげで\TeX で
+日本語が使えるようになった\myftnote{ICOTの高木氏(現在日立)，都立大の
+桜井氏の力に負うところも大きい．}．またNTTの磯崎氏が\LaTeX の
+日本語版 \JLaTeX を作ってくれたので，
+簡単に日本語のタイプセットができるようになった\myftnote{最初に開発した
+\JBibTeX はNTT版を想定していたので，ASCII版に対する記述がないだけで，
+他意はない．現在はNTT版，ASCII版の両方を使っている．}．
+
+技術系の文書を書く場合には，参考文献の管理に手間取ることが多い．
+この手間を軽減するためのプログラムとして\LaTeX には，{\tt roff}
+一族の{\tt refer}に対応した
+\BibTeX があるが，この日本語化ができて
+いなかったので\myftnote{1988年4月に，高木氏
+から\JTeX~in C のテープを入手した時点で．またASCIIバージョンを知らなかった
+ので．}，
+\JLaTeX の機能を活かしきれないきらいがあった\myftnote{私は面倒くさい
+ことは嫌いなので．}．
+そこで，とりあえず日本語を使える形の\BibTeX を\JBibTeX という形で
+作成してみた．
+
+\section{\BibTeX の概要}
+
+\subsection{処理の流れ}
+\BibTeX は\LaTeX で作成される{\tt aux}ファイル\myftnote{ファイルの
+エクステンションでファイル名を代表する．}中
+の \verb|\citation|に示されて
+いる \verb|\cite|項目に対応する参考文献レコードを\LaTeX の
+文書中に \verb|\bibliography|で指定されたデータベースファイル
+({\tt bib})から
+検索し， \verb|\bibliographystyle|で指定された参考文献
+書式(スタイル)で{\tt bbl}ファイルに書き出す形で動作する．実行時の
+メッセージは端末に出力されると同時に，ログファイルの{\tt blg}ファイルにも
+出力される．
+
+通常はある文書{\tt file.tex}を処理するには次のような
+手順をふむ\myftnote{{\tt bbl}ファイルの内容が固定された後は，{\tt latex}を
+起動するだけでよい(相互参照関係の処理のために2回以上の起動が必要な
+こともある)．}．
+
+\newcounter{myn}
+\begin{list}%
+{\arabic{myn}.}{\usecounter{myn}
+\setlength{\parsep}{1pt}
+\setlength{\itemsep}{1pt}
+\setlength{\topsep}{1pt}
+}
+\item {\tt latex file}で{\tt aux}を作り出す．
+\item {\tt bibtex file}で{\tt aux, bib}から{\tt bbl}ファイルを作り出す．
+\item 以後の{\tt latex file}の起動で{\tt bbl}が自動的に読み込まれる．
+\end{list}
+
+\subsection{参考文献データベース}
+データベース中の参考文献レコードは，文献の形式(論文，本など)を指定した
+後に，引用キー，書誌項目を ``キーワード=値'' の形でカンマで区切って
+並べる形で記述する\cite{latex,btxdoc}．
+\newpage
+文献の形式としては以下が用意されている．
+\begin{table}[h]
+\begintable
+{\dg 文献の形式}|{\dg 説\hskip2cm 明}\hfil\crthick
+{\tt article}\hfill| 論文誌など発表された論文\hfill\cr
+{\tt book}\hfill | 出版社の明示された本\hfill\cr
+{\tt booklet}\hfill | 印刷，製本されているが出版主体が不明なもの\hfill\cr
+{\tt conference}\hfill | inproceedingsと同じ(Scribeとの互換性のため)\hfill\cr
+{\tt inbook}\hfill | 書物の一部(章，節，文など何でも)\hfill\cr
+{\tt incollection}\hfill | それ自身の表題を持つ，本の一部分\hfill\cr
+{\tt inproceedings\ }\hfill | 会議録中の論文\hfill\cr
+{\tt manual}\hfill | マニュアル\hfill\cr
+{\tt masterthesis}\hfill | 修士論文\hfill\cr
+{\tt misc}\hfill | 他のどれにも当てはまらない時に使う\hfill\cr
+{\tt phdthesis}\hfill | 博士論文\hfill\cr
+{\tt proceedings}\hfill | 会議録\hfill\cr
+{\tt techreport}\hfill | テクニカルレポート\hfill\cr
+{\tt unpublished}\hfill | 正式には出版されていないもの\hfill\endtable
+\end{table}
+
+それぞれで必須な項目(フィールド)がある．
+
+項目(フィールド)としては以下がある\myftnote{正確にはplain, alpha,
+abbrv, unsrtで，annoteを除いた項目が意味を持つ(タイプセットに
+使われる)．}．
+\begin{table}[h]
+\begintable
+{\dg フィールド名}|{\dg 説\hskip2cm 明}\hfil\crthick
+{\tt address}\hfill | 出版主体の住所\hfill\cr
+{\tt annote}\hfill | 注釈付きのスタイルで使われる\hfill\cr
+{\tt author}\hfill | 著者名\hfill\cr
+{\tt booktitle}\hfill | 本の名前\hfill\cr
+{\tt chapter}\hfill | 章，節などの番号\hfill\cr
+{\tt crossref}\hfill | 相互参照する文献のデータベースのキー\hfill\cr
+{\tt edition}\hfill | 本の版\hfill\cr
+{\tt editor}\hfill | 編集者\hfill\cr
+{\tt howpublished\ }\hfill | どのようにしてこの奇妙なものが発行されたか\hfill\cr
+{\tt institution}\hfill | テクニカルレポートの発行主体\hfill\cr
+{\tt journal}\hfill | 論文誌名\hfill\cr
+{\tt key}\hfill | 著者名がない時に相互引用，ラベル作成などに使われる\hfill\cr
+{\tt month}\hfill | 発行月，または書かれた月\hfill\cr
+{\tt note}\hfill | 読者に役立つ付加情報\hfill\cr
+{\tt number}\hfill | 論文誌などの番号\hfill\cr
+{\tt organization\ }\hfill | 会議を主催した機関名あるいはマニュアルの出版主体\hfill\cr
+{\tt pages}\hfill | ページ(範囲)\hfill\cr
+{\tt publisher}\hfill | 主版社(者)名\hfill\cr
+{\tt school}\hfill | 修士，博士論文が書かれた大学名\hfill\cr
+{\tt series}\hfill | シリーズ，あるいは複数巻の本の名前\hfill\cr
+{\tt title}\hfill | 表題\hfill\cr
+{\tt type}\hfill | テクニカルレポートの種類\hfill\cr
+{\tt volume}\hfill | 論文誌，複数巻の本の巻\hfill\cr
+{\tt year}\hfill | 発行年，または書かれた年\hfill\endtable
+\end{table}
+\newpage
+
+以下にデータベースの記述例を示す．
+
+{\baselineskip=11pt
+\begin{quote}
+\begin{verbatim}
+  @ARTICLE{la,
+        author="Masao Iri and Kazuo Murota and Shouichi Matsui",
+        title="Linear-time approximation algorithms for finding the
+        minimum-weight perfect matching on a plane",
+        journal=ipl,volume=12,pages="206--209",year=1981
+  }
+\end{verbatim}
+\end{quote}
+}
+
+頻繁に使われる論文誌名などは，({\tt bst}ファイル中に)後述のマクロ機能を使って
+省略形を定義しておくことで，{\tt journal=ipl}などと書ける({\tt bib}ファイル
+中に{\tt @STRING(ipsj=\{情報処理学会\})}のように定義することもできる)．
+
+\subsection{スタイル}
+スタイルは{\tt alpha.bst}などのスタイルファイルに記述されている．
+スタイルファイル中の書式は，スタックマシンに対しての命令を
+後置演算子記法で記述した形である\cite{btxhak}．
+
+スタイルを記述する言語には二種類の関数がある．一つはシステム組み込みの
+ものであり，{\tt newline\$, write\$} などのように名前の最後が{\tt `\$'}で
+終る．もう一つは{\tt MACRO, FUNCTION}を使って定義するものである．
+
+組み込み関数には以下のようなものがある(全部で37ある)．
+
+\begin{table}[h]
+\parasize=9.68cm
+\begintable
+{\dg\bf 組み込み関数(名)\ }|{\dg 機\hskip2cm 能}\hfil\crthick
+{\tt >, <, =} \hfill | \para{整数の比較}\cr
+{\tt +, -}\hfill |\para{整数加算，減算}\cr
+{\tt *}\hfill | \para{文字列の連結}\cr
+{\tt :=}\hfill |\para{代入}\crthick
+{\tt add.period\$}\hfill|\para{文字列の{\tt `\}'}でない最後の文字が，
+{\tt `.', `?', `!'}のいずれでもなければ{\tt `.'}を最後に付加する}\cr
+{\tt call.type\$}\hfill|\para{エントリの型(文献の型)に応じた関数を呼び出す．
+例えば{\tt book}なら関数{\tt book}を呼び出す．}\cr
+{\tt change.case\$}\hfill | \para{指定に応じて大文字，
+小文字に変換した文字列を返す(指定が{\tt `t'}なら
+最初の文字以外をすべて小文字に，{\tt `l'}ならすべて
+小文字に，{\tt `u'}ならすべて大文字に変換する)．}\cr
+{\tt chr.to.int\$}\hfill |\para{1文字のみの文字列のASCIIコードを返す}\cr 
+{\tt text.prefix\$}\hfill | \para{高々指定された文字数
+以内の先頭文字列を返す}\cr
+{\tt skip\$}\hfill | \para{何もしない}\cr
+{\tt substring\$}\hfill | \para{部分文字列を返す}\cr
+{\tt write\$}\hfill | \para{文字列を{\tt bbl}ファイルに書き出す} \endtable
+\end{table}
+
+スタイルは前述の関数とコマンドおよびシステム変数を使って記述する．
+コマンドは以下からなる．
+\begin{itemize}
+\item 宣言と変数，関数定義のための5つのコマンド({\tt ENTRY, FUNCTION, INTEGERS,
+MACRO, STRINGS})
+
+\begin{table}[h]
+\begintable
+{\dg コマンド名}\ | {\dg 機\hskip2cm 能}\hfil\crthick
+{\tt ENTRY}\hfill | フィールドとエントリを宣言する\hfill\cr
+{\tt FUNCTION}\hfill | 新たな関数を定義する\hfill\cr
+{\tt INTEGERS}\hfill | グローバルな整数型の変数を宣言する\hfill\cr
+{\tt MACROS}\hfill | 文字列マクロを定義する\hfill\cr
+{\tt STRINGS}\hfill | グローバルな文字列型の変数を宣言する\hfill\endtable
+\end{table}
+
+\item データベース読み込みのためのコマンド({\tt READ})．データベース
+を読み込み，内部的にリストの形式にする．
+\newpage
+\item 処理と出力のための4つのコマンド({\tt EXECUTE, ITERATE, REVERSE, SORT})
+
+\begin{table}[h]
+\begintable
+{\dg コマンド名}\ | {\dg 機\hskip2cm 能}\hfil\crthick
+{\tt EXECUTE}\hfill | 1つの関数を実行する\hfill\cr
+{\tt ITERATE}\hfill | 現在のリスト中の各エントリに対して1つの関数を
+適用する\hfill\cr
+{\tt REVERSE}\hfill | {\tt ITERATE}と同じ操作をリストの逆順に行う\hfill\cr
+{\tt SORT}\hfill | {\tt sort.key\$}によってリストをソートする\hfill\endtable
+\end{table}
+\end{itemize}
+
+システム変数には以下がある．
+\begin{table}[h]
+\begintable
+{\dg 変数名}| {\dg 説\hskip2cm 明}\hfil\crthick
+{\tt sort.key\$}\hfill | 文字列型，ソートのキー\hfill\cr
+{\tt entry.max\$}\hfill | 整数型，エントリ文字列の最大長(100)\hfill\cr
+{\tt global.max\$\ }\hfill | 整数型，文字列の最大長(1000)\hfill\endtable
+\end{table}
+
+以下にスタイルファイル{\tt alpha}の一部分を例として示す．
+
+\begin{figure}[h]
+{\baselineskip=11pt
+\begin{quote}
+\begin{verbatim}
+MACRO {tcs} {"Theoretical Computer Science"}  
+READ
+FUNCTION {sortify}
+   { purify$ "l" change.case$ }
+FUNCTION {chop.word}
+{ 's :=
+  'len :=
+  s #1 len substring$ =
+    { s len #1 + global.max$ substring$ }
+    's
+  if$
+}
+INTEGERS { et.al.char.used }
+FUNCTION {initialize.et.al.char.used}
+    { #0 'et.al.char.used := }
+EXECUTE {initialize.et.al.char.used}
+ITERATE {presort}
+SORT
+EXECUTE {initialize.longest.label}
+ITERATE {forward.pass}
+REVERSE {reverse.pass}
+FUNCTION {begin.bib}
+{ et.al.char.used
+    { "\newcommand{\etalchar}[1]{$^{#1}$}" write$ newline$ }
+    'skip$
+  if$
+  preamble$ empty$
+    'skip$
+    { preamble$ write$ newline$ }
+  if$
+  "\begin{thebibliography}{"  longest.label  * "}" * write$ newline$
+}
+EXECUTE {begin.bib}
+EXECUTE {init.state.consts}
+ITERATE {call.type$}
+FUNCTION {end.bib}
+{ newline$
+  "\end{thebibliography}" write$ newline$
+}
+EXECUTE {end.bib}
+\end{verbatim}
+\end{quote}
+}
+\end{figure}
+\section{日本語化の概要}
+\subsection{バージョン0.10と0.20の生い立ち}
+最小限の変更ですませることにし\myftnote{手抜きである．}，
+以下の形で元の\BibTeX (Version 0.99c; Pascal版)に変更を
+加えた第1バージョン(0.10)を1988年5月に作成した．この
+ために行った変更は，change
+fileの変更が600行程度，Cで書かれたサポートルーチン(bibext.c)への
+変更が50行程度であるが，change fileへの本質的な変更は200行程度である．
+
+その後1989年5月に\BibTeX のCバージョンに対応して，
+Pascalコンパイラーのないシステムでも動作するように，
+第2バージョン(0.20)を作成した．このために
+行った変更は，新たな組み込み関数を追加する
+ことも含めてchange fileの変更が450行程度，
+bibext.cへの変更が430行程度で
+ある\myftnote{{\tt web2c}の出力中の{\tt putc}を日本語
+コードに対応するための{\tt Fputc}に{\tt sed}する
+ために{\tt Makefile}の一部分も変更した．}．{\tt bibext.c}の変更の
+大部分は\JTeX 用に桜井氏が作成したプログラムを流用しているので，新たに
+作成した部分は少ない\myftnote{作業はSUN-3で行ったが，その他のマシンへの
+移植作業はJUNETを通じて協力していただいた．これにより
+現在は，SUN-4, VAX/ Ultrix/BSD, NEWS /NEWS-OS, Symmetry /Dynix, 
+FACOM M Series /UTS, LUNA /BSD, ΣWSなどで動作している．}．
+
+\subsection{バージョン0.30とMS-DOS版の旅立ち}
+筆者が勤務の関係で米国出張中のクリスマス休暇の間に作成した
+のがバージョン0.30と{\tt MS-DOS}版の\JBibTeX である\myftnote{寒い所
+だったので，家族で外出
+する気にもならず，お金もなかったので旅行もできずで {\tt :-)}．}．
+
+バージョン0.30ではASCII版のversion 0.98をベースにした{\tt Kanji BibTeX}
+との整合性を向上させる，また不完全であった日本語対応を完全にするなどの
+作業を行った．
+このためにバージョン0.20から変更したchange fileの行数は50行程度である．
+これに際しては，職場の同僚である
+二方厚志，所健一の両氏，(株)アスキーの倉沢良一，渡邉雄一両氏の協力を得た．
+特に渡邉氏には多忙な中，様々なテストに協力していただいた．
+バージョン0.30ではドキュメント類の修正，スタイルファイルの改良も行った．
+これにより，NTT版だけでなく，ASCII版でも(ドキュメントの処理も含めて)
+問題なく動作するバージョンの配布キットが完成した．
+
+MS-DOS版はUNIX上で作成したCのソースを直接変更してTurbo-Cを利用して作成した．
+コンパイラ，リンカの制約から大量の大域変数が宣言できないので，
+大域変数の宣言部分をいくつかのファイルに分けるとか，動的にメモリを
+割り当てるとかの変更をCソースに直接施した．変更行数は100行程度である．
+利用可能メモリの制約から，処理可能引用文献数がUNIX版に比べて
+少ないことを除けば(300件程度以内でないとだめ)，
+実用上十分な性能を持つプログラムである．
+
+\subsection{漢字コードの扱い}
+
+オリジナルの\BibTeX への変更を少なくするために，
+漢字コードは内部的にはEUCで表現することとした．
+ファイルから一行を読み込む時点で，EUCならそのまま，JIS漢字コードはEUCに
+コード変換する\myftnote{JIS漢字コードのエスケープ・シーケンスの
+先頭の2バイトのみを漢字in/outの
+判定に使用し，3バイト目は何でもよいようにしてある．また，当所ではSJISは
+使っていないのでバージョン0.10ではそれは考えていなかったが，
+バージョン0.20ではそれにも対処できるようにした．MS-DOS版ではSJISがディフォルト
+の漢字コードになっている．JISも読める．}．
+
+漢字コードをファイルに書き出す時にコード系の変換を行う．\JBibTeX
+はNTT版 \JTeX に改良を加えて漢字コードとしてJISの他に，EUCも使えるように
+したものの上の\JLaTeX と対にして使うことを前提としているが，ASCII版でも
+問題なく使える．
+この\JTeX では漢字コードの指定がEUC/SJISであっても，JIS漢字コードも読み込める
+ように変更したものである\myftnote{都立大の桜井氏が中心となって
+開発しているバージョンに対応している．}．
+
+そこで第1バージョン(0.10)では漢字コードの変換は以下の形で行う
+こととした．
+
+\begin{itemize}
+\item 補助({\tt aux})，スタイル({\tt bst})，データベース({\tt bib})ファイル中
+の漢字コードの総てがEUC漢字コードであれば，{\tt bbl}, {\tt blg}ファイル
+あるいは端末への出力はEUCコードで行う．
+\item 上記以外の場合には，書き出しが行れる直近に読んだJIS漢字のコードの
+エスケープ・シーケンスを使って漢字コードを書き出す\myftnote{完全に漢字コード
+対応になっていない可能性があるので，bibファイルなどの記述にエラーがあった
+時に，端末などにEUCコードのままで漢字コードが出力されるかもしれない(第1
+バージョン(0.10)の場合)．}．
+\end{itemize}
+
+漢字コードの変換は，入力時はbibext.cで行い，出力時はbibtex本体で行うことと
+したために，change fileの変更が多くなった．
+
+第2バージョン(0.20)以降では，漢字コード系はサイト毎に
+コンパイル時に決定することとし，利用者単位には次の環境変数で変更可能とした．
+
+\begin{figure}[h]
+\thicksize=0pt
+\thinsize=0pt
+\begintable
+端末\hfill |{\tt BIBTERMCODE}\hfill | \hskip5cm\cr
+ファイル\hfill | {\tt BIBFILECODE}\hfill | \hskip5cm\endtable
+\end{figure}
+
+これらの変数に\JTeX の \verb|\kanjiterminaltype|, \verb|\kanjifiletype|で
+指定するのと同じ値を設定することで(EUCなら20,
+SJISなら10など)入出力のコード系を変更できる(\JTeX 同様EUC, SJISを指定
+してあってもJISコード系も読み込めるようになっている)．
+
+漢字コードの変換はすべてbibext.cの中で行うこととしたので，change fileの
+変更が少なくなっている．
+
+\subsection{組込み関数の仕様変更}
+
+組込み関数の{\tt substring\$, text.prefix\$} においては
+1つの漢字コードの間で(1バイト目と2バイト目の間で)文字列が切られないようにした．
+例えば，`漢字' の先頭から3文字(バイト)を抜出すと `字' の2バイト目がなくなって
+しまうので，このような場合には，4バイト目まで切出すようにした\myftnote{これは
+日本語用のスタイルでない{\tt alpha, plain}などを
+使った場合でもそれなりの出力が得られるようにするためである．}．
+ 
+前記との関係で，{\tt chr.to.int\$} は引数が
+漢字コードならばsingle characterでなくてもwarningを出さず，
+漢字文字列の1バイト目のコードを値として返すようにした\myftnote{これは0.10バー
+ジョンで試作したスタイルファイル中で，漢字コード文字列の判定をいいかげんに
+行うために必要となった変更であり，0.20バージョンでは漢字コード文字列判定用に
+新たな組み込み関数を追加したので不要かも知れない．}．
+
+以上はバージョン0.10から行っていた変更であるが，バージョン0.30では，さらに
+次の2つの変更も追加した．
+
+{\tt add.period\$} 関数は，半角の`!'$\!$, `?'$\!$, `.'で終われば，
+`.'を付加しないので，全角の`！'，`？'，`．'，`。'で終わっても
+`.'を付加しないようにした．
+
+{\tt format.name\$} 関数では，漢字コードで表記された氏名の場合には全角の空白も
+半角の空白と同じように扱うこととした．また複数の名前は \verb*| and |
+を間に入れて列挙するが，漢字コード表記された氏名の場合には
+全角の``，'', ``、''を使っても \verb*| and | と同じように扱うようにした．
+これで漢字コード著者名の入力が以前より簡単になるはずである(少なくともPCでかな
+漢字変換FEPを使っている場合には，半角への切り替えが不要になる)．
+
+\subsection{組み込み関数の追加}
+
+次に述べる日本語用のスタイルに関連することであるが，漢字コードを含む文字列の
+場合に処理を分ける必要がある．第1バージョンでは漢字コードを含むかどうかは，
+先頭文字のみで判定するようなスタイルを作成したが，これでは不完全である
+ので，第2バージョン以降からは{\tt is.kanji.str\$} という関数を追加した．
+この関数は，与えられた文字列が日本語コード(non ASCIIコード)を
+含む時に``真''(整数の1)を返す関数である．
+
+\newpage
+\section{日本語用のスタイル}
+
+\subsection{問題点}
+前述の方法で日本語を扱えるようにしても，\BibTeX のスタイル(bst)を
+日本語に合せないと，参考文献が奇妙な型式となる．
+例えば，{\tt plain}のスタイルを使うと，著者が複数の場合
+
+\vskip 2mm
+\hskip1cm
+[1] 松井 and 篠原 $\cdots$
+\vskip 2mm
+
+\noindent のような形になってしまう．日本語の場合にはやはり
+
+\vskip 2mm
+\hskip1cm
+[1] 松井, 篠原 $\cdots$
+\vskip 2mm
+
+\noindent のようになって欲しい．また英語の場合には`{\tt et al.}'でよいが
+日本語の場合には`{\dg ほか}'の方がよい．
+さらに，文献をソートする場合には著者名を主キーとするスタイルが多いので，
+ここが漢字コードであると漢字コードの順に並ぶので具合がよくない．
+
+{\tt alpha}では著者の名前からラベルを作るが，英語と混在することを考えると
+ラベルも
+
+\vskip 2mm
+\hskip1cm
+[松篠87] 松井, 篠原 $\cdots$
+\vskip 2mm
+
+\noindent のような形よりは
+
+\vskip 2mm
+\hskip1cm
+[MS87] 松井, 篠原 $\cdots$
+\vskip 2mm
+
+\noindent のほうが望ましいと考えた．
+
+\subsection{日本語用のスタイルの試作}
+
+上記のような問題を解決することを考慮したスタイルを標準スタイル
+{\tt plain}, {\tt alpha}, {\tt abbrv}, {\tt unsrt}を基に{\tt jplain}, 
+{\tt jalpha}, {\tt jabbrv}, {\tt junsrt}
+という形で作ってみた．また情報処理学会論文誌{\tt tipsj}，情報処理
+学会欧文論文誌{\tt jipsj}，
+電子情報通信学会論文誌{\tt tieic}，日本オペレーションズリサーチ学会
+論文誌{\tt jorsj}，人工知能学会誌{\tt jsai}，ソフトウェア科学会誌{\tt jssst}用
+のスタイルも試作してみた．
+
+参考文献のソートあるいはラベル作成を巧く行うことを
+考え合せて，日本語の文献には著者名のローマ字標記を`名前', `姓'の順で(英語風に)
+入れる`{\tt yomi}'なる新たなフィールドを{\tt bib}ファイル中に
+書くこととした\myftnote{この順番に異論のある人もあろうが\cite{jeng}，
+多くの日本人がこの形で(英語で)書いて論文を発表していることから
+こう決めた．}$^,$\myftnote{ここにひらがなで`読み'をかくことも，
+もちろんできるから，五十音順にソートすることも可能である．}．
+このフィールドを使ってソートを行ったり, ラベルを作るような形で
+上記のスタイルを作成した\myftnote{yomiというフィールドを
+加えるために{\tt bibtex}本体を変更する必要はない．
+スタイルファイル中の{\tt ENTRY}に追加するだけである．}$^,$\myftnote{著者名の
+処理以外にも変更を加えている．詳しくは配布キット中の{\tt jbtxbst.doc}を
+参照されたい．}．
+
+\newpage
+{\tt jalpha}スタイルの一部を例として示す(ただし配布済みのスタイルとは
+異なる部分がある)．
+
+\vskip2mm
+
+{\baselineskip=11pt
+\begin{quote}
+\begin{verbatim}
+FUNCTION {format.names}
+{ 's :=
+  #1 'nameptr :=
+  s num.names$ 'numnames :=
+  numnames 'namesleft :=
+    { namesleft #0 > }
+    { s nameptr "{ff}{ll}" format.name$ is.kanji.str$
+        {s nameptr "{ff}{ll}" format.name$ 't :=}
+        {s nameptr "{ff~}{vv~}{ll}{, jj}" format.name$ 't :=}
+      if$
+      nameptr #1 >
+        { namesleft #1 >
+            {", " * t * }
+            { t "others" =
+                { s is.kanji.str$
+                        {"ほか" * }
+                        {", et~al." * }
+                  if$
+                }
+                { s is.kanji.str$
+                    {", " * t * }
+                    { numnames #2 =
+                        {" and " * t * }
+                        {", and " * t * }
+                      if$
+                    }
+                   if$
+                }
+              if$
+            }
+          if$
+        }
+        't
+      if$
+      nameptr #1 + 'nameptr :=
+      namesleft #1 - 'namesleft :=
+    }
+  while$
+}
+
+\end{verbatim}
+\end{quote}
+}
+
+\subsection{データベースの記述方法}
+
+以上のようにした\JBibTeX のための{\tt bib}ファイルの中身は次のように
+する\myftnote{著者の姓と名の間にスペース(半角でも全角でも)を
+入れておかないと，{\tt jabbrv}スタイルの時に姓だけにならずに，名も出
+力されてしまうので注意が必要である．スペースで姓と名を区切った場合には，
+スタイルファイルの記述において，漢字コード著者名を{\tt format.name\$} して
+得られるfirst nameには姓が，last nameには名が得られることに注意が必要で
+ある({\tt format.name\$} を完全には日本語対応にしていないためである．しかし
+family name, last tokenと読み替えれば問題ないし{\tt :-)}．日本語対応の
+スタイルファイルを作成した経験から言うと，漢字コード著者名と
+それ以外の場合に同じフォーマットを指定して{\tt format.name\$} を呼び出す
+ことはほとんどないので，混乱するかもしれないが，あえてこのままにしてある)．
+また，例では漢字コード著者名の区切りとして，`` and '' を使ってあるが，ここは
+もちろん，``，'' (但し全角！)でよい．}．
+
+{\baselineskip=11pt
+\begin{quote}
+\begin{verbatim}
+  @ARTICLE{la,
+        author="Masao Iri and Kazuo Murota and Shouichi Matsui",
+        title="Linear-time approximation algorithms for finding the
+        minimum-weight perfect matching on a plane",
+        journal=ipl,volume=12,pages="206--209",year=1981
+  }
+\end{verbatim}
+\newpage
+\begin{verbatim}
+  @ARTICLE{あふれ無し,
+        author="松井 正一 and 伊理 正夫",
+        title="あふれのない浮動小数点表示方式",
+        journal="情報処理学会論文誌", volume=21, number=4, pages="306--313",
+        yomi="Shouichi Matsui and Masao Iri",
+        year=1980
+  }
+\end{verbatim}
+\end{quote}
+}
+
+このようにデータベースを作成しておくと{\tt jplain}ならば
+
+\vskip 1.5mm
+\hskip1cm
+[1] Masao Iri, Kazuo Murota, and Shouichi Matsui. 
+Linear-time approximation $\cdots$
+
+\hskip1cm
+[2] 松井正一, 伊理正夫. あふれのない浮動小数点表示方式. $\cdots$
+\vskip 1.5mm
+
+\noindent のような形で参考文献リストが得られる．{\tt jalpha}なら
+
+\vskip 1.5mm
+\hskip1cm
+[IMM81] Masao Iri, Kazuo Murota, and Shouichi Matsui. Linear-time approximation
+ $\cdots$
+
+\hskip1cm
+[MI80]~~~ 松井正一, 伊理正夫. あふれのない浮動小数点表示方式. $\cdots$
+\vskip 1.5mm
+
+\noindent となる．{\tt jabbrv}なら
+
+\vskip 1.5mm
+\hskip1cm
+[1] M. Iri, K. Murota, and S. Matsui. Linear-time approximation
+ $\cdots$
+
+\hskip1cm
+[2] 松井, 伊理. あふれのない浮動小数点表示方式. $\cdots$
+\vskip 1.5mm
+
+\noindent となる．著者が漢字コードなのに`{\tt yomi}'がない場合には，例えば，
+
+\vskip 1.5mm
+\hskip1cm
+[松井80] 松井正一, 伊理正夫. あふれのない浮動小数点表示方式. $\cdots$
+\vskip 1.5mm
+
+\noindent となるようにしてある(著者が複数でも先頭の著者のみからラベルを
+作るようにしてある)．ただし，ソートキーには漢字コード(EUCコード)が
+使われるから，順番はおかしなものとなる．
+
+
+\section{おわりに}
+
+本稿では日本語化した\BibTeX である\JBibTeX について述べた．
+バージョン0.20まではとりあえず動くという形で作成してあったが，
+バージョン0.30では十分実用に耐えるレベルに達したと考えている．
+日本語用のスタイルについても同様である．
+現在までのところ利用者がさほど多くないため，使用経験が乏しい．
+今後は使用経験に基づき，日本語のために必要な組み込み関数の
+変更・追加などの改良を加えていきたい．また各種の学会用のスタイルの
+作成も必要であると考えている．
+またOren Patashnik氏からの私信によれば，今年中(1991)にversion 1.0をリリースする
+予定らしいので，それの日本語化も必要であろう．
+
+\bibliography{jbibtex}
+\bibliographystyle{jplain}
+\end{document}

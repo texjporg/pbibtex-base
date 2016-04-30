@@ -1,0 +1,798 @@
+@preamble{ "\newcommand{\noopsort}[1]{} "
+	# "\newcommand{\printfirst}[2]{#1} "
+	# "\newcommand{\singleletter}[1]{#1} "
+	# "\newcommand{\switchargs}[2]{#2#1} " }
+
+@ARTICLE{article-minimal,
+   author = {L[eslie] A. Aamport},
+   title = {The Gnats and Gnus Document Preparation System},
+   journal = {\mbox{G-Animal's} Journal},
+   year = 1986,
+}
+
+@ARTICLE{article-full,
+   author = {L[eslie] A. Aamport},
+   title = {The Gnats and Gnus Document Preparation System},
+   journal = {\mbox{G-Animal's} Journal},
+   year = 1986,
+   volume = 41,
+   number = 7,
+   pages = "73+",
+   month = jul,
+   note = "This is a full ARTICLE entry",
+}
+
+The KEY field is here to override the KEY field in the journal being
+cross referenced (so is the NOTE field, in addition to its imparting
+information).
+
+@ARTICLE{article-crossref,
+   crossref = {WHOLE-JOURNAL},
+   key = "",
+   author = {L[eslie] A. Aamport},
+   title = {The Gnats and Gnus Document Preparation System},
+   pages = "73+",
+   note = "This is a cross-referencing ARTICLE entry",
+}
+
+@ARTICLE{whole-journal,
+   key = "GAJ",
+   journal = {\mbox{G-Animal's} Journal},
+   year = 1986,
+   volume = 41,
+   number = 7,
+   month = jul,
+   note = {The entire issue is devoted to gnats and gnus
+		(this entry is a cross-referenced ARTICLE (journal))},
+}
+
+@INBOOK{inbook-minimal,
+   author = "Donald E. Knuth",
+   title = "Fundamental Algorithms",
+   publisher = "Addison-Wesley",
+   year = "{\noopsort{1973b}}1973",
+   chapter = "1.2",
+}
+
+@INBOOK{inbook-full,
+   author = "Donald E. Knuth",
+   title = "Fundamental Algorithms",
+   volume = 1,
+   series = "The Art of Computer Programming",
+   publisher = "Addison-Wesley",
+   address = "Reading, Massachusetts",
+   edition = "Second",
+   month = "10~" # jan,
+   year = "{\noopsort{1973b}}1973",
+   type = "Section",
+   chapter = "1.2",
+   pages = "10--119",
+   note = "This is a full INBOOK entry",
+}
+
+@INBOOK{inbook-crossref,
+   crossref = "whole-set",
+   title = "Fundamental Algorithms",
+   volume = 1,
+   series = "The Art of Computer Programming",
+   edition = "Second",
+   year = "{\noopsort{1973b}}1973",
+   type = "Section",
+   chapter = "1.2",
+   note = "This is a cross-referencing INBOOK entry",
+}
+
+@BOOK{book-minimal,
+   author = "Donald E. Knuth",
+   title = "Seminumerical Algorithms",
+   publisher = "Addison-Wesley",
+   year = "{\noopsort{1973c}}1981",
+}
+
+@BOOK{book-full,
+   author = "Donald E. Knuth",
+   title = "Seminumerical Algorithms",
+   volume = 2,
+   series = "The Art of Computer Programming",
+   publisher = "Addison-Wesley",
+   address = "Reading, Massachusetts",
+   edition = "Second",
+   month = "10~" # jan,
+   year = "{\noopsort{1973c}}1981",
+   note = "This is a full BOOK entry",
+}
+
+@BOOK{book-crossref,
+   crossref = "whole-set",
+   title = "Seminumerical Algorithms",
+   volume = 2,
+   series = "The Art of Computer Programming",
+   edition = "Second",
+   year = "{\noopsort{1973c}}1981",
+   note = "This is a cross-referencing BOOK entry",
+}
+
+@BOOK{whole-set,
+   author = "Donald E. Knuth",
+   publisher = "Addison-Wesley",
+   title = "The Art of Computer Programming",
+   series = "Four volumes",
+   year = "{\noopsort{1973a}}{\switchargs{--90}{1968}}",
+   note = "Seven volumes planned (this is a cross-referenced set of BOOKs)",
+}
+
+@BOOKLET{booklet-minimal,
+   key = "Kn{\printfirst{v}{1987}}",
+   title = "The Programming of Computer Art",
+}
+
+@BOOKLET{booklet-full,
+   author = "Jill C. Knvth",
+   title = "The Programming of Computer Art",
+   howpublished = "Vernier Art Center",
+   address = "Stanford, California",
+   month = feb,
+   year = 1988,
+   note = "This is a full BOOKLET entry",
+}
+
+@INCOLLECTION{incollection-minimal,
+   author = "Daniel D. Lincoll",
+   title = "Semigroups of Recurrences",
+   booktitle = "High Speed Computer and Algorithm Organization",
+   publisher = "Academic Press",
+   year = 1977,
+}
+
+@INCOLLECTION{incollection-full,
+   author = "Daniel D. Lincoll",
+   title = "Semigroups of Recurrences",
+   editor = "David J. Lipcoll and D. H. Lawrie and A. H. Sameh",
+   booktitle = "High Speed Computer and Algorithm Organization",
+   number = 23,
+   series = "Fast Computers",
+   chapter = 3,
+   type = "Part",
+   pages = "179--183",
+   publisher = "Academic Press",
+   address = "New York",
+   edition = "Third",
+   month = sep,
+   year = 1977,
+   note = "This is a full INCOLLECTION entry",
+}
+
+@INCOLLECTION{incollection-crossref,
+   crossref = "whole-collection",
+   author = "Daniel D. Lincoll",
+   title = "Semigroups of Recurrences",
+   pages = "179--183",
+   note = "This is a cross-referencing INCOLLECTION entry",
+}
+
+@BOOK{whole-collection,
+   editor = "David J. Lipcoll and D. H. Lawrie and A. H. Sameh",
+   title = "High Speed Computer and Algorithm Organization",
+   booktitle = "High Speed Computer and Algorithm Organization",
+   number = 23,
+   series = "Fast Computers",
+   publisher = "Academic Press",
+   address = "New York",
+   edition = "Third",
+   month = sep,
+   year = 1977,
+   note = "This is a cross-referenced BOOK (collection) entry",
+}
+
+@MANUAL{manual-minimal,
+   key = "Manmaker",
+   title = "The Definitive Computer Manual",
+}
+
+@MANUAL{manual-full,
+   author = "Larry Manmaker",
+   title = "The Definitive Computer Manual",
+   organization = "Chips-R-Us",
+   address = "Silicon Valley",
+   edition = "Silver",
+   month = apr # "-" # may,
+   year = 1986,
+   note = "This is a full MANUAL entry",
+}
+
+@MASTERSTHESIS{mastersthesis-minimal,
+   author = "{\'{E}}douard Masterly",
+   title = "Mastering Thesis Writing",
+   school = "Stanford University",
+   year = 1988,
+}
+
+@MASTERSTHESIS{mastersthesis-full,
+   author = "{\'{E}}douard Masterly",
+   title = "Mastering Thesis Writing",
+   school = "Stanford University",
+   type = "Master's project",
+   address = "English Department",
+   month = jun # "-" # aug,
+   year = 1988,
+   note = "This is a full MASTERSTHESIS entry",
+}
+
+@MISC{misc-minimal,
+   key = "Missilany",
+   note = "This is a minimal MISC entry",
+}
+
+@MISC{misc-full,
+   author = "Joe-Bob Missilany",
+   title = "Handing out random pamphlets in airports",
+   howpublished = "Handed out at O'Hare",
+   month = oct,
+   year = 1984,
+   note = "This is a full MISC entry",
+}
+
+@STRING{STOC-key = "OX{\singleletter{stoc}}"}
+
+@STRING{ACM = "The OX Association for Computing Machinery"}
+
+@STRING{STOC = " Symposium on the Theory of Computing"}
+
+@INPROCEEDINGS{inproceedings-minimal,
+   author = "Alfred V. Oaho and Jeffrey D. Ullman and Mihalis Yannakakis",
+   title = "On Notions of Information Transfer in {VLSI} Circuits",
+   booktitle = "Proc. Fifteenth Annual ACM" # STOC,
+   year = 1983,
+}
+
+@INPROCEEDINGS{inproceedings-full,
+   author = "Alfred V. Oaho and Jeffrey D. Ullman and Mihalis Yannakakis",
+   title = "On Notions of Information Transfer in {VLSI} Circuits",
+   editor = "Wizard V. Oz and Mihalis Yannakakis",
+   booktitle = "Proc. Fifteenth Annual ACM" # STOC,
+   number = 17,
+   series = "All ACM Conferences",
+   pages = "133--139",
+   month = mar,
+   year = 1983,
+   address = "Boston",
+   organization = ACM,
+   publisher = "Academic Press",
+   note = "This is a full INPROCEDINGS entry",
+}
+
+@INPROCEEDINGS{inproceedings-crossref,
+   crossref = "whole-proceedings",
+   author = "Alfred V. Oaho and Jeffrey D. Ullman and Mihalis Yannakakis",
+   title = "On Notions of Information Transfer in {VLSI} Circuits",
+   organization = "",
+   pages = "133--139",
+   note = "This is a cross-referencing INPROCEEDINGS entry",
+}
+
+@PROCEEDINGS{proceedings-minimal,
+   key = STOC-key,
+   title = "Proc. Fifteenth Annual" # STOC,
+   year = 1983,
+}
+
+@PROCEEDINGS{proceedings-full,
+   editor = "Wizard V. Oz and Mihalis Yannakakis",
+   title = "Proc. Fifteenth Annual" # STOC,
+   number = 17,
+   series = "All ACM Conferences",
+   month = mar,
+   year = 1983,
+   address = "Boston",
+   organization = ACM,
+   publisher = "Academic Press",
+   note = "This is a full PROCEEDINGS entry",
+}
+
+@PROCEEDINGS{whole-proceedings,
+   key = STOC-key,
+   organization = ACM,
+   title = "Proc. Fifteenth Annual" # STOC,
+   address = "Boston",
+   year = 1983,
+   booktitle = "Proc. Fifteenth Annual ACM" # STOC,
+   note = "This is a cross-referenced PROCEEDINGS",
+}
+
+@PHDTHESIS{phdthesis-minimal,
+   author = "F. Phidias Phony-Baloney",
+   title = "Fighting Fire with Fire: Festooning {F}rench Phrases",
+   school = "Fanstord University",
+   year = 1988,
+}
+
+@PHDTHESIS{phdthesis-full,
+   author = "F. Phidias Phony-Baloney",
+   title = "Fighting Fire with Fire: Festooning {F}rench Phrases",
+   school = "Fanstord University",
+   type = "{PhD} Dissertation",
+   address = "Department of French",
+   month = jun # "-" # aug,
+   year = 1988,
+   note = "This is a full PHDTHESIS entry",
+}
+
+@TECHREPORT{techreport-minimal,
+   author = "Tom Terrific",
+   title = "An {$O(n \log n / \! \log\log n)$} Sorting Algorithm",
+   institution = "Fanstord University",
+   year = 1988,
+}
+
+@TECHREPORT{techreport-full,
+   author = "Tom T{\'{e}}rrific",
+   title = "An {$O(n \log n / \! \log\log n)$} Sorting Algorithm",
+   institution = "Fanstord University",
+   type = "Wishful Research Result",
+   number = "7",
+   address = "Computer Science Department, Fanstord, California",
+   month = oct,
+   year = 1988,
+   note = "This is a full TECHREPORT entry",
+}
+
+@UNPUBLISHED{unpublished-minimal,
+   author = "Ulrich {\"{U}}nderwood and Ned {\~N}et and Paul {\={P}}ot",
+   title = "Lower Bounds for Wishful Research Results",
+   note = "Talk at Fanstord University (this is a minimal UNPUBLISHED entry)",
+}
+
+@UNPUBLISHED{unpublished-full,
+   author = "Ulrich {\"{U}}nderwood and Ned {\~N}et and Paul {\={P}}ot",
+   title = "Lower Bounds for Wishful Research Results",
+   month = nov # ", " # dec,
+   year = 1988,
+   note = "Talk at Fanstord University (this is a full UNPUBLISHED entry)",
+}
+
+@MISC{random-note-crossref,
+   key = {Volume-2},
+   note = "Volume~2 is listed under Knuth \cite{book-full}"
+}
+
+以下は日本語のスタイルのテスト用のデータ群．
+
+@INBOOK{inbook-full-j,
+   author = "ドナルド・ダック",
+   yomi = "Donald Duck",
+   title = "基本算法",
+   volume = 1,
+   series = "手回し計算機の裏技集",
+   publisher = "林南出版",
+   address = "東京, 調布市",
+   edition = "第2版",
+   month = "4月1日",
+   year = 1963,
+   chapter = "第1.2節",
+   pages = "10--119",
+   note = "いんちき"
+}
+
+@INCOLLECTION{incol-full-j-1,
+   author = "ドナルド・ハック",
+   yomi = "Donald Hack",
+   booktitle = "{究極のJBibTeXing}",
+   number = 1,
+   series = "これでわかるかな？講座",
+   publisher = "豊島園出版",
+   address = "東京, 練馬区",
+   edition = "第1版",
+   month = "11月7日",
+   year = 1991,
+   chapter = "第6.2節",
+   pages = 321,
+   note = "テスト用"
+}
+
+@ARTICLE{article-crossref-j,
+   crossref = {WHOLE-JOURNAL-J},
+   key = "",
+   author = "匿名　希望",
+   yomi ="Kibou Tokumei",
+   title = {論文乱造の裏技教えます},
+   pages = "73+",
+   note = "これは文献リスト内参照しているARTICLEの例"
+}
+
+@ARTICLE{article-crossref-jj,
+   crossref = {WHOLE-JOURNAL-J},
+   key = "",
+   author = "匿名 希望",
+   yomi ="Kibou Tokumei",
+   title = {論文乱造の裏技教えます，その２},
+   pages = "83+",
+   note = "これは文献リスト内参照しているARTICLEの例"
+}
+
+@ARTICLE{whole-journal-j,
+   key = "Big",
+   journal = {Big TomorrowでなくSmall Yesterday},
+   year = 1986,
+   volume = 41,
+   number = 7,
+   month = jul,
+   note = {いかにして手抜きして出世するか，インチキで儲けるかの特集号！}
+}
+
+@INBOOK{inbook-crossref-j,
+   crossref = "whole-set-j",
+   title = "{究極のJBibTeXing}",
+   volume = "第1巻",
+   series = "これでわかるかな？講座",
+   edition = "第1版",
+   year = 1991,
+   chapter = "第3.5節",
+   note = "文献リスト内参照をしているINBOOKの例。"
+}
+
+@BOOK{whole-set-j,
+   author = "ドナルド・ハック",
+   yomi = "Donald Hack",
+   title = "これでわかるかな？講座",
+   volume = "全13巻",
+   publisher = "豊島園出版",
+   address = "東京, 練馬区",
+   year = 1991,
+   note = "13巻を予定はしているが，締切を守らない著者のことだから？これはシリーズ全体が参照されている例．"
+}
+
+@INBOOK{inbook-crossref-j-1,
+   crossref = "whole-set-j",
+   title = "{はじめてのJBibTeXing}",
+   series = "これでわかるかな？講座",
+   edition = 1,
+   year = "{\noopsort{1973b}}1973",
+   chapter = "3.5",
+   type = "節",
+   note = "文献リスト内参照をしているINBOOKの例！"
+}
+
+@string(ieeeassp={IEEE Trans. Acoust., Speech \& Signal Process.})
+
+@booklet{cvs,
+   title="{CVS技術レポート}",
+   author="機械振興協会",
+   yomi="KikaiSinkouKyoukai",
+   year="昭52"}
+
+@article{ha,
+   title="個別軌道輸送システム十字路付近のモデル化とその解析",
+   author="浜松 芳夫 and 中田 勝治 and 加地 郁夫",
+   yomi="Yoshio Hamamatsu and Katsuji Nakata and Ikuo Kaji",
+   journal= tieice # "(A)", volume="J64-A", number=10, pages="835-842",
+   year=1982}
+@article{costa,
+   author="J. M. Costa and A. N. Venetsanopoulos",
+   title="Design of circularly symmetric two-demensional recursive filters",
+   journal=ieeeassp,
+   volume="ASSP-22",number=6,pages="432-443",year=1974}
+@inproceedings{mcclella,
+   author="J. H. McClellan",
+   title="The design of two-dimensional digital filters by transformation",
+   booktitle="Proc. 7th Annu. Princeton Conf. Inform. Sci. \& Systm.",
+   pages="247-251", year=1973}
+@book{dug,
+   author="D. E. Dudgen and R. M. Mersereau",
+   title="Multideimensional digital signal processing",
+   publisher="Prentice-Hall",year=1984}
+@inproceedings{sakawa,
+   author="M. Sakawa and H. Yano",
+   title="Interactive decision making for multiobjective linear
+           programming problems with fuzzy parameters",
+   booktitle="Large-Scale Modeling and Interactive Decision Analysis,
+              Proceedings, Eisenach, GDR",
+   editor="G. Fandel and M. Grauer and A. Kurzhanski and A. P. Wierzbiki",
+   publisher="Springer-Verlag", pages="88-96",year=1986}
+@manual{ssl,
+	title="SSL~II使用手引書",year=1980,
+        organization="富士通",
+	yomi="Fujitsu"}
+@book{newman,
+     author="J. R. Norman",
+     title="The World of Mathematics, 4 vols.",
+     publisher="Simon and Schuster",
+     year=1956,
+     note="(翻訳~: 林 雄一朗訳編~: ``数学と論理と'', 東京図書(1970))"
+     }
+@book{Rich,
+    author="Elaine A. Rich",
+    title="Artificial Intelligence",
+    series="McGraw-Hill Series in Artificial Intelligence",
+    publisher="McGraw-Hill Book Company", year=1983,
+    note="(翻訳~: 廣田, 宮村 訳~: ``人工知能 I, II'',マグロウヒル(1984))"}
+
+@STRING(GIH={後藤 英一、一松 信、広田 良吾})
+@STRING(情報処理学会={情報処理学会})
+
+@INCOLLECTION{goto,
+	author="後藤　英一",
+	title="計算機による数式処理とは",
+	pages="4--6",
+	editor=GIH,
+	booktitle="計算機による数式処理のすすめ",
+	series="コンピュータ・サイエンス\ {\bf bit}\ 別冊",
+	publisher="共立出版",
+	yomi="Eiichi Goto",
+	year="昭61-4" }
+@UNPUBLISHED{磯崎,
+	author="磯崎 秀樹",
+	title="How To Use {\JLaTeX}",
+	note="memo for {\JLaTeX}",
+	yomi="Hideki Isozaki",
+	year=1987}
+@MANUAL{斉藤,
+     author="斉藤 康己",
+	title="日本語{\TeX}:~{\JTeX}",
+	yomi="Yasuki Saitoh",
+	organization="DECUS第7回シンポジウム配付資料", year=1987}
+@BOOK{sym,
+	editor="Janusz S. Kowalik",
+	title="Coupling Symbolic and Numerical Computing in Expert Systems",
+	publisher="North-Holland",year=1986}
+@INCOLLECTION{eda,
+	author="F. N. Springsteel",
+	title="A Multilevel Expert System for Explaratory Data Analysis",
+	pages="295--306",
+	editor="Janusz S. Kowalik",
+	booktitle="Coupling Symbolic and Numerical
+		   Computing in Expert Systems",
+	publisher="North-Holland",year=1986}
+	}
+@BOOK{dss,
+	editor="Clyde W. Holsapple and Andrew B. Whinston",
+	title="Decision Support Systems: Theory and Application",
+	publisher="North-Holland",year=1987}
+@INCOLLECTION{cm,
+	author="Amilcar Sernads and Cristina Sernads",
+	title="Conceptual Modeling for Knowledge-Based DSS Development",
+	editor="Clyde W. Holsapple and Andrew B. Whinston",
+	booktitle="Decision Support Systems: Theory and Application",
+	pages="91--135",year=1987,
+	publisher="North-Holland"}
+@BOOK{reduce,
+	editor=GIH,
+	yomi="E. Goto and S. Hitotsumatsu and R. Hirota",
+	title="計算機による数式処理のすすめ",
+	series="コンピュータ・サイエンス\ {\bf bit}\ 別冊",
+	publisher="共立出版",
+	year="1986"}
+@ARTICLE{fp,
+	author="Shouichi Matsui and Masao Iri",
+	title="An Overflow/Underflow-Free Floating-Point Representation of Numbers",
+	journal="Journal of Information Processing",
+	volume=4,number=3,pages="123--133",
+	month=nov,year=1981}
+@ARTICLE{la,
+	author="Masao Iri and Kazuo Murota and Shouichi Matsui",
+	title="Linear-time approximation algorithms for finding the
+        minimum-weight perfect matching on a plane",
+	journal=ipl,volume=12,pages="206-209",year=1981
+}
+@ARTICLE{あふれ無し,
+	author="松井 正一 and 伊理 正夫",
+	title="あふれのない浮動小数点表示方式",
+	journal="情報処理学会論文誌", volume=21, number=4, pages="306--313",
+	yomi="Shouichi Matsui and Masao Iri",
+	year=1980}
+@ARTICLE{ダム,
+	title="知識工学的手法に基づく水力鋼構造物の寿命予測",
+	author="中村 秀治、 松浦 真一、  松井 正一 and  寺野 隆雄",
+	journal="土木学会論文集",number="368/I-5",
+	pages="301--310",
+	yomi="Hideharu Nakamura and Shinichi Matsuura and Shouichi Matsui and
+		Takao Terano",
+	year=1986,month=apr}
+@BOOK{人名表記,
+	author="マーク・ピーターセン",
+	title="日本人の英語",
+	publisher="岩波書店",
+	year=1988, month=apr,
+	pages=196,
+	yomi="Mark Petersen",
+	series="岩波新書(新赤版) 18",
+	note="pp. 187--189
+	英語での日本人の名前の書き方,
+	日本の国際化のためには明治時代からの考え方をこのあたりでやめたらどうか
+	Shouichi Matsui でなく Matsui Shouichi"
+}
+
+@MISC{EUC日本語TeX,
+	author="松井　正一",yomi="Matsui, Shouichi",
+	title="{NTT}版日本語{\TeX}: {\JTeX}の使い方",
+	year=1988, month=may,
+	note="電力中央研究所 情報システム部 内部メモ"
+}
+
+@INPROCEEDINGS{multi,
+	author="松井　正一，篠原　靖志，大屋　隆生、高橋 誠",
+	yomi="Shouichi Matsui and Yasusi Sinohara and Takao Ohya and
+		Makoto Takahashi",
+	title="マルチメディアを活用した意思決定支援システムの開発",
+	booktitle="「利用者志向の情報システム」シンポジウム予稿集",
+	publisher=情報処理学会,pages="39--48",year=1986,month=jul
+}
+
+@BOOK{marumoji,
+	author="山根　一真", yomi="K. Yamane",
+	title="変体少女文字の研究",publisher="講談社",
+	year=1986,pages=230
+}
+
+@ARTICLE{maru,
+	author="味岡　伸太郎", yomi="Taro Ajioka",
+	title="横書きで文字を書けば自然とマル字になる",
+	journal="とよはし百選＜夏号＞",number="通巻37号",
+	pages=25,publisher="東愛知新聞社",year=1986
+}
+
+yomi に平仮名を使う例
+
+@INCOLLECTION{goto-h,
+	author="後藤 英一",
+	title="計算機による数式処理とは",
+	pages="4--6",
+	crossref="reduce",
+	yomi="{\noop{ごとう}後}藤",
+	year=1986 }
+@UNPUBLISHED{磯崎-h,
+	author="磯崎 秀樹",
+	title="How To Use {\JLaTeX}",
+	note="memo for {\JLaTeX}",
+	yomi="{\noop{いそざき}磯}崎",
+	year=1987}
+@MANUAL{斉藤-h,
+     author="斉藤 康己",
+	title="日本語{\TeX}:~{\JTeX}",
+	yomi="{\noop{さいとう}斉}藤",
+	organization="DECUS第7回シンポジウム配付資料", year=1987}
+@INPROCEEDINGS{multi-h,
+	author="松井 正一、篠原 靖志、大屋 隆生、高橋 誠",
+	yomi="{\noop{まつい}松}井",
+	title="マルチメディアを活用した意思決定支援システムの開発",
+	booktitle="「利用者志向の情報システム」シンポジウム予稿集",
+	publisher=情報処理学会,pages="39--48",year=1986,month=jul
+	}
+
+ソフトウェア科学会用のテストデータ
+
+@INPROCEEDINGS{ama,
+	author="M. Amamiya and R. Hasegawa and H. Mikami",
+	title="List Processing with Data Flow Machine",
+	booktitle="RIMS Symposium on Software Science and Engineering",
+	editor="E. Goto and Oozei Sonota and others",
+	publisher="Springer-Verlag",
+	year=1982,
+	pages="165--190"
+}
+
+@TECHREPORT{Arv,
+	author="Kathall V. Arvind and K. Pingali",
+	title="A Data Flow Architecture with Tagged Tokens",
+	type="MIT LCS Momo",
+	number="TM174",
+	year=1980
+}
+
+@BOOK{cha,
+	author="V. Chachra and P. M. Chare and J. M. Moore",
+	title="Applications of Graph Theory Algorithms",
+	publisher="Elsevier North Holland",
+	year=1979
+}
+
+@ARTICLE{dav,
+	author="D. Davidson and D. Landskov and B. D. Shriver and
+                P. W. Maliett",
+	title="Some experiments in Local Microcodes Compaction for
+	       Horizontal Machines",
+	journal=ieeetc,
+	volume="C-30", number=7, month=jul, year=1981,
+	pages="460-477"
+}
+
+@inproceedings{den,
+	author="J. B. Dennis and D. P. Misunas",
+	title ="A Preliminary Architecture for a Basic Data Flow Processor",
+	booktitle="Proc. of the 2nd Int'l Symp. on Computer Architecture",
+	month=jan,year=1975,pages="126-132"
+}
+
+@article{fis,
+	author="J. A. Fisher",
+	title="Trace Scheduling: A Techinique for Global Microcode Compaction",
+	journal=ieeetc, volume="C-30",number=7,year=1981,pages="478-490"
+}
+
+@article{gajski,
+	author="D. D. Gajski and D. A. Padua and D. J. Kuck and Kuhn, R. H.",
+	title="A Second Optinion on Data Flow Machines and Languages",
+	journal="Computer",
+	volume=15, number=2, month=feb, year=1982, pages="58-69"
+}
+
+@inproceedings{suna1,
+	author="砂原　秀樹，所　真理雄",
+	yomi="Hideki Sunahara and Mario Tokoro",
+	title="データ駆動型計算機の実行制御に関する考察",
+	booktitle="データフローワークショップ'86",
+	month=may, year=1986,
+	pages="83--89"
+}
+
+@inproceedings{suna2,
+	author="Hideki Sunahara and Mario Tokoro",
+	title="Half-Dynamic Scheduling with Data-flow Control",
+	booktitle="Presented at Int'l Conf. on SuperComputing",
+	address="Athens, Greece",
+	month="June 8--12",year=1987
+}
+
+@article{toko1,
+	author="M. Tokoro and E. Tamura and T. Takizuka",
+	title="Optimization of Microprograms",
+	journal=ieeetc,
+	month=jul,year=1981,
+	volume="C-30",number=7,pages="491--504"
+}
+
+@inproceedings{toko2,
+	author="M. Tokoro and J. R. Jagannathan and H. Sunahara",
+	title="On the Working Set Concepts for Data-flow Machines",
+	booktitle="Proc. of the 10th Int'l Symp. on Computer Architecture",
+	month=jun,year=1983,
+	pages="90-97"
+}
+
+@incollection{suna86,
+	author="Sunahara, H. and Tokoro, M.",
+	title="On the Working Set Concept for Data-flow Machines: Policies
+	       and Their Evaluation",
+	booktitle="Fifth Generation Computer Architectures",
+	editor="Woods, J. V.",
+	publisher="North-Holland", year=1986, pages="147-160"
+}
+	
+人工知能学会誌用テストデータ
+
+@inproceedings{onda,
+	author="Onda, H. and Hasegawa, T. and Matsui, T.",
+	title="Collision Avoidance for a 6-DOF Manipulator Based on Empty
+	       Space Analysis of 3-D Real World",
+	booktitle="IEEE Int. Workshop on Intelligent Robots and Systems",
+	address="Ibaraki",
+	year=1990
+}
+
+@article{近藤,
+	author="近藤，木村",
+	yomi="Kondoh and Kimura",
+	title="迷路法に基づく自由空間算出法を用いた障害物回避動作計画",
+	journal="日本ロボット学会誌",
+	volume=5,number=4,pages="263--272",
+	year=1987
+}
+
+@article{JSAI-1,
+	journal="人工知能学会誌",
+	key="JinkouTinouGakkai",
+	volume=5, number=4,
+	year=1990, month=jul,
+	note="特集「分散人工知能」"
+}
+
+@incollection{grosz,
+	author="Grosz, B.",
+	title="The Representation and Use of Focus in a System For
+		Understanding Dialog",
+	booktitle="Natural Language Processing",
+	editor="B. Grosz and K. S. Jones and B. L. Webber",
+	publisher="Morgan Kaufram Publisher",
+	year="1979, in part 1986",
+	pages="353--362"
+}
+	
