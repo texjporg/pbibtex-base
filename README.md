@@ -1,7 +1,7 @@
 # pbibtex-base
 
 These are miscellaneous files, including bibliography styles (.bst),
-for pBibTeX, which is an Japanese extended version of BibTeX contained in
+for pBibTeX, which is a Japanese extended version of BibTeX contained in
 TeX Live.
 
 Originally, pBibTeX was known as jBibTeX. When it came to be included
@@ -13,7 +13,7 @@ their names are jbibtex.pdf, jbtxdoc.pdf, and so on.
 
 All the text files containing Japanese characters are encoded in
 ISO-2022-JP. This is because ISO-2022-JP encoded texts are most suitable
-for the pBibTeX program.
+for the traditional pTeX and pBibTeX programs.
 
 ## License
 
