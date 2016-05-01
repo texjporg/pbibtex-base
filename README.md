@@ -22,7 +22,6 @@ https://github.com/texjporg/pbibtex-base
 
 If you have issues, please let us know from the above page.
 
-
 ## License
 
 The bundle is redistribution derived from [ptex-texmf distribution
