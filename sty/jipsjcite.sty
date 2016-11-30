@@ -1,0 +1,14 @@
+% jipsjcite.sty by Shouichi Matsui 1989-05-11
+
+\def\thebibliography#1{\par\@startsection{section}{1}{\z@}{-2.0ex plus
+    -1ex minus -.2ex}{1.5ex plus 1.0ex minus .2ex}%
+{\normalsize\dg\bf}%
+*{References\@mkboth{References}{References}}
+ \list{{\bf\arabic{enumi}.}}{\settowidth\labelwidth{{\bf #1.}}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+
+{\centering\normalsize\dg\bf}%

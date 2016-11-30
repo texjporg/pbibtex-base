@@ -1,0 +1,25 @@
+% tieic.sty by Shouichi Matsui 1989-05-24 from
+% ipsjcite.sty by Hideki ISOZAKI Jan. 19, 1989
+
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{,\penalty\@m\ }\@ifundefined
+       {b@\@citeb}{{\bf ?}\@warning
+       {Citation `\@citeb' on page \thepage \space undefined}}%
+\hbox{(\csname b@\@citeb\endcsname)}}}{#1}}
+
+\def\@cite#1#2{$^{\mbox{\the\scriptfont0 #1}}$}
+
+\def\thebibliography#1{\par\@startsection{section}{1}{\z@}{-2.0ex plus
+    -1ex minus -.2ex}{1.5ex plus 1.0ex minus .2ex}%
+{\centering\large\dg\bf}%
+*{文　献\@mkboth{文献}{文献}}
+\footnotesize
+ \list{(\arabic{enumi})}{\settowidth\labelwidth{(#1)}\leftmargin\labelwidth
+ \settowidth\topsep{}\settowidth\itemsep{}\settowidth\parsep{}
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+

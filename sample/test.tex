@@ -1,0 +1,38 @@
+% この文書はASCII版で処理することを前提にしている．NTT版で処理するには
+% document style を変更すること
+\documentclass{jarticle}
+%\documentstyle{jarticle}
+%\documentstyle{j-article}
+%\documentstyle[jtwocolumn,jipsjcite]{jarticle}    % jipsj.bst
+%\documentstyle[jtwocolumn,ipsjcite]{jarticle}	   % tipsj.bst
+%\documentstyle[jtwocolumn,tieicecite]{jarticle}   % tieice.bst
+%\documentstyle[jtwocolumn,jssstcite]{jarticle}    % jssst.bst
+%\documentstyle[jtwocolumn,jsaicite]{jarticle}	   % jsai.bst
+%
+\def\JTeX{\leavevmode\lower .5ex\hbox{J}\kern-.17em\TeX}
+\def\JLaTeX{\leavevmode\lower.5ex\hbox{J}\kern-.17em\LaTeX}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\def\JBibTeX{\leavevmode\lower .6ex\hbox{J}\kern-0.15em\BibTeX}
+%
+\begin{document}
+テスト用のドキュメントである \cite{EUC日本語TeX,JSAI-1}．
+
+\nocite{*}
+
+\bibliography{jxampl}
+
+\bibliographystyle{jplain}
+%\bibliographystyle{junsrt}
+%\bibliographystyle{jalpha}
+%\bibliographystyle{jabbrv}
+%\bibliographystyle{tipsj}
+%\bibliographystyle{jipsj}
+%\bibliographystyle{tieice}
+%\bibliographystyle{jorsj}
+%\bibliographystyle{jname}
+%\bibliographystyle{jssst}
+%\bibliographystyle{jsai}
+
+\end{document}
+

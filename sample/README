@@ -1,0 +1,16 @@
+These test files are derived from the old distribution of JBibTeX,
+included in ptex-2.1.4 distribution archive (ptex-2.1.4/web2c/jbibtex)
+and jtex1.7 distribution (jtex1.7/jtex/BibTeX) by ASCII Corporation.
+
+* The files are converted into ISO-2022-JP (JIS) encoding.
+* Makefile is adjusted to work with the latest pLaTeX + pBibTeX.
+  Use platex/pbibtex instead of jlatex/jbibtex, and use -kanji=<enc>
+  instead of -BIBFILECODE=<num> (e.g. number "20" meant EUC-JP input
+  encoding is EUC-JP, similar to NTT JTeX \kanjifilecode number)
+* test.tex uses \documentclass instead of \documentstyle.
+* jplain.bbl.base (renamed from jplain.sav) is changed to work with
+  pBibTeX 0.99d-j0.33. On Version 0.99d, BibTeX made output lines
+  breakable only at white_space (so that, for example, URLs would not
+  be broken).
+
+Japanese TeX Development Community (2016/11/30)
