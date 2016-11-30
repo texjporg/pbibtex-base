@@ -9,7 +9,7 @@ test:
 	$(PBIBTEX) test
 	$(PLATEX) test
 	$(PLATEX) test
-	diff test.bbl jplain.sav
+	diff test.bbl jplain.bbl.base
 	@echo \*\*\*  TESTING SUCCESS  \*\*\*
 
 clean:
