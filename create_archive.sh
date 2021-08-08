@@ -15,7 +15,6 @@ git archive --format=tar --prefix=$PROJECT/ HEAD | (cd $TMP && tar xf -)
 rm $TMP/$PROJECT/.gitignore
 rm $TMP/$PROJECT/create_archive.sh
 rm -rf $TMP/$PROJECT/tests
-rm -rf $TMP/$PROJECT/sty
 perl -pi.bak -e "s/\\\$RELEASEDATE/$RELEASEDATE/g" $TMP/$PROJECT/README.md
 rm -f $TMP/$PROJECT/README.md.bak
 
