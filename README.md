@@ -2,11 +2,9 @@
 
 This bundle contains bibliography styles (.bst) and documents for pBibTeX,
 which is a Japanese extended version of BibTeX available from TeX Live.
-
-Originally, pBibTeX was known as jBibTeX. When it came to be included
-in TeX Live, it was renamed as pBibTeX according to the prefix of pTeX.
-Since the bundle contains the original documents of jBibTeX as-is,
-their names are jbibtex.pdf, jbtxdoc.pdf, and so on.
+The documentation files for pBibTeX are included in pbibtex-manual bundle
+([CTAN](https://ctan.org/pkg/pbibtex-manual),
+[GitHub](https://github.com/texjporg/pbibtex-manual)).
 
 ## Character encoding
 
