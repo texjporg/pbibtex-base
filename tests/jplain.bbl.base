@@ -20,9 +20,9 @@ L[eslie]~A. Aamport.
 \newblock This is a cross-referencing ARTICLE entry.
 
 \bibitem{maru}
-$BL#2,?-B@O:(B.
-\newblock $B2#=q$-$GJ8;z$r=q$1$P<+A3$H%^%k;z$K$J$k(B.
-\newblock $B$H$h$O$7I4A*!c2F9f!d(B, $BDL4,(B37$B9f(B, p.~25, 1986.
+味岡伸太郎.
+\newblock 横書きで文字を書けば自然とマル字になる.
+\newblock とよはし百選＜夏号＞, 通巻37号, p.~25, 1986.
 
 \bibitem{ama}
 M.~Amamiya, R.~Hasegawa, and H.~Mikami.
@@ -36,8 +36,8 @@ Kathall~V. Arvind and K.~Pingali.
 \newblock MIT LCS Momo TM174, 1980.
 
 \bibitem{whole-journal-j}
-Big Tomorrow$B$G$J$/(BSmall Yesterday, Vol.~41, No.~7, July 1986.
-\newblock $B$$$+$K$7$F<jH4$-$7$F=P@$$9$k$+!$%$%s%A%-$GLY$1$k$+$NFC=89f!*(B
+Big TomorrowでなくSmall Yesterday, Vol.~41, No.~7, July 1986.
+\newblock いかにして手抜きして出世するか，インチキで儲けるかの特集号！
 
 \bibitem{cha}
 V.~Chachra, P.~M. Chare, and J.~M. Moore.
@@ -64,10 +64,10 @@ J.~B. Dennis and D.~P. Misunas.
   126--132, January 1975.
 
 \bibitem{inbook-full-j}
-$B%I%J%k%I!&%@%C%/(B.
-\newblock $B4pK\;;K!(B, $B<j2s$77W;;5!$NN"5;=8(B, $BBh(B1$B4,(B, $BBh(B1.2$B@a(B, pp. 10--119.
-\newblock $BNSFn=PHG(B, $BEl5~(B, $BD4I[;T(B, $BBh(B2$BHG(B, 4$B7n(B1$BF|(B 1963.
-\newblock $B$$$s$A$-(B.
+ドナルド・ダック.
+\newblock 基本算法, 手回し計算機の裏技集, 第1巻, 第1.2節, pp. 10--119.
+\newblock 林南出版, 東京, 調布市, 第2版, 4月1日 1963.
+\newblock いんちき.
 
 \bibitem{dug}
 D.~E. Dudgen and R.~M. Mersereau.
@@ -91,15 +91,15 @@ D.~D. Gajski, D.~A. Padua, D.~J. Kuck, and R.~H. Kuhn.
 \newblock {\em Computer}, Vol.~15, No.~2, pp. 58--69, February 1982.
 
 \bibitem{reduce}
-$B8eF#1Q0l(B, $B0l>>?.(B, $B9-EDNI8c!JJT!K(B.
-\newblock $B7W;;5!$K$h$k?t<0=hM}$N$9$9$a(B.
-\newblock $B%3%s%T%e!<%?!&%5%$%(%s%9(B\ {\bf bit}\ $BJL:}(B. $B6&N)=PHG(B, 1986.
+後藤英一, 一松信, 広田良吾（編）.
+\newblock 計算機による数式処理のすすめ.
+\newblock コンピュータ・サイエンス\ {\bf bit}\ 別冊. 共立出版, 1986.
 
 \bibitem{goto}
-$B8eF#1Q0l(B.
-\newblock $B7W;;5!$K$h$k?t<0=hM}$H$O(B.
-\newblock  $B8eF#1Q0l(B, $B0l>>?.(B, $B9-EDNI8c!JJT!K(B, $B7W;;5!$K$h$k?t<0=hM}$N$9$9$a(B,
-  $B%3%s%T%e!<%?!&%5%$%(%s%9(B\ {\bf bit}\ $BJL:}(B, pp. 4--6. $B6&N)=PHG(B, $B><(B61-4.
+後藤英一.
+\newblock 計算機による数式処理とは.
+\newblock  後藤英一, 一松信, 広田良吾（編）, 計算機による数式処理のすすめ,
+  コンピュータ・サイエンス\ {\bf bit}\ 別冊, pp. 4--6. 共立出版, 昭61-4.
 
 \bibitem{grosz}
 B.~Grosz.
@@ -110,35 +110,35 @@ B.~Grosz.
   1986.
 
 \bibitem{inbook-crossref-j-1}
-$B%I%J%k%I!&%O%C%/(B.
-\newblock {$B$O$8$a$F$N(BJBibTeXing}, $BBh(B3.5$B@a(B.
-\newblock $B$3$l$G$o$+$k$+$J!)9V:B(B, $BA4(B13$B4,(B \cite{whole-set-j}, $BBh(B1$BHG(B,
+ドナルド・ハック.
+\newblock {はじめてのJBibTeXing}, 第3.5節.
+\newblock これでわかるかな？講座, 全13巻 \cite{whole-set-j}, 第1版,
   {\noopsort{1973b}}1973.
-\newblock $BJ88%%j%9%HFb;2>H$r$7$F$$$k(BINBOOK$B$NNc!*(B
+\newblock 文献リスト内参照をしているINBOOKの例！
 
 \bibitem{incol-full-j-1}
-$B%I%J%k%I!&%O%C%/(B.
-\newblock  {$B5f6K$N(BJBibTeXing}, $B$3$l$G$o$+$k$+$J!)9V:B(B, No.~1, $BBh(B6.2$B@a(B, p. 321.
-  $BK-Eg1`=PHG(B, $BEl5~(B, $BN}GO6h(B, $BBh(B1$BHG(B, 11$B7n(B7$BF|(B 1991.
-\newblock $B%F%9%HMQ(B.
+ドナルド・ハック.
+\newblock  {究極のJBibTeXing}, これでわかるかな？講座, No.~1, 第6.2節, p. 321.
+  豊島園出版, 東京, 練馬区, 第1版, 11月7日 1991.
+\newblock テスト用.
 
 \bibitem{whole-set-j}
-$B%I%J%k%I!&%O%C%/(B.
-\newblock $B$3$l$G$o$+$k$+$J!)9V:B(B, $BA4(B13$B4,(B.
-\newblock $BK-Eg1`=PHG(B, $BEl5~(B, $BN}GO6h(B, 1991.
+ドナルド・ハック.
+\newblock これでわかるかな？講座, 全13巻.
+\newblock 豊島園出版, 東京, 練馬区, 1991.
 \newblock
-  13$B4,$rM=Dj$O$7$F$$$k$,!$Dy@Z$r<i$i$J$$Cx<T$N$3$H$@$+$i!)$3$l$O%7%j!<%:A4BN$,;2>H$5$l$F$$$kNc!%(B
+  13巻を予定はしているが，締切を守らない著者のことだから？これはシリーズ全体が参照されている例．
 
 \bibitem{inbook-crossref-j}
-$B%I%J%k%I!&%O%C%/(B.
-\newblock {$B5f6K$N(BJBibTeXing}, $BBh(B3.5$B@a(B.
-\newblock $B$3$l$G$o$+$k$+$J!)9V:B(B, $BBh(B1$B4,(B \cite{whole-set-j}, $BBh(B1$BHG(B, 1991.
-\newblock $BJ88%%j%9%HFb;2>H$r$7$F$$$k(BINBOOK$B$NNc!#(B
+ドナルド・ハック.
+\newblock {究極のJBibTeXing}, 第3.5節.
+\newblock これでわかるかな？講座, 第1巻 \cite{whole-set-j}, 第1版, 1991.
+\newblock 文献リスト内参照をしているINBOOKの例。
 
 \bibitem{ha}
-$BIM>>K'IW(B, $BCfED>!<#(B, $B2CCO0jIW(B.
-\newblock $B8DJL50F;M"Aw%7%9%F%`==;zO)IU6a$N%b%G%k2=$H$=$N2r@O(B.
-\newblock $BEE;R>pJsDL?.3X2qO@J8;o(B(A), Vol. J64-A, No.~10, pp. 835--842, 1982.
+浜松芳夫, 中田勝治, 加地郁夫.
+\newblock 個別軌道輸送システム十字路付近のモデル化とその解析.
+\newblock 電子情報通信学会論文誌(A), Vol. J64-A, No.~10, pp. 835--842, 1982.
 
 \bibitem{dss}
 Clyde~W. Holsapple and Andrew~B. Whinston, editors.
@@ -151,18 +151,18 @@ Masao Iri, Kazuo Murota, and Shouichi Matsui.
   perfect matching on a plane.
 \newblock {\em Information Processing Letters}, Vol.~12, pp. 206--209, 1981.
 
-\bibitem{$B0k:j(B}
-$B0k:j=(<y(B.
+\bibitem{磯崎}
+磯崎秀樹.
 \newblock How to use {\JLaTeX}.
 \newblock memo for {\JLaTeX}, 1987.
 
 \bibitem{JSAI-1}
-$B?M9)CNG=3X2q;o(B, Vol.~5, No.~4, July 1990.
-\newblock $BFC=8!VJ,;6?M9)CNG=!W(B.
+人工知能学会誌, Vol.~5, No.~4, July 1990.
+\newblock 特集「分散人工知能」.
 
 \bibitem{cvs}
-$B5!3#?66=6(2q(B.
-\newblock {CVS$B5;=Q%l%]!<%H(B}, $B><(B52.
+機械振興協会.
+\newblock {CVS技術レポート}, 昭52.
 
 \bibitem{whole-set}
 Donald~E. Knuth.
@@ -220,10 +220,10 @@ Jill~C. Knvth.
 \newblock Vernier Art Center, Stanford, California, February 1988.
 \newblock This is a full BOOKLET entry.
 
-\bibitem{$B6aF#(B}
-$B6aF#(B, $BLZB<(B.
-\newblock $BLBO)K!$K4p$E$/<+M36u4V;;=PK!$rMQ$$$?>c32J*2sHrF0:n7W2h(B.
-\newblock $BF|K\%m%\%C%H3X2q;o(B, Vol.~5, No.~4, pp. 263--272, 1987.
+\bibitem{近藤}
+近藤, 木村.
+\newblock 迷路法に基づく自由空間算出法を用いた障害物回避動作計画.
+\newblock 日本ロボット学会誌, Vol.~5, No.~4, pp. 263--272, 1987.
 
 \bibitem{sym}
 Janusz~S. Kowalik, editor.
@@ -279,15 +279,15 @@ Larry Manmaker.
   June-August 1988.
 \newblock This is a full MASTERSTHESIS entry.
 
-\bibitem{EUC$BF|K\8l(BTeX}
-$B>>0f@50l(B.
-\newblock {NTT}$BHGF|K\8l(B{\TeX}: {\JTeX}$B$N;H$$J}(B, May 1988.
-\newblock $BEENOCf1{8&5f=j(B $B>pJs%7%9%F%`It(B $BFbIt%a%b(B.
+\bibitem{EUC日本語TeX}
+松井正一.
+\newblock {NTT}版日本語{\TeX}: {\JTeX}の使い方, May 1988.
+\newblock 電力中央研究所 情報システム部 内部メモ.
 
-\bibitem{$B$"$U$lL5$7(B}
-$B>>0f@50l(B, $B0KM}@5IW(B.
-\newblock $B$"$U$l$N$J$$IbF0>.?tE@I=<(J}<0(B.
-\newblock $B>pJs=hM}3X2qO@J8;o(B, Vol.~21, No.~4, pp. 306--313, 1980.
+\bibitem{あふれ無し}
+松井正一, 伊理正夫.
+\newblock あふれのない浮動小数点表示方式.
+\newblock 情報処理学会論文誌, Vol.~21, No.~4, pp. 306--313, 1980.
 
 \bibitem{fp}
 Shouichi Matsui and Masao Iri.
@@ -296,10 +296,10 @@ Shouichi Matsui and Masao Iri.
   November 1981.
 
 \bibitem{multi}
-$B>>0f@50l(B, $B<D86Lw;V(B, $BBg20N4@8(B, $B9b66@?(B.
-\newblock $B%^%k%A%a%G%#%"$r3hMQ$7$?0U;W7hDj;Y1g%7%9%F%`$N3+H/(B.
-\newblock  $B!VMxMQ<T;V8~$N>pJs%7%9%F%`!W%7%s%]%8%&%`M=9F=8(B, pp. 39--48.
-  $B>pJs=hM}3X2q(B, July 1986.
+松井正一, 篠原靖志, 大屋隆生, 高橋誠.
+\newblock マルチメディアを活用した意思決定支援システムの開発.
+\newblock  「利用者志向の情報システム」シンポジウム予稿集, pp. 39--48.
+  情報処理学会, July 1986.
 
 \bibitem{mcclella}
 J.~H. McClellan.
@@ -316,16 +316,16 @@ Joe-Bob Missilany.
 \newblock Handed out at O'Hare, October 1984.
 \newblock This is a full MISC entry.
 
-\bibitem{$B%@%`(B}
-$BCfB<=(<#(B, $B>>1:??0l(B, $B>>0f@50l(B, $B;{LnN4M:(B.
-\newblock $BCN<19)3XE*<jK!$K4p$E$/?eNO9]9=B$J*$N<wL?M=B,(B.
-\newblock $BEZLZ3X2qO@J8=8(B, No. 368/I-5, pp. 301--310, April 1986.
+\bibitem{ダム}
+中村秀治, 松浦真一, 松井正一, 寺野隆雄.
+\newblock 知識工学的手法に基づく水力鋼構造物の寿命予測.
+\newblock 土木学会論文集, No. 368/I-5, pp. 301--310, April 1986.
 
 \bibitem{newman}
 J.~R. Norman.
 \newblock {\em The World of Mathematics, 4 vols.}
 \newblock Simon and Schuster, 1956.
-\newblock ($BK]Lu(B~: $BNS(B $BM:0lO/LuJT(B~: ``$B?t3X$HO@M}$H(B'', $BEl5~?^=q(B(1970)).
+\newblock (翻訳~: 林 雄一朗訳編~: ``数学と論理と'', 東京図書(1970)).
 
 \bibitem{inproceedings-minimal}
 Alfred~V. Oaho, Jeffrey~D. Ullman, and Mihalis Yannakakis.
@@ -371,13 +371,13 @@ Wizard~V. Oz and Mihalis Yannakakis, editors.
   Computing Machinery, Academic Press.
 \newblock This is a full PROCEEDINGS entry.
 
-\bibitem{$B?ML>I=5-(B}
-$B%^!<%/!&%T!<%?!<%;%s(B.
-\newblock $BF|K\?M$N1Q8l(B.
-\newblock $B4dGH?7=q(B($B?7@VHG(B) 18. $B4dGH=qE9(B, April 1988.
-\newblock pp. 187--189 $B1Q8l$G$NF|K\?M$NL>A0$N=q$-J}(B,
-  $BF|K\$N9q:]2=$N$?$a$K$OL@<#;~Be$+$i$N9M$(J}$r$3$N$"$?$j$G$d$a$?$i$I$&$+(B Shouichi
-  Matsui $B$G$J$/(B Matsui Shouichi.
+\bibitem{人名表記}
+マーク・ピーターセン.
+\newblock 日本人の英語.
+\newblock 岩波新書(新赤版) 18. 岩波書店, April 1988.
+\newblock pp. 187--189 英語での日本人の名前の書き方,
+  日本の国際化のためには明治時代からの考え方をこのあたりでやめたらどうか Shouichi
+  Matsui でなく Matsui Shouichi.
 
 \bibitem{phdthesis-minimal}
 F.~Phidias Phony-Baloney.
@@ -396,12 +396,12 @@ Elaine~A. Rich.
 \newblock {\em Artificial Intelligence}.
 \newblock McGraw-Hill Series in Artificial Intelligence. McGraw-Hill Book
   Company, 1983.
-\newblock ($BK]Lu(B~: $BW"ED(B, $B5\B<(B $BLu(B~: ``$B?M9)CNG=(B I, II'',$B%^%0%m%&%R%k(B(1984)).
+\newblock (翻訳~: 廣田, 宮村 訳~: ``人工知能 I, II'',マグロウヒル(1984)).
 
-\bibitem{$B@FF#(B}
-$B@FF#9/8J(B.
-\newblock $BF|K\8l(B{\TeX}:~{\JTeX}.
-\newblock DECUS$BBh(B7$B2s%7%s%]%8%&%`G[IU;qNA(B, 1987.
+\bibitem{斉藤}
+斉藤康己.
+\newblock 日本語{\TeX}:~{\JTeX}.
+\newblock DECUS第7回シンポジウム配付資料, 1987.
 
 \bibitem{sakawa}
 M.~Sakawa and H.~Yano.
@@ -431,9 +431,9 @@ H.~Sunahara and M.~Tokoro.
   Architectures}, pp. 147--160. North-Holland, 1986.
 
 \bibitem{suna1}
-$B:=86=(<y(B, $B=j??M}M:(B.
-\newblock $B%G!<%?6nF07?7W;;5!$N<B9T@)8f$K4X$9$k9M;!(B.
-\newblock  $B%G!<%?%U%m!<%o!<%/%7%g%C%W(B'86, pp. 83--89, May 1986.
+砂原秀樹, 所真理雄.
+\newblock データ駆動型計算機の実行制御に関する考察.
+\newblock  データフローワークショップ'86, pp. 83--89, May 1986.
 
 \bibitem{suna2}
 Hideki Sunahara and Mario Tokoro.
@@ -466,16 +466,16 @@ M.~Tokoro, E.~Tamura, and T.~Takizuka.
   July 1981.
 
 \bibitem{article-crossref-j}
-$BF?L>4uK>(B.
-\newblock $BO@J8MpB$$NN"5;65$($^$9(B.
-\newblock  Big Tomorrow$B$G$J$/(BSmall Yesterday \cite{whole-journal-j}, pp. 73+.
-\newblock $B$3$l$OJ88%%j%9%HFb;2>H$7$F$$$k(BARTICLE$B$NNc(B.
+匿名希望.
+\newblock 論文乱造の裏技教えます.
+\newblock  Big TomorrowでなくSmall Yesterday \cite{whole-journal-j}, pp. 73+.
+\newblock これは文献リスト内参照しているARTICLEの例.
 
 \bibitem{article-crossref-jj}
-$BF?L>4uK>(B.
-\newblock $BO@J8MpB$$NN"5;65$($^$9!$$=$N#2(B.
-\newblock  Big Tomorrow$B$G$J$/(BSmall Yesterday \cite{whole-journal-j}, pp. 83+.
-\newblock $B$3$l$OJ88%%j%9%HFb;2>H$7$F$$$k(BARTICLE$B$NNc(B.
+匿名希望.
+\newblock 論文乱造の裏技教えます，その２.
+\newblock  Big TomorrowでなくSmall Yesterday \cite{whole-journal-j}, pp. 83+.
+\newblock これは文献リスト内参照しているARTICLEの例.
 
 \bibitem{unpublished-minimal}
 Ulrich {\"{U}}nderwood, Ned {\~N}et, and Paul {\={P}}ot.
@@ -492,33 +492,33 @@ Ulrich {\"{U}}nderwood, Ned {\~N}et, and Paul {\={P}}ot.
 Volume~2 is listed under Knuth \cite{book-full}.
 
 \bibitem{marumoji}
-$B;3:,0l??(B.
-\newblock $BJQBN>/=wJ8;z$N8&5f(B.
-\newblock $B9VCL<R(B, 1986.
+山根一真.
+\newblock 変体少女文字の研究.
+\newblock 講談社, 1986.
 
-\bibitem{$B0k:j(B-h}
-$B0k:j=(<y(B.
+\bibitem{磯崎-h}
+磯崎秀樹.
 \newblock How to use {\JLaTeX}.
 \newblock memo for {\JLaTeX}, 1987.
 
 \bibitem{goto-h}
-$B8eF#1Q0l(B.
-\newblock $B7W;;5!$K$h$k?t<0=hM}$H$O(B.
-\newblock  $B8eF#$[$+(B \cite{reduce}, pp. 4--6.
+後藤英一.
+\newblock 計算機による数式処理とは.
+\newblock  後藤ほか \cite{reduce}, pp. 4--6.
 
-\bibitem{$B@FF#(B-h}
-$B@FF#9/8J(B.
-\newblock $BF|K\8l(B{\TeX}:~{\JTeX}.
-\newblock DECUS$BBh(B7$B2s%7%s%]%8%&%`G[IU;qNA(B, 1987.
+\bibitem{斉藤-h}
+斉藤康己.
+\newblock 日本語{\TeX}:~{\JTeX}.
+\newblock DECUS第7回シンポジウム配付資料, 1987.
 
 \bibitem{multi-h}
-$B>>0f@50l(B, $B<D86Lw;V(B, $BBg20N4@8(B, $B9b66@?(B.
-\newblock $B%^%k%A%a%G%#%"$r3hMQ$7$?0U;W7hDj;Y1g%7%9%F%`$N3+H/(B.
-\newblock  $B!VMxMQ<T;V8~$N>pJs%7%9%F%`!W%7%s%]%8%&%`M=9F=8(B, pp. 39--48.
-  $B>pJs=hM}3X2q(B, July 1986.
+松井正一, 篠原靖志, 大屋隆生, 高橋誠.
+\newblock マルチメディアを活用した意思決定支援システムの開発.
+\newblock  「利用者志向の情報システム」シンポジウム予稿集, pp. 39--48.
+  情報処理学会, July 1986.
 
 \bibitem{ssl}
-$BIY;NDL(B.
-\newblock SSL~II$B;HMQ<j0z=q(B, 1980.
+富士通.
+\newblock SSL~II使用手引書, 1980.
 
 \end{thebibliography}

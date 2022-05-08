@@ -15,15 +15,15 @@
 	%
 	% Please notify Shouichi MATSUI(matsui@denken.or.jp) of any bugs in
 	% these standard styles or in this documentation file.
-	% $B>>0f(B $B@50l(B  ($B:b(B) $BEENOCf1{8&5f=j!!>pJs8&5f=j(B  $B>pJs2J3XIt(B
+	% 松井 正一  (財) 電力中央研究所　情報研究所  情報科学部
 	% Last update 1994-10-25
 %
-% $B$3$N%U%!%$%k(B jbtxbst.doc $B$O;29MJ88%%9%?%$%k$NM}2r$r=u$1$k$?$a!$(Bcpp $B$J$I$r(B
-% $B;H$C$F!$0c$&%9%?%$%k$r:n@.$9$k>l9g$N?w7?$H$7$F;H$&$?$a$NJ*$G$"$k!%(B
-% Oren Patashnik $B;a$K$h$k!$(Bbtxbst.doc $B$rK]Lu$9$k$H$H$b$K!$F|K\8lMQ$K=$@5!$DI2C(B
-% $B$r2C$($?$b$N$G$"$k!%(B
+% このファイル jbtxbst.doc は参考文献スタイルの理解を助けるため，cpp などを
+% 使って，違うスタイルを作成する場合の雛型として使うための物である．
+% Oren Patashnik 氏による，btxbst.doc を翻訳するとともに，日本語用に修正，追加
+% を加えたものである．
 %
-% $BI8=`%9%?%$%k$O0J2<$N$h$&$K$7$F@8@.$7$?8e!$(B
+% 標準スタイルは以下のようにして生成した後，
 %	cpp -P -DJPLAIN jbtxbst.doc jplain.txt
 %	cpp -P -DJUNSRT jbtxbst.doc junsrt.txt
 %	cpp -P -DJALPHA jbtxbst.doc jalpha.txt
@@ -33,101 +33,101 @@
 %	cpp -P -DTIEICE jbtxbst.doc tieic.txt
 %	cpp -P -DJORSJ jbtxbst.doc jorsj.txt
 %	cpp -P -DJNAME jbtxbst.doc jname.txt
-% $BITMW$J%3%a%s%H9T!$6u9T$r:o=|$7$?8e!$%U%!%$%kL>$rJQ99$9$l$P@8@.$G$-$k!%(B
-% ($B<B:]$K$O8e=R$N(B cpp.awk $B$r;H$C$F(B gawk $B$G@8@.$7$?!K!%(B
+% 不要なコメント行，空行を削除した後，ファイル名を変更すれば生成できる．
+% (実際には後述の cpp.awk を使って gawk で生成した）．
 % 
-% ASCII $BHG$N(B versinn 0.98 $B$K4p$E$/(B Kanji BibTeX $B$G;H$o$l$F$$$k(B jplain, jalpha,
-% junsrt, jabbrv $B$K6a$$7A$N(B bst $B%U%!%$%k$r:n$k$K$O!$(B
+% ASCII 版の versinn 0.98 に基づく Kanji BibTeX で使われている jplain, jalpha,
+% junsrt, jabbrv に近い形の bst ファイルを作るには，
 %
 %	cpp -P -DJPLAIN -DASCII98 jbtxbst.doc jplain98.txt
 %
-% $B$H$$$&$h$&$K(B, -DASCII98 $B$rDI2C$9$k!%40A4$KF1$8$G$O$J$$$,!$$+$J$j6a$$7A$N(B
-% $BJ88%%j%9%H%G!<%?(B(bbl)$B$,F@$i$l$k$h$&$J%9%?%$%k%U%!%$%k$rF@$k$3$H$,$G$-$k!%(B
+% というように, -DASCII98 を追加する．完全に同じではないが，かなり近い形の
+% 文献リストデータ(bbl)が得られるようなスタイルファイルを得ることができる．
 %
-% cpp $B$r;}$C$F$$$J$$$H$+!$(B(PC $BMQ$N(B)C $B%3%s%Q%$%i!<$N(B cpp $B$K$h$C$F$O>e5-$NMM$K(B
-% $B=hM}$G$-$J$$>l9g$,$"$k!%(BTurbo C 2.0 $B$N(B cpp $B$O8-$32a$.$F!$>e5-$NL\E*(B
-% $B$K$O;H$($J$$!%$^$?9TF,$K(B # $B$,$J$/$F$b$=$l$r(B cpp $B$X$N;XNa$@$H$_$J$9=hM}7O$G$b(B
-% $B$&$^$/$$$+$J$$>l9g$,$"$k!%(B
-% cpp $B$G$&$^$/=hM}$G$-$J$$>l9g$K;H$($k(B gawk $BMQ$N%9%/%j%W%H$r(B bst/cpp.awk $B$H$$$&(B
-% $B7A$GMQ0U$7$F$"$k!%;H$$J}$K$D$$$F$O(B bst/generate.[bat|sh] $B$r8+$h!*(B
+% cpp を持っていないとか，(PC 用の)C コンパイラーの cpp によっては上記の様に
+% 処理できない場合がある．Turbo C 2.0 の cpp は賢こ過ぎて，上記の目的
+% には使えない．また行頭に # がなくてもそれを cpp への指令だとみなす処理系でも
+% うまくいかない場合がある．
+% cpp でうまく処理できない場合に使える gawk 用のスクリプトを bst/cpp.awk という
+% 形で用意してある．使い方については bst/generate.[bat|sh] を見よ！
 %
-% UNIX $B$N(B cpp $B$G$O=hM}$G$-$k$3$H$r4|BT$9$k!%>/$J$/$H$b(B SUN $B$N(B cpp $B$G$O(B
-% $B=hM}$G$-$?!%(B
+% UNIX の cpp では処理できることを期待する．少なくとも SUN の cpp では
+% 処理できた．
 %
-% $BIT9,$K$7$F(B cpp $B$,;H$($J$$$H$+!$(B gawk $B$b$J$$$H$+$N>l9g$K$O!$0J2<$N@bL@$r(B
-% $B;29M$K$7$F?M4V(B cpp $B$K$J$C$F!$(Beditor $B$r;H$C$FJT=8$7$F:n$j=P$;$P$$$$!%(B
-% ($B$3$s$JIT9,$J$3$H$O$J$$$G$7$g$&$M!)!K(B
+% 不幸にして cpp が使えないとか， gawk もないとかの場合には，以下の説明を
+% 参考にして人間 cpp になって，editor を使って編集して作り出せばいい．
+% (こんな不幸なことはないでしょうね？）
 %
-% cpp $B$N=PNO$OFCDj$N9T$,:o=|$5$l$k!J$"$k$$$O6uGr9T$,IU2C$5$l$k!K$3$H$r=|$1$P(B
-% $BF~NO$HF1$8$G$"$k!%0J2<$N%7!<%/%(%s%9$O!$(B# $BJ8;z$,Bh#1%+%i%`$K$"$k$H$7$F!$(B
+% cpp の出力は特定の行が削除される（あるいは空白行が付加される）ことを除けば
+% 入力と同じである．以下のシークエンスは，# 文字が第１カラムにあるとして，
 %	#if VAR
-%	    VAR $B$,(B 0 $B$G$J$$;~$K4^$a$k9T(B
+%	    VAR が 0 でない時に含める行
 %	#else
-%	    VAR $B$,(B 0 $B$N;~$K4^$a$k9T(B
+%	    VAR が 0 の時に含める行
 %	#endif
 %
-% VAR $B$NCM$K1~$8$F$I$A$i$N9T72$,;H$o$l$k$+!$4^$^$l$k$h$&$K$J$k$+$r<($9!%(B
-% #else $BItJ,$O$J$/$F$b$h$$!%(B#else, #endif $B$N8e$K$O%3%a%s%H$r=q$/;v$,$G$-$k!%(B
-% $BJQ?t$O(B
+% VAR の値に応じてどちらの行群が使われるか，含まれるようになるかを示す．
+% #else 部分はなくてもよい．#else, #endif の後にはコメントを書く事ができる．
+% 変数は
 %	#define VAR value
-% $B$GCM$r@_Dj$G$-!$(B #ifdef VAR $B$G(B VAR $B$,CM$r;}$C$F$$$k$+!JDj5A$5$l$F$$$k$+!K!$(B
-% #ifndef VAR $B$G(B VAR $B$,CM$r;}$C$F$$$J$$$+!JL$Dj5A$+!K$rD4$Y$k$3$H$,$G$-$k!%(B
-% $B$3$N%U%!%$%kCf$G;H$C$F$$$k$b$&#1$D$N7A<0$O(B #if !VAR $B$G$"$j!$$3$l$O(B VAR $B$N(B
-% $BCM$,(B 0 $B$N;~$K8eB3$N9T72$r4^$a$k$h$&$K$9$k$b$N$G$"$k!%(B
+% で値を設定でき， #ifdef VAR で VAR が値を持っているか（定義されているか），
+% #ifndef VAR で VAR が値を持っていないか（未定義か）を調べることができる．
+% このファイル中で使っているもう１つの形式は #if !VAR であり，これは VAR の
+% 値が 0 の時に後続の行群を含めるようにするものである．
 %
-% $B5,Ls(B: $B%W%j%W%m%;%C%5$N$?$a$NJQ?t$H$7$F$O!$$9$Y$FBgJ8;z$r;H$&$3$H$K$9$l$P!$(B
-% $B!!!!!!$I$3$K$"$k$+8+$D$1$k$N$,4JC1$K$J$k!%(B
+% 規約: プリプロセッサのための変数としては，すべて大文字を使うことにすれば，
+% 　　　どこにあるか見つけるのが簡単になる．
 %
-% $B8@$$Lu(B: cpp $B$N5!G=$r%U%k$K;H$&$h$&$K=q$1$P!$$3$N%U%!%$%k$O$b$C$H>.$5$/$G$-$k!%(B
-%         $B$7$+$7!$:n6H$7$?4D6-$G$O$A$c$s$H;H$($k(B cpp $B$,$J$+$C$?$N$G!$(B
-%         $B%*%j%8%J%k$G;H$C$F$$$J$+$C$?5!G=$O;H$C$F$$$J$$!%(B
+% 言い訳: cpp の機能をフルに使うように書けば，このファイルはもっと小さくできる．
+%         しかし，作業した環境ではちゃんと使える cpp がなかったので，
+%         オリジナルで使っていなかった機能は使っていない．
 %
-% cpp $B$X$N(B(gawk $B$X$N(B)$B%3%^%s%I9T$G$O!$(BJPLAIN, JUNSRT, JALPHA, JABBRV, JIPSJ,
-% TIPSJ, TIEICE, JNAME, JORSJ $B$N$$$:$l$+$r;XDj$7$F$*$/$3$H!J$I$l$G$b$J$$$H!$(B
-% JPLAIN $B$r%G%#%U%)!<%k%H$H$7$F;H$&$h$&$K$J$C$F$$$k!%=>$C$F?7$7$$%9%?%$%k$r(B
-% $B:n$j=P$9>l9g$K$O!$$3$N%G%#%U%)%k%H$r@_Dj$7$F$$$kItJ,$r=q$-49$($k$3$H!K!%(B
+% cpp への(gawk への)コマンド行では，JPLAIN, JUNSRT, JALPHA, JABBRV, JIPSJ,
+% TIPSJ, TIEICE, JNAME, JORSJ のいずれかを指定しておくこと（どれでもないと，
+% JPLAIN をディフォールトとして使うようになっている．従って新しいスタイルを
+% 作り出す場合には，このディフォルトを設定している部分を書き換えること）．
 %
-% $B$=$l$>$l$NO@M}JQ?t$O!$$=$l$>$l$N%9%?%$%k$G!$??(B(1)$B$+56(B(0)$B$K@_Dj$7$F$*$/$3$H!%(B
-% $B8=:_;H$C$F$$$kJQ?t$H$=$N0UL#$O0J2<$NDL$j$G$"$k!%(B
+% それぞれの論理変数は，それぞれのスタイルで，真(1)か偽(0)に設定しておくこと．
+% 現在使っている変数とその意味は以下の通りである．
 %
-%	LAB_ALPH:	$BJ8;zNs%i%Y%k$r@8@.(B($B$3$l$,56$J$i?t;z%i%Y%k$K$J$k(B)
-%	SORTED:		($B?t;z%i%Y%k$G$J$$$J$i!K%i%Y%k!$Cx<T$J$I$N>pJs$r(B
-%			$B;H$C$F$K%=!<%H$9$k(B($B56$J$i%=!<%H$5$l$:$K!$=P8==g$KJB$V(B)
-%	NAME_FULL:	$BCx<T!$JT<T$NL>A0$H$7$F(B bibliography file $BCf$K=q$+$l$?(B
-%			$BJ*$r$=$N$^$^;H$&(B($B56$J$i@+0J30$O%$%K%7%c%k$@$1$K$J$k!%(B
-%			$B4A;zI=5-$5$l$?Cx<T$N>l9g$K$O!$@+$HL>$N4V$K%9%Z!<%9$,(B
-%			$B$"$l$P!$@+$@$1$K$J$k(B)
-%	ATIT_LOWER:	$BK\0J30!JO@J8$J$I!K$N%?%$%H%k$O@hF,$NJ8;z!$%3%m%s$N8e$N(B
-%			$B:G=i$NJ8;z0J30$O>.J8;z$K$9$k(B($B56$J$i(B database $BCf$N$^$^(B)
-%	MONTH_FULL:	$B7n$NL>A0$r>JN,7A$H$7$J$$(B($B56$J$i>JN,7A(B)
-%	JOUR_FULL:	$BO@J8;o!$;(;o$J$I$r>JN,7A$H$7$J$$(B($B56$J$i>JN,7A!$8=:_$O(B
-%			$B$=$N7A<0$O(B ACM $B$N=PHGJ*$K$"$k7A<0$G$"$k(B)
+%	LAB_ALPH:	文字列ラベルを生成(これが偽なら数字ラベルになる)
+%	SORTED:		(数字ラベルでないなら）ラベル，著者などの情報を
+%			使ってにソートする(偽ならソートされずに，出現順に並ぶ)
+%	NAME_FULL:	著者，編者の名前として bibliography file 中に書かれた
+%			物をそのまま使う(偽なら姓以外はイニシャルだけになる．
+%			漢字表記された著者の場合には，姓と名の間にスペースが
+%			あれば，姓だけになる)
+%	ATIT_LOWER:	本以外（論文など）のタイトルは先頭の文字，コロンの後の
+%			最初の文字以外は小文字にする(偽なら database 中のまま)
+%	MONTH_FULL:	月の名前を省略形としない(偽なら省略形)
+%	JOUR_FULL:	論文誌，雑誌などを省略形としない(偽なら省略形，現在は
+%			その形式は ACM の出版物にある形式である)
 %----------------------------------------------------------------------
-% $B>>0f$K$h$kDI2CJ,(B
-%	 IN_LOWER:		In $B$G$J$/(B in$B!!$r;H$&!%(B
-%	 ONE_SENTENCE:  	1$BJ8$N7A$K$9$k!%(B
-%	 ED_SHORT:		Editor $B$G$J$/(B Ed.
-%	 FAMILY_FIRST:		$B1Q8lI=5-Cx<T$N@+$r@h$K!$L>$r8e$K$9$k!%(B
-%        FIRST_FAMILY_FIRST:    $B1Q8lI=5-Cx<T$NBh0lCx<T$@$1@+$r@h$K$9$k!%(B
-%	 NO_COM_AND:		3$BL>0J>e$NCx<T$N;~(B and $B$NA0$K(B , $B$rF~$l$J$$!%(B
-%	 SMALL_CAP:		$BI=Bj$O(B small cap $B%U%)%s%H!%(B
-%	 KANJI_FULL_NAME:	$B4A;zCx<TL>$OL>$^$G=P$9!%(B
-%	 ED_IN_PAR :		$BJT=8<TL>$r3g8L$KF~$l$k!%(B
-%	 NO_EM:			$BK\!$;(;oL>$H$+$K6/D4;XDj(B($B%$%?%j%C%/(B)$B$O;H$o$J$$!%(B
-%	 YEAR_IN_PAR:		$BG/$r3g8L$G0O$`!%(B
-%	 ZENKAKU_PUN:		$BF|K\8lJ88%$KBP$7$F$OA43Q$N(B"$B!$(B","$B!%(B","$B!'(B"$B$r;H$&!%(B
-%	 ZENKAKU_COLON:		$B#1J87A<0$N;~!$F|K\8lCx<T$N8e$K$OA43Q$N%3%m%s$r(B
-%				$BIU$1$k!%(B
-%	 JIPSJ_LIKE:    	JIPSJ $B$N$h$&$JC;$$(B Vol., pp. $B;2>H7A<0(B
-%				Vol.=V, No.=N, pp. C--D, year=Y, month=M $B$r(B
-%				V, N(M Y), C--D $B$N$h$&$J=gHV$GJB$Y$k!%(B
-%	 USE_FIRST_ONLY:	$BJ8;zNs%i%Y%k$K$OBh#1Cx<T$7$+;H$o$J$$!%(B
-%	 USE_KANJI_HOKA:	``$B$[$+(B''$B$G$J$/(B``$BB>(B''$B$r;H$&(B
-%	 SHOW_BOOK_PAGES:	BOOK $B$N%Z!<%8?t$b=PNO$9$k!%(B
+% 松井による追加分
+%	 IN_LOWER:		In でなく in　を使う．
+%	 ONE_SENTENCE:  	1文の形にする．
+%	 ED_SHORT:		Editor でなく Ed.
+%	 FAMILY_FIRST:		英語表記著者の姓を先に，名を後にする．
+%        FIRST_FAMILY_FIRST:    英語表記著者の第一著者だけ姓を先にする．
+%	 NO_COM_AND:		3名以上の著者の時 and の前に , を入れない．
+%	 SMALL_CAP:		表題は small cap フォント．
+%	 KANJI_FULL_NAME:	漢字著者名は名まで出す．
+%	 ED_IN_PAR :		編集者名を括弧に入れる．
+%	 NO_EM:			本，雑誌名とかに強調指定(イタリック)は使わない．
+%	 YEAR_IN_PAR:		年を括弧で囲む．
+%	 ZENKAKU_PUN:		日本語文献に対しては全角の"，","．","："を使う．
+%	 ZENKAKU_COLON:		１文形式の時，日本語著者の後には全角のコロンを
+%				付ける．
+%	 JIPSJ_LIKE:    	JIPSJ のような短い Vol., pp. 参照形式
+%				Vol.=V, No.=N, pp. C--D, year=Y, month=M を
+%				V, N(M Y), C--D のような順番で並べる．
+%	 USE_FIRST_ONLY:	文字列ラベルには第１著者しか使わない．
+%	 USE_KANJI_HOKA:	``ほか''でなく``他''を使う
+%	 SHOW_BOOK_PAGES:	BOOK のページ数も出力する．
 %----------------------------------------------------------------------
 %
-% $B%G%#%U%)!<%k%H$N%9%?%$%k$N;XDj!J?7$7$$%9%?%$%k$r2C$($k>l9g$K$O$3$3$r(B
-% $BJQ99$9$kI,MW$,$"$k!%JQ99$7$F$*$+$J$$$H(B jplain $B$K$J$C$F$7$^$&!*!K(B
+% ディフォールトのスタイルの指定（新しいスタイルを加える場合にはここを
+% 変更する必要がある．変更しておかないと jplain になってしまう！）
 %
 #ifndef JUNSRT
 #   ifndef JALPHA
@@ -147,9 +147,9 @@
 #   endif  JALPHA
 #endif
 %
-% ASSCII98 $B$,Dj5A$5$l$F$$$l$P!$(BASCII $BHG$N(B 0.98 $B$K4p$E$/(B Kanji BibTeX $B$N(B
-% $B%9%?%$%k%U%!%$%k$r;H$C$FF@$i$l$k7k2L$K6a$$$b$N$,F@$i$l$k$h$&$K$9$k!%(B
-% $B$^$C$?$/F1$8$K$J$k$H4|BT$7$F$O$$$1$J$$!*!*!*(B
+% ASSCII98 が定義されていれば，ASCII 版の 0.98 に基づく Kanji BibTeX の
+% スタイルファイルを使って得られる結果に近いものが得られるようにする．
+% まったく同じになると期待してはいけない！！！
 %
 #ifdef ASCII98
 #   define ZENKAKU_PUN 1
@@ -159,7 +159,7 @@
 #endif
 %
 #ifdef JPLAIN
-% jplain $B%9%?%$%k(B ($B%=!<%H$5$l$??tCM%i%Y%k(B)
+% jplain スタイル (ソートされた数値ラベル)
 #   define LAB_ALPH 0
 #   define SORTED 1
 #   define NAME_FULL 1
@@ -185,7 +185,7 @@
 #endif JPLAIN
 %
 #ifdef JUNSRT
-% junsrt $B%9%?%$%k(B ($B%=!<%H$5$l$J$$?tCM%i%Y%k(B)
+% junsrt スタイル (ソートされない数値ラベル)
 #   define LAB_ALPH 0
 #   define SORTED 0
 #   define NAME_FULL 1
@@ -211,7 +211,7 @@
 #endif JUNSRT
 %
 #ifdef JALPHA
-% jalpha $B%9%?%$%k(B ($B%=!<%H$5$l$?J8;zNs%i%Y%k(B)
+% jalpha スタイル (ソートされた文字列ラベル)
 #   define LAB_ALPH 1
 #   define SORTED 1
 #   define NAME_FULL 1
@@ -238,7 +238,7 @@
 #endif JALPHA
 %
 #ifdef JABBRV
-% jabbrv $B%9%?%$%k(B ($B%=!<%H$5$l$??tCM%i%Y%k$G!$>JN,7A<0(B)
+% jabbrv スタイル (ソートされた数値ラベルで，省略形式)
 #   define LAB_ALPH 0
 #   define SORTED 1
 #   define NAME_FULL 0
@@ -264,8 +264,8 @@
 #endif JABBRV
 %
 #ifdef TIPSJ
-% tipsj $B%9%?%$%k(B ($B%=!<%H$5$l$J$$?tCM%i%Y%k$G!$>JN,7A!$#1J87A<0(B)
-% $B>pJs=hM}3X2qO@J8;o!$>pJs=hM}3X2q;oMQ(B
+% tipsj スタイル (ソートされない数値ラベルで，省略形，１文形式)
+% 情報処理学会論文誌，情報処理学会誌用
 #   define LAB_ALPH 0
 #   define SORTED 0
 #   define NAME_FULL 0
@@ -292,8 +292,8 @@
 #endif TIPSJ
 %
 #ifdef JIPSJ
-% jipsj $B%9%?%$%k(B ($B%=!<%H$5$l$??tCM%i%Y%k$G!$>JN,7A$r;H$&!$#1J87A<0(B)
-% Journal of Information Processing ($B>pJs=hM}3X2q(B)
+% jipsj スタイル (ソートされた数値ラベルで，省略形を使う，１文形式)
+% Journal of Information Processing (情報処理学会)
 #   define LAB_ALPH 0
 #   define SORTED 1
 #   define NAME_FULL 0
@@ -320,8 +320,8 @@
 #endif JIPSJ
 %
 #ifdef TIEICE
-% tieic $B%9%?%$%k(B ($B%=!<%H$5$l$J$$?tCM%i%Y%k$G!$>JN,7A$r;H$&!$#1J87A<0(B)
-% $BEE;R>pJsDL?.3X2qO@J8;o(B
+% tieic スタイル (ソートされない数値ラベルで，省略形を使う，１文形式)
+% 電子情報通信学会論文誌
 #   define LAB_ALPH 0
 #   define SORTED 0
 #   define NAME_FULL 0
@@ -348,8 +348,8 @@
 #endif TIEICE
 %
 #ifdef JNAME
-% jname $B%9%?%$%k(B ($B%=!<%H$5$l$?J8;zNs%i%Y%k$G!$>JN,7A$r;H$&!$#1J87A<0(B)
-% $BJ8;zNs%i%Y%k$K$OBh#1Cx<T$NL>A0$7$+;H$o$J$$!%(B
+% jname スタイル (ソートされた文字列ラベルで，省略形を使う，１文形式)
+% 文字列ラベルには第１著者の名前しか使わない．
 #   define LAB_ALPH 1
 #   define SORTED 1
 #   define NAME_FULL 0
@@ -377,9 +377,9 @@
 #endif JNAME
 %
 #ifdef JORSJ
-% jorsj $B%9%?%$%k(B ($B%=!<%H$5$l$??tCM%i%Y%k$G!$>JN,7A$r;H$&!$#1J87A<0(B)
+% jorsj スタイル (ソートされた数値ラベルで，省略形を使う，１文形式)
 % Journal of the Operations Research Society of Japan
-% $BF|K\%*%Z%l!<%7%g%s%:%j%5!<%A3X2qO@J8;o!J1QJ8!$OBJ8$N$I$A$i$G$bNI$$!*!K(B
+% 日本オペレーションズリサーチ学会論文誌（英文，和文のどちらでも良い！）
 #   define LAB_ALPH 0
 #   define SORTED 1
 #   define NAME_FULL 0
@@ -405,44 +405,44 @@
 %--------------------------------------
 #endif JORSJ
 %
-%   $B%(%s%H%j$N%U%)!<%^%C%H7A<0!'(B Mary-Claire van Leunen $B$,(B
-%	"A Handbook for Scholars" $B$G?d>)$7$F$$$k7A<0$K6a$$!%K\$NCg4V$NI=Bj$O(B
-%	$B%$%?%j%C%/BN$G(B($B6/D4$5$l$F(B)$B!$$=$l0J30$NI=Bj$O(B($BEE;R>pJsDL?.3X2qO@J8;o$r(B
-%	$B=|$$$F!$0zMQId$J$7$G!KJ8$N7A<0$GBgJ8;z!$>.J8;z$,;H$o$l$k!%(B
-%	$B$3$N%U%!%$%k$G$O!$#1J8$N7A<0$G%U%)!<%^%C%H$9$k%9%?%$%k0J30$G$O!$(B
-%	$B<g$?$k%V%m%C%/$N4V$K(B \newblock(\newline $B$d(B \newpage $B$K;w$?L>A0(B)$B$r(B
-%	$B=PNO$9$k$N$G!$(B\ducumentstyle $B$N0z?t$H$7$F(B `openbib' $B%*%W%7%g%s$r;XDj(B
-%	$B$9$k$3$H$G!$(Bopen $B7A<0$N%j%9%H!$$9$J$o$A%V%m%C%/4V$G2~9T$5$l!$%V%m%C%/(B
-%	$BFb$G$O%$%s%G%s%H$5$l$?7A<0$N%j%9%H$rF@$k;v$,$G$-$k!%(B
-%	$B%G%#%U%)!<%k%H$O(B closed $B7A<0$G$"$j!$%V%m%C%/Kh$K2~9T$5$l$?$j$7$J$$!%(B
+%   エントリのフォーマット形式： Mary-Claire van Leunen が
+%	"A Handbook for Scholars" で推奨している形式に近い．本の仲間の表題は
+%	イタリック体で(強調されて)，それ以外の表題は(電子情報通信学会論文誌を
+%	除いて，引用符なしで）文の形式で大文字，小文字が使われる．
+%	このファイルでは，１文の形式でフォーマットするスタイル以外では，
+%	主たるブロックの間に \newblock(\newline や \newpage に似た名前)を
+%	出力するので，\ducumentstyle の引数として `openbib' オプションを指定
+%	することで，open 形式のリスト，すなわちブロック間で改行され，ブロック
+%	内ではインデントされた形式のリストを得る事ができる．
+%	ディフォールトは closed 形式であり，ブロック毎に改行されたりしない．
 %
-%   $BJ88%%j%9%H$NJ8;zNs%i%Y%k$N7A<0$O0J2<$NDL$j!%(B
-%		[Knu73] $BCx<T!JJT<T!$%-!<!K$,#1?M$N;~(B
-%		[AHU83] $BJ#?tCx<T$N;~$O@+$NF,J8;z$rJB$Y$?$b$N(B
-%			(Aho, Hopcroft, Ulman $B$N>l9g$K$O(B AHU $B$H$J$k(B)
+%   文献リストの文字列ラベルの形式は以下の通り．
+%		[Knu73] 著者（編者，キー）が１人の時
+%		[AHU83] 複数著者の時は姓の頭文字を並べたもの
+%			(Aho, Hopcroft, Ulman の場合には AHU となる)
 %
-%   $BJ88%%j%9%H$N?tCM%i%Y%k$N7A<0$O0J2<$NDL$j!%(B
+%   文献リストの数値ラベルの形式は以下の通り．
 %		[number]
 %
-%   $BJ8;zNs%i%Y%k$N7A<0$N%=!<%H$O0J2<$NDL$j!J<!$N=g$GJ88%$,JB$V!K!%(B
-%		$B<g%-!<$,%i%Y%k!$<!$,Cx<T!JJT<T$J$I$N>l9g$b$"$k!K!$(B
-%		$B$=$N<!$,G/!$:G8e$,I=Bj$N%"%k%U%!%Y%C%H=g$GJB$Y$i$l$k!%(B
+%   文字列ラベルの形式のソートは以下の通り（次の順で文献が並ぶ）．
+%		主キーがラベル，次が著者（編者などの場合もある），
+%		その次が年，最後が表題のアルファベット順で並べられる．
 %
-%		$B4A;zCx<TL>$N>l9g$K$O(B yomi $B%U%#!<%k%I$K%m!<%^;zI=5-$rF~$l$F(B
-%		$BCV$/;v$G!$J8;zNs%i%Y%k$N%i%Y%k$K$J$k!%=q$-J}$r9)IW$9$l$P!$(B
-%		$BF|K\8l$N%i%Y%k$H$9$k$3$H$b$G$-!$$5$i$K#5#02;=g$KJB$Y$k$3$H$b(B
-%		$B$G$-$k!%>\$7$/$O(B jbtxdoc.tex $B$r8+$h!%(B
+%		漢字著者名の場合には yomi フィールドにローマ字表記を入れて
+%		置く事で，文字列ラベルのラベルになる．書き方を工夫すれば，
+%		日本語のラベルとすることもでき，さらに５０音順に並べることも
+%		できる．詳しくは jbtxdoc.tex を見よ．
 %
-%   $B?tCM%i%Y%k$N7A<0$N%=!<%H$O0J2<$NDL$j!J<!$N=g$GJ88%$,JB$V!K!%(B
-%		$B<g%-!<$,Cx<T!JJT<T$J$I$N>l9g$b$"$k!K!$<!$,G/!$:G8e$,I=Bj$N(B
-%		$B%"%k%U%!%Y%C%H=g$GJB$Y$i$l$k!%(B
+%   数値ラベルの形式のソートは以下の通り（次の順で文献が並ぶ）．
+%		主キーが著者（編者などの場合もある），次が年，最後が表題の
+%		アルファベット順で並べられる．
 %
-%		$B4A;zCx<TL>$N>l9g$K$O(B yomi $B%U%#!<%k%I$K%m!<%^;zI=5-$rF~$l$F(B
-%		$BCV$/;v$G!$%"%k%U%!%Y%C%H=g$K$J$k!%=q$-J}$r9)IW$9$l$P!$#5#02;(B
-%		$B=g$KJB$Y$k$3$H$b$G$-$k!%>\$7$/$O(B jbtxdoc.tex $B$r8+$h!%(B
+%		漢字著者名の場合には yomi フィールドにローマ字表記を入れて
+%		置く事で，アルファベット順になる．書き方を工夫すれば，５０音
+%		順に並べることもできる．詳しくは jbtxdoc.tex を見よ．
 %
-%   $B%=!<%H$5$l$J$$>l9g$NJ88%$N=gHV!'(B
-%		$BK\J8Cf$N0zMQ=g!%(B
+%   ソートされない場合の文献の順番：
+%		本文中の引用順．
 %
 %   History
 %   12/16/84	(HWT)	Original `plain' version, by Howard Trickey.
@@ -482,107 +482,107 @@
 %			the first block if the author field is empty;
 %			MISC can't be empty---it requires some optional field.
 %
-%  $B0J>e$O1Q8lHG$N(B btxbst.doc $B$NJQ99MzNr$G$"$k!%(B
+%  以上は英語版の btxbst.doc の変更履歴である．
 %
-%	1989-06-02 $B>>0f@50l(B(Shouichi Matsui)
-%			C version 0.20 $BMQ$KJQ99!$#3$D$N%9%?%$%k$rDI2C(B	
-%	1991-01-01 $B>>0f@50l(B(Shouichi Matsui) 
-%			C version 0.30 $BMQ$KJQ99$HHyD4@0B??t!*?7$?$J%9%?%$%k$b(B
-%			$BDI2C!*(B
+%	1989-06-02 松井正一(Shouichi Matsui)
+%			C version 0.20 用に変更，３つのスタイルを追加	
+%	1991-01-01 松井正一(Shouichi Matsui) 
+%			C version 0.30 用に変更と微調整多数！新たなスタイルも
+%			追加！
 %
-% $B%(%s%H%j$N%U%#!<%k%I$N@k8@(B
+% エントリのフィールドの宣言
 %
-%   (April '84 edition $B$N(B 231-232 $B%Z!<%8$K=R$Y$i$l$F$$$k(B) Scribe $B$H(B
-%   $BF1$8$h$&$J$b$N$G$"$k$,!$(B(J)BibTeX $B$OL>A0$N=hM}5!G=$r;}$C$F$$$k$N$G!$(B
-%   fullauthor $B$"$k$$$O(B editors $B%U%#!<%k%I$O$J$$!%(B
-%   annote $B%U%#!<%k%I$OCm<aIU$-$NJ88%%j%9%H%9%?%$%k$r:n$k>l9g$K$O;H$o$l$k$,!$(B
-%   $B$3$N%U%!%$%k$GDj5A$7$F$$$k%9%?%$%k$G$O;H$C$F$$$J$$$N$G!$%3%a%s%H%"%&%H(B
-%   $B$5$l$F$$$k!%$3$3$K<($7$?%U%#!<%k%I$NB>$K!$AH$_9~$_$NJ88%%j%9%HFb;2>H(B
-%   (CROSSREF)$B%U%#!<%k%I$b$"$k$,!$$3$l$K$D$$$F$O8e$G@bL@$9$k!%(B
+%   (April '84 edition の 231-232 ページに述べられている) Scribe と
+%   同じようなものであるが，(J)BibTeX は名前の処理機能を持っているので，
+%   fullauthor あるいは editors フィールドはない．
+%   annote フィールドは注釈付きの文献リストスタイルを作る場合には使われるが，
+%   このファイルで定義しているスタイルでは使っていないので，コメントアウト
+%   されている．ここに示したフィールドの他に，組み込みの文献リスト内参照
+%   (CROSSREF)フィールドもあるが，これについては後で説明する．
 
 ENTRY
-% $B%U%#!<%k%I72(B:
-% $B!!!!0J2<$N@bL@$G!I?7$?$JJ8$r3+;O$9$k!I$N$O#1J87A<0$G%U%)!<%^%C%H$7$J$$!$(B
-% $B!!!!%9%?%$%k$N>l9g$K$N$_$"$F$O$^$k!%(B
+% フィールド群:
+% 　　以下の説明で”新たな文を開始する”のは１文形式でフォーマットしない，
+% 　　スタイルの場合にのみあてはまる．
   { address
-%	$BDL>o$O=PHG<R!$5!4X$N=;=j$rF~$l$k!%FI<T$N0Y$K$J$k>l9g$K$N$_F~$l$k$3$H!%(B
-%	$BNc$($P!$Bg$-$J=PHG<R$N>l9g$K$O>JN,$9$Y$-$G$"$k!%$7$+$7!$(BPROCEEDINGS
-%	$B$^$?$O(B INPROCEEDINGS $B$N>l9g$K$O$3$3$K$O2q5D$N3+:ECO$r=q$/!%$3$N#2$D$N(B
-%	$B%(%s%H%j$N7?$G$O!$=PHG<T!$5!4X$N=;=j$,I,MW$J$i!$(Bpublisher $B$+(B
-%	organization $B%U%#!<%k%I$K4^$a$k$3$H!%(B
+%	通常は出版社，機関の住所を入れる．読者の為になる場合にのみ入れること．
+%	例えば，大きな出版社の場合には省略すべきである．しかし，PROCEEDINGS
+%	または INPROCEEDINGS の場合にはここには会議の開催地を書く．この２つの
+%	エントリの型では，出版者，機関の住所が必要なら，publisher か
+%	organization フィールドに含めること．
 %    annote
-%	$BD9$$Cm<a(B($BCm<aIU$-J88%%j%9%HMQ!$?7$?$JJ8$r3+;O$9$k(B)$B!%(B
+%	長い注釈(注釈付き文献リスト用，新たな文を開始する)．
     author
-%	(J)BibTeX $B7A<0$G=q$$$?!$Cx<T$NL>A0(B
+%	(J)BibTeX 形式で書いた，著者の名前
     booktitle
-%	$B;2>H$5$l$F$$$k$N$,K\A4BN$G$J$$>l9g$K!$K\$NI=Bj$rF~$l$k!%K\A4It$r(B
-%	$B;2>H$7$F$$$k>l9g$K$O!$$3$l$G$J$/(B title $B%U%#!<%k%I$r;H$&$3$H!%(B
+%	参照されているのが本全体でない場合に，本の表題を入れる．本全部を
+%	参照している場合には，これでなく title フィールドを使うこと．
     chapter
-%	$B>O(B($B$"$k$$$O@a$J$I(B)$B$NHV9f!%(B
+%	章(あるいは節など)の番号．
     edition
-%	$BK\$NHG!$(B("Second" $B$J$I$N(B) $B=g=x?t$G$J$$$H$$$1$J$$!%(B
+%	本の版，("Second" などの) 順序数でないといけない．
     editor
-%	(J)BibTeX $B7A<0$G=q$$$?!$JT<T$NL>A0!%(Bauthor $B%U%#!<%k%I$b$"$k>l9g$K$O(B
-%	$BCx:n$,H/I=$5$l$?K\$J$I$NJT<T$NL>A0$r=q$/!%(B
+%	(J)BibTeX 形式で書いた，編者の名前．author フィールドもある場合には
+%	著作が発表された本などの編者の名前を書く．
     howpublished
-%	$B$3$N4qL/$JJ*$,$I$&$7$F=PHG$5$l$?$+!J?7$?$JJ8$r3+;O$9$k!K!%(B
+%	この奇妙な物がどうして出版されたか（新たな文を開始する）．
     institution
-%	$B%F%/%K%+%k%l%]!<%H$N%5%]!<%H5!4XL>(B
+%	テクニカルレポートのサポート機関名
     journal
-%	$BO@J8;o!$;(;o$NL>A0(B($B$$$/$D$+%^%/%m$,MQ0U$5$l$F$$$k(B)$B!%(B
+%	論文誌，雑誌の名前(いくつかマクロが用意されている)．
     key
-%	$B%"%k%U%!%Y%C%H=g$KJB$Y$k;~!$%i%Y%k$r:n$k;~!$J88%%j%9%HFb;2>H$N%-!<$H$7$F(B
-%	$B;H$o$l$k!JCx<T!$JT<T$,$J$$$H$-$KI,MW$G$"$k!K!%(B
+%	アルファベット順に並べる時，ラベルを作る時，文献リスト内参照のキーとして
+%	使われる（著者，編者がないときに必要である）．
     month
-%	$B7n(B($B%^%/%m$,MQ0U$5$l$F$$$k(B)$B!%(B
+%	月(マクロが用意されている)．
     note
-%	$BFI<T$,;2>HJ88%$r8+$D$1$k$N$KLrN)$D>pJs!J?7$?$JJ8$r3+;O$9$k!K!%(B
+%	読者が参照文献を見つけるのに役立つ情報（新たな文を開始する）．
     number
-%	$BO@J8;o!$;(;o!$%F%/%K%+%k%l%]!<%H$NHV9f!$$"$k$$$O%7%j!<%:Cf$NHV9f!%(B
+%	論文誌，雑誌，テクニカルレポートの番号，あるいはシリーズ中の番号．
     organization
-%	$B2q5D$N%9%]%s%5!<!J$"$k$$$O%^%K%e%"%k$N=PHG<R!K$N5!4XL>$G!$Cx<T!JJT<T!K$,(B
-%	$B$J$$>l9g$G!$$3$N>pJs$+$i$G$O%i%Y%k$,4qL/$K$J$k>l9g!$$"$k$$$OJ88%%j%9%HFb(B%	$B;2>H$9$k>l9g$K$O!$E,Ev$J4J7i$J5!4XL>$r(B key $B%U%#!<%k%I$KF~$l$k$3$H!%(B
+%	会議のスポンサー（あるいはマニュアルの出版社）の機関名で，著者（編者）が
+%	ない場合で，この情報からではラベルが奇妙になる場合，あるいは文献リスト内%	参照する場合には，適当な簡潔な機関名を key フィールドに入れること．
     pages
-%	$B%Z!<%8HV9f!$%Z!<%8?t!$$"$k$$$O%Z!<%8HO0O!JHO0O$O(B `--'  $B$r;H$C$F!$(B
-%	$BC1=c$JHO0O$G$O$J$$>l9g$K$O8e$m$K(B `+' $B$rIU$1$F<($9$3$H!K!%(B
+%	ページ番号，ページ数，あるいはページ範囲（範囲は `--'  を使って，
+%	単純な範囲ではない場合には後ろに `+' を付けて示すこと）．
     publisher
-%	$B=PHG<R(B($B<gBN(B)$B$NL>A0!%(B
+%	出版社(主体)の名前．
     school
-%	$B3X9;(B($BBg3X(B)$B$NL>A0!J3X0LO@J8MQ!K!%(B
+%	学校(大学)の名前（学位論文用）．
     series
-%	$BJ#?t4,$+$i$J$kK\$N%7%j!<%:L>!$3F!9$NK\$O3F!9$NI=Bj$r;}$C$F$$$k$O$:!%(B
+%	複数巻からなる本のシリーズ名，各々の本は各々の表題を持っているはず．
     title
-%	$B;2>H$7$F$$$k$b$N$NI=Bj!%(B
+%	参照しているものの表題．
     type
-%	$B%F%/%K%+%k%l%]!<%H$N>l9g$K%G%#%U%)%k%H$G;H$o$l$k(B "Technical Report"
-%	$B$NBe$o$j$NL>>N!JNc$($P(B "Research Note"$B!K!$$"$k$$$O3X0LO@J8$N<oN`!$(B
-%	$B$"$k$$$OK\$N%Q!<%H$NL>A0!%(B
+%	テクニカルレポートの場合にディフォルトで使われる "Technical Report"
+%	の代わりの名称（例えば "Research Note"），あるいは学位論文の種類，
+%	あるいは本のパートの名前．
     volume
-%	$BO@J8;o$J$I$N4,?t!$$"$k$$$OJ#?t4,$N=qJ*$N4,?t!%(B
+%	論文誌などの巻数，あるいは複数巻の書物の巻数．
     year
-%	$BG/$O?t;z$@$1$G$J$$$H$$$1$J$$!J@55,2=$7$?8e$G$O!$#4$D$N?t;z$G=*$o$i$J$$(B
-%	$B$H$$$1$J$$!%?7$?$JJ8$r3+;O$7$J$$!K!%(B
-%	$B><OB(B53$B$H$+$r;H$C$F$b$+$^$o$J$$$,!$(Bjalpha $B$J$I$G@8@.$5$l$k%i%Y%k$,JQ$J(B
-%	$B$b$N$K$J$k$3$H$,$"$k$N$GCm0U$9$k$3$H!%(B
+%	年は数字だけでないといけない（正規化した後では，４つの数字で終わらない
+%	といけない．新たな文を開始しない）．
+%	昭和53とかを使ってもかまわないが，jalpha などで生成されるラベルが変な
+%	ものになることがあるので注意すること．
     yomi
-%	$BCx<T!$JT=8<TL>$N!VFI$_!W$r(Bauthor, editor$B$J$I$N=q<0$G(B
-%	$B1Q8lIw$K=q$/!%$R$i$,$J$G=q$1$P0J30$G$O8^==2;=g$N(B
-%	$B%=!<%H$b$G$-$k!%>\$7$/$O(B jbtxdoc.tex $B$r8+$h!%(B
+%	著者，編集者名の「読み」をauthor, editorなどの書式で
+%	英語風に書く．ひらがなで書けば以外では五十音順の
+%	ソートもできる．詳しくは jbtxdoc.tex を見よ．
   }
 
-% $BF|K\8l$NJ88%$+$I$&$+$N%U%i%0(B
+% 日本語の文献かどうかのフラグ
   {is.kanji.entry}
 
-% $B0J2<$NJ8;z7?JQ?t$O0zMQ%i%Y%k$r:n@.$9$k$?$a$K;H$o$l$k!%%a%b%j$,B-$j$J$$(B
-% $B>l9g$K$O!$(Bsort.label $B$O(B on the fly $B$K4JC1$K:n@.$G$-$k!%(B
+% 以下の文字型変数は引用ラベルを作成するために使われる．メモリが足りない
+% 場合には，sort.label は on the fly に簡単に作成できる．
 
 #if LAB_ALPH
 #if SORTED
   { label extra.label sort.label }
 #else !SORTED
 
-% $BJ8;zNs%i%Y%k$r;H$&>l9g$K!$0zMQ=g$KJB$Y$k$N$ONI$$$H$O;W$($J$$$,!$(B
-% $B$=$N>l9g$K$O!$$A$g$C$HJL$N$d$jJ}$G%i%Y%k$r:n$i$J$/$F$O$J$i$J$$!%(B
+% 文字列ラベルを使う場合に，引用順に並べるのは良いとは思えないが，
+% その場合には，ちょっと別のやり方でラベルを作らなくてはならない．
 
   { label }
 #endif SORTED
@@ -590,62 +590,62 @@ ENTRY
   { label }
 #endif LAB_ALPH
 
-% $B$=$l$>$l$N%(%s%H%j$N7?$KBP1~$7$?4X?t$O!$@h$:(B output.bibitem $B$r8F$s$G(B
-% \bibitem $B$H$=$N0z?t$r(B .BBL $B%U%!%$%k$K=q$-=P$9!%<!$KMM!9$J%U%#!<%k%I$,(B
-% $B%U%)!<%^%C%H$5$l(B output $B$+(B output.check $B$K$h$C$F=q$-=P$5$l$k!%$3$l$i$N(B
-% $B=PNO4X?t$O6uJ8;zNs$,EO$5$l$F$$$J$$$3$H$r3NG'$7$J$,$i!$6h@Z$j5-9f!J%+%s%^!$(B
-% $B%T%j%*%I!$%3%m%s!$(B\newblock$B!K$r=q$-=P$9=hM}$r9T$&!%:G8e$K(B fin.entry $B$,(B
-% $B8F$P$l!$J8$N=*$o$j$N%T%j%*%I$r=q$-$@$7$F!$=hM}$,=*N;$9$k!%(B
+% それぞれのエントリの型に対応した関数は，先ず output.bibitem を呼んで
+% \bibitem とその引数を .BBL ファイルに書き出す．次に様々なフィールドが
+% フォーマットされ output か output.check によって書き出される．これらの
+% 出力関数は空文字列が渡されていないことを確認しながら，区切り記号（カンマ，
+% ピリオド，コロン，\newblock）を書き出す処理を行う．最後に fin.entry が
+% 呼ばれ，文の終わりのピリオドを書きだして，処理が終了する．
 %
-% $B;29MJ88%$O$$$/$D$+$N%V%m%C%/$H$7$F%U%)!<%^%C%H$5$l$k!'(B
-% open $B7A<0$G$O!$%V%m%C%/$O?7$7$$9T$r3+;O$7!$%V%m%C%/Cf$G$O%$%s%G%s%H$5$l$k!%(B
-% $B%V%m%C%/Cf$K$OJ#?t$NJ8$,$"$C$F$h$$!J$H$O$$$C$F$bJ8K!E*$K$$$&J8$G$O$J$/!$(B
-% $B%T%j%*%I$G=*$o$kC18lNs$G$O$"$k$,!K!%%(%s%H%j4X?t$O:G=i$N%V%m%C%/0J30$N(B
-% $B%V%m%C%/$r=PNO$9$kA0$K$O(B new.block $B$r8F$P$M$P$J$i$J$$!%(B
-% $B$^$??7$7$$J8$r3+;O$9$k>l9g$K$O(B new.sentence $B$r8F$P$M$P$J$i$J$$!%(B
-% $B=PNO%k!<%A%s$O!$%T%j%*%I$,#2$DB3$$$?$j$7$J$$$h$&$K!$#2$D$N(B new.sentence
-% $B$N4V$K$O!$6uJ8;zNs$G$J$$$b$N$,$"$k$3$H$r3NG'$9$kI,MW$,$"$k!%(B
-% new.block $B$K$D$$$F$bF1$8$G$"$k!%(B
+% 参考文献はいくつかのブロックとしてフォーマットされる：
+% open 形式では，ブロックは新しい行を開始し，ブロック中ではインデントされる．
+% ブロック中には複数の文があってよい（とはいっても文法的にいう文ではなく，
+% ピリオドで終わる単語列ではあるが）．エントリ関数は最初のブロック以外の
+% ブロックを出力する前には new.block を呼ばねばならない．
+% また新しい文を開始する場合には new.sentence を呼ばねばならない．
+% 出力ルーチンは，ピリオドが２つ続いたりしないように，２つの new.sentence
+% の間には，空文字列でないものがあることを確認する必要がある．
+% new.block についても同じである．
 %
-% $B=PNO%k!<%A%s$O$=$N0z?t$rD>$A$K=PNO$7$J$$!%$=$N$+$o$j$KDL>o$O(B
-% $B%9%?%C%/$KCV$-!$(B($B6h@Z$j5-9f$H$7$F2?$,I,MW$+J,$+$C$?;~E@$G(B)$B<!$N(B
-% $B=PNO%k!<%A%s$,=PNO$9$k!%=>$C$F=PNO%k!<%A%s$O%9%?%C%/>e$N%G!<%?$K(B
-% $BI,MW$J6h@Z$j5-9f$rIU2C$7$F=q$-=P$9I,MW$,$"$k!%(B
+% 出力ルーチンはその引数を直ちに出力しない．そのかわりに通常は
+% スタックに置き，(区切り記号として何が必要か分かった時点で)次の
+% 出力ルーチンが出力する．従って出力ルーチンはスタック上のデータに
+% 必要な区切り記号を付加して書き出す必要がある．
 %
-% $B$I$N6h@Z$j5-9f$,I,MW$+$rH=Dj$9$k$?$a$K!$(Boutput.state $B$r;H$&!%(B
-% $B$=$NCM$O0J2<$N$$$:$l$+!%(B
-%	before.all		\bibitem $B$ND>8e(B
-%	mid.sentence		$BJ8$NESCf!$8eB3$,$"$k>l9g$K$O%+%s%^$,I,MW(B
-%	after.sentence		$BJ8$ND>8e!%%T%j%*%I$,I,MW(B
-%	after.block		$B%V%m%C%/(B($BJ8(B)$B$ND>8e!%%T%j%*%I$H(B\newblock $B$,I,MW(B
+% どの区切り記号が必要かを判定するために，output.state を使う．
+% その値は以下のいずれか．
+%	before.all		\bibitem の直後
+%	mid.sentence		文の途中，後続がある場合にはカンマが必要
+%	after.sentence		文の直後．ピリオドが必要
+%	after.block		ブロック(文)の直後．ピリオドと\newblock が必要
 %------------------------------------------------------------------------
-%	after.author		$BCx<TL>$N8e(B(: $B$rIU$1$k$N$K;H$&(B)
+%	after.author		著者名の後(: を付けるのに使う)
 %------------------------------------------------------------------------
 %
 %*****************************************************************************
-%$BCm0U!'(B
+%注意：
 %
-%  $B0J2<$N%3%a%s%HCf$G=R$Y$i$l$F$$$k%"%k%4%j%:%`$O!$F|K\8lMQ$N%9%?%$%k%U%!%$%k(B
-%  $B$N:n@.$N$?$a$K!$%3!<%I$N$_JQ99$7$?ItJ,$,$"$k$N$G!$<B:]$N%3!<%I$HI,$:$7$b(B
-%  $BF1$8$b$N$G$O$J$$!%(B
+%  以下のコメント中で述べられているアルゴリズムは，日本語用のスタイルファイル
+%  の作成のために，コードのみ変更した部分があるので，実際のコードと必ずしも
+%  同じものではない．
 %
 %*****************************************************************************
 %
-% VAR: output.state : INTEGER		-- $B=PNO$N>uBVJQ?t(B
+% VAR: output.state : INTEGER		-- 出力の状態変数
 %
-% output.nonnull $B4X?t$O!JEO$5$l$?J*$,6uJ8;zNs$G$J$$$H$7$F!K!$0z?t$r%9%?%C%/(B
-% $B$KJ]B8$7!$J]B8$7$F$*$$$?J8;zNs$KI,MW$H$5$l$kE,Ev$J6h@Z$j5-9f$r8e$m$K(B
-% $BIU2C$7$F=q$-=P$9!%%F%9%H$N=gHV$OIQEY=g$K$J$C$F$$$k!%(B
+% output.nonnull 関数は（渡された物が空文字列でないとして），引数をスタック
+% に保存し，保存しておいた文字列に必要とされる適当な区切り記号を後ろに
+% 付加して書き出す．テストの順番は頻度順になっている．
 %
-% $B#1J8$N7A$K$9$k>l9g(B(ONE_SENTENCE$B$,??$N>l9g(B)$B$K$O!$0J2<$H0[$J$k%"%k%4%j%:%`$G(B
-% $B$"$k!%<B:]$N%3!<%I$r;2>H$N$3$H!*(B
+% １文の形にする場合(ONE_SENTENCEが真の場合)には，以下と異なるアルゴリズムで
+% ある．実際のコードを参照のこと！
 %
 % output.nonnull(s) ==
 %  BEGIN
 %	s := argument on stack
 %	if output.state = mid.sentence then
 %	    write$(pop() * ", ")
-%		  -- "pop" $B$O4X?t$G$O$J$$!%%9%?%C%/%H%C%W$N%G!<%?$r;H$&!%(B
+%		  -- "pop" は関数ではない．スタックトップのデータを使う．
 %	else
 %	    if output.state = after.block then
 %		write$(add.period$(pop()))
@@ -654,7 +654,7 @@ ENTRY
 %	    else
 %		if output.state = before.all then
 %		    write$(pop())
-%		else	    -- output.state $B$O(B after.sentence $B$N$O$:(B
+%		else	    -- output.state は after.sentence のはず
 %		    write$(add.period$(pop()) * " ")
 %		fi
 %	    fi
@@ -663,8 +663,8 @@ ENTRY
 %	push s on stack
 %  END
 %
-% output $B$O(B $B0z?t$,6u$G$J$$$J$i!J0z?t$OL$Dj5A%U%#!<%k%I$+$b$7$l$J$$$N$G!$(B
-% $BI,$:$7$bJ8;zNs$G$O$J$$!K!$(B output.nonnull $B$r8F$S=P$9!%(B
+% output は 引数が空でないなら（引数は未定義フィールドかもしれないので，
+% 必ずしも文字列ではない）， output.nonnull を呼び出す．
 %
 % output(s) ==
 %  BEGIN
@@ -672,10 +672,10 @@ ENTRY
 %	fi
 %  END
 %
-% output.check $B$O$[$H$s$I(B output $B4X?t$HF1$8$G$"$k$,!$I,MW$J%U%#!<%k%I$,(B
-% $B$J$$$3$H$r%f!<%6!<$K7Y9p$9$k!%!J$3$l$O$=$N%U%#!<%k%I$N$J$$J88%>pJs$O(B
-% $BNI$$$b$N$G$O$J$$$3$H$rCN$i$;$k$?$a!$$^$?$=$N%U%#!<%k%I$,$J$/$F$b!$=PNO$5$l$k(B
-% $B%U%)!<%^%C%H7A<0$,$^$"$^$"$NJ*$K$J$k$h$&$K$9$k$?$a$G$"$k!K!%(B
+% output.check はほとんど output 関数と同じであるが，必要なフィールドが
+% ないことをユーザーに警告する．（これはそのフィールドのない文献情報は
+% 良いものではないことを知らせるため，またそのフィールドがなくても，出力される
+% フォーマット形式がまあまあの物になるようにするためである）．
 %
 % output.check(s,t) ==
 %  BEGIN
@@ -685,28 +685,28 @@ ENTRY
 %	fi
 %  END
 %
-% output.bibitem $B4X?t$O8=:_$N%(%s%H%j$KBP$9$k(B \bibitem $B$r=q$-=P$7(B
-%  ($B%i%Y%k$O4{$K$G$-$F$$$k$H2>Dj$9$k(B)$B!$>uBV$K1~$8$?6h@Z$j5-9f$r@_Dj$9$k!%(B
-% $B=PNO$N5,Ls$K=>$C$?J8;zNs$r%9%?%C%/$K;D$9!%(B
+% output.bibitem 関数は現在のエントリに対する \bibitem を書き出し
+%  (ラベルは既にできていると仮定する)，状態に応じた区切り記号を設定する．
+% 出力の規約に従った文字列をスタックに残す．
 %
 % output.bibitem ==
 %  BEGIN
 %	newline$
-%	write$("\bibitem[")	% $B0J2<#39T$OJ8;zNs%i%Y%kMQ(B
+%	write$("\bibitem[")	% 以下３行は文字列ラベル用
 %	write$(label)		%
 %	write$("]{")		%
-%	write$("\bibitem{")	% $B$3$N9T$O?tCM%i%Y%k$N;~(B
+%	write$("\bibitem{")	% この行は数値ラベルの時
 %	write$(cite$)
 %	write$("}")
 %	push "" on stack
 %	output.state := before.all
 %  END
 %
-% fin.entry $B4X?t$O%9%?%C%/$K;D$C$F$$$kJ8;zNs$K%T%j%*%I$rIU2C$7!$%(%s%H%j$N(B
-% $B=hM}$r=*$($k!%$b$7>uBV$,$^$@(B before.all $B$G$"$l$P$3$N%(%s%H%j$KBP$7$F$O2?$b(B
-% $B=PNO$5$l$F$$$J$$$N$G!$7k2L$OJQ$J$b$N$K$J$k$,!$MxMQ<T$O$=$l$K5$$E$/!%(B
-% $BJ88%$O0zMQ$5$l$F$$$k$N$G$"$k$+$i!$0zMQ%i%Y%k$r:n$k$?$a$K(B bibitem $B$O(B
-% $BI,MW$G$"$k$+$i!$%(%s%H%j$r>JN,$7$?$j$7$J$$!%(B
+% fin.entry 関数はスタックに残っている文字列にピリオドを付加し，エントリの
+% 処理を終える．もし状態がまだ before.all であればこのエントリに対しては何も
+% 出力されていないので，結果は変なものになるが，利用者はそれに気づく．
+% 文献は引用されているのであるから，引用ラベルを作るために bibitem は
+% 必要であるから，エントリを省略したりしない．
 %
 % fin.entry ==
 %  BEGIN
@@ -714,8 +714,8 @@ ENTRY
 %	newline$
 %  END
 %
-% new.block $B4X?t$O=PNO$9$k?7$?$J%V%m%C%/$N=`Hw$r9T$$!$(B
-% new.sentence $B$O?7$?$J%;%s%F%s%9$N=`Hw$r9T$&!%(B
+% new.block 関数は出力する新たなブロックの準備を行い，
+% new.sentence は新たなセンテンスの準備を行う．
 %
 % new.block ==
 %  BEGIN
@@ -740,7 +740,7 @@ INTEGERS { output.state before.all mid.sentence after.sentence after.block
 INTEGERS { output.state before.all mid.sentence after.sentence after.block }
 #endif ONE_SENTENCE
 
-% $B0J2<$N#3$D$N4X?t$O(B AND, OR, NOT $B$N$?$a$N$b$N$G$"$k!%(B
+% 以下の３つの関数は AND, OR, NOT のためのものである．
 
 FUNCTION {not}
 {   { #0 }
@@ -770,25 +770,25 @@ FUNCTION {init.state.consts}
 #endif ONE_SENTENCE
 }
 
-% s, t  $B$O:n6HMQ$NJ8;zNsJQ?t(B
+% s, t  は作業用の文字列変数
 STRINGS { s t }
 
-% $BA43Q$N(B"$B!$(B","$B!%!I$r;H$&;~$N$?$a$N4X?t(B
-% $B;29MJ88%$O%3%s%Q%/%H$KAH$_$?$$$N$G!$;d$O$3$l$O9%$-$G$O$J$$$,!$(B
-% ASCII $BHG$N(B 0.98 $B$G$O$3$N5!G=$,$"$C$?$N$G!%(B
+% 全角の"，","．”を使う時のための関数
+% 参考文献はコンパクトに組みたいので，私はこれは好きではないが，
+% ASCII 版の 0.98 ではこの機能があったので．
 
 #if   ZENKAKU_PUN
 FUNCTION {add.kanji.period}
 {
   add.period$ duplicate$
   #-1 #1 substring$ "." =
-    {#-2 global.max$ substring$ "$B!%(B" *}
+    {#-2 global.max$ substring$ "．" *}
     'skip$
   if$
 }
 #endif ZENKAKU_PUN
 
-% $BA43Q$N%3%m%s$r;H$&>l9g$K$O$3$NDj5A$O$3$3$K$J$$$H$$$1$J$$!%(B
+% 全角のコロンを使う場合にはこの定義はここにないといけない．
 #if    ZENKAKU_COLON
 FUNCTION {field.or.null}
 { duplicate$ empty$
@@ -803,7 +803,7 @@ FUNCTION {output.nonnull}
   output.state mid.sentence =
 #if    ZENKAKU_PUN
     { is.kanji.entry
-        { "$B!$(B" * write$ }
+        { "，" * write$ }
         { ", " * write$ }
       if$
     }
@@ -834,7 +834,7 @@ FUNCTION {output.nonnull}
 		{ author field.or.null is.kanji.str$ 
 		  editor field.or.null is.kanji.str$ or
 		  organization field.or.null is.kanji.str$ or
-		    {"$B!'(B" * write$}
+		    {"：" * write$}
 		    {": " * write$}
 		  if$
 		}
@@ -901,7 +901,7 @@ FUNCTION {output.bibitem}
   before.all 'output.state :=
 }
 
-% $B$3$N4X?t$O%(%s%H%j$N=PNO$r=*$j$K$9$k(B
+% この関数はエントリの出力を終りにする
 
 FUNCTION {fin.entry}
 { 
@@ -940,10 +940,10 @@ FUNCTION {new.sentence}
   if$
 }
 
-% $B;~$H$7$F!$%V%m%C%/$,==J,$KD9$$>l9g$K$N$_?7$?$J%V%m%C%/$r3+;O$7$J$$$H$$$1$J$$!%(B
-% new.block.checka $B4X?t$O$=$N0z?t$,6u$G$J$$>l9g$K(B new.block $B$r<B9T$9$k!%(B
-% new.block.checkb $B4X?t$O$=$N#2$D$N0z?t$,$I$A$i$b6u$K$J$$>l9g$K(B new.block $B$r(B
-%		   $B<B9T$9$k!%(B
+% 時として，ブロックが十分に長い場合にのみ新たなブロックを開始しないといけない．
+% new.block.checka 関数はその引数が空でない場合に new.block を実行する．
+% new.block.checkb 関数はその２つの引数がどちらも空にない場合に new.block を
+%		   実行する．
 
 FUNCTION {new.block.checka}
 { empty$
@@ -961,7 +961,7 @@ FUNCTION {new.block.checkb}
   if$
 }
 
-% new.sentence.check $B4X?t72$bF1$8$h$&$J$b$N(B
+% new.sentence.check 関数群も同じようなもの
 
 FUNCTION {new.sentence.checka}
 { empty$
@@ -979,17 +979,17 @@ FUNCTION {new.sentence.checkb}
   if$
 }
 
-% $B%(%s%H%j$N%G!<%?72$r%U%)!<%^%C%H$9$k$?$a$N4X?t72(B
-% $B$3$l$i$N4X?t72$G$O!$%+%s%^$"$k$$$O%T%j%*%I!J%T%j%*%I$N8e$K%T%j%*%I$,B3$$$?$j(B
-% $B$7$J$$$h$&$K(B add.period$ $B$r;H$C$F!K$rIU$1$i$l$k$h$&$K!$J8;zNs$+6uJ8;zNs(B
-% $B$r=PNO$9$k$3$H$r5,Ls$H$9$k!%(B
+% エントリのデータ群をフォーマットするための関数群
+% これらの関数群では，カンマあるいはピリオド（ピリオドの後にピリオドが続いたり
+% しないように add.period$ を使って）を付けられるように，文字列か空文字列
+% を出力することを規約とする．
 %
-% $BLr$K$?$DJd=u4X?t(B field.or.null $B$O0z?t$,L$Dj5A%U%#!<%k%I!J%G!<%?%Y!<%9$+$i(B
-% $B%G!<%?$rFI$s$@;~$KCM$N@_Dj$5$l$F$$$J$$%U%#!<%k%I!K$+$I$&$+!$$"$k$$$O(B
-% $B6uGr0J30$NJ8;z$r4^$^$J$$J8;zNs$+$I$&$+$r%A%'%C%/$7!$$=$&$G$"$l$P6uJ8;zNs(B
-% $B$rCM$H$7$FJV$9!%(B
-% $B$3$N4X?t$N<g$?$kL\E*$O!J$=$l$@$1$G$O$J$$$,!K%9%?%C%/%H%C%W$K;D$C$F$$$k(B
-% $BCM$,L$Dj5A%U%#!<%k%I$G$J$/!$J8;zNs$G$"$k$3$H$rJ]>Z$9$k$?$a$3$H$G$"$k!%(B
+% 役にたつ補助関数 field.or.null は引数が未定義フィールド（データベースから
+% データを読んだ時に値の設定されていないフィールド）かどうか，あるいは
+% 空白以外の文字を含まない文字列かどうかをチェックし，そうであれば空文字列
+% を値として返す．
+% この関数の主たる目的は（それだけではないが）スタックトップに残っている
+% 値が未定義フィールドでなく，文字列であることを保証するためことである．
 %
 % field.or.null(s) ==
 %  BEGIN
@@ -997,12 +997,12 @@ FUNCTION {new.sentence.checkb}
 %	else return s
 %  END
 %
-% $B$b$&#1$D$NJd=u4X?t(B emphasize $B$O0z?t$,6uJ8;zNs$G$J$1$l$P$=$l$K6/D4;XDj$r(B
-% $BIU2C$7$?CM$rJV$9!%6uJ8;zNs$J$i6uJ8;zNs$rJV$9!%%$%?%j%C%/Jd@5$OIU2C$7$J$$(B
-% $B$N$G!$6h@Z$j5-9f$,B3$/>l9g$K$N$_;H$&$3$H!%(B
+% もう１つの補助関数 emphasize は引数が空文字列でなければそれに強調指定を
+% 付加した値を返す．空文字列なら空文字列を返す．イタリック補正は付加しない
+% ので，区切り記号が続く場合にのみ使うこと．
 %
-% $B4A;z$r4^$`J8;zNs$N;~$K$O6/D4;XDj$rIU2C$7$J$$!%$^$?(B NO_EM $B$,Dj5A$5$l$F$$$l$P(B
-% $B6/D4;XDj$rIU2C$7$J$$!%(B
+% 漢字を含む文字列の時には強調指定を付加しない．また NO_EM が定義されていれば
+% 強調指定を付加しない．
 %
 % emphasize(s) ==
 %  BEGIN
@@ -1015,17 +1015,17 @@ FUNCTION {new.sentence.checkb}
 %          else return "{\em " * s * "}"
 % #endif NO_EM
 %
-% format.names $B4X?t$O!$4pK\E*$K$O(B((J)BibTeX $B$NL>A07A<0$G=q$+$l$?!K0z?t$r!$%+%s%^(B
-% $B$G6h@Z$j$J$,$i!$$^$?:G8e$NL>A0$NA0$K$O(B and $B$rA0$KIU$1$F!J:G8e$,(B others $B$G(B
-% $B$"$l$P(B et~al. $B$H$7$F(B and $B$rIU$1$:$K!(4A;zCx<TL>$N>l9g$K$O(B et~al. $B$G$O$J$/$F!$(B
-%  "$B$[$+(B"$B$"$k$$$O(B"$BB>(B" $B$r;H$$!$%+%s%^$G6h@Z$k$@$1$G(B and $B$OIU$1$:$K!K!$(B
-% "First Von Last, Junior" $B$N7A$K%U%)!<%^%C%H$9$k!%!JL>A0$N%U%)!<%^%C%H7A<0(B
-% $B$N;XDj$K$h$C$F$O(B First $B$O>JN,7A$H$5$l$k$3$H$b$"$k!K!%(B
-% $B0z?t$K$O:GDc#1$D$NL>A0$,$J$1$l$P$J$i$J$$!%(B
+% format.names 関数は，基本的には((J)BibTeX の名前形式で書かれた）引数を，カンマ
+% で区切りながら，また最後の名前の前には and を前に付けて（最後が others で
+% あれば et~al. として and を付けずに；漢字著者名の場合には et~al. ではなくて，
+%  "ほか"あるいは"他" を使い，カンマで区切るだけで and は付けずに），
+% "First Von Last, Junior" の形にフォーマットする．（名前のフォーマット形式
+% の指定によっては First は省略形とされることもある）．
+% 引数には最低１つの名前がなければならない．
 %
-% $B0J2<$N%"%k%4%j%:%`$OF|K\8l$KBP1~$9$k!$?7$7$/F3F~$7$?%9%$%C%A!JJQ?t!K$KBP1~(B
-% $B$9$k!$$?$a$K%3!<%IItJ,$,BgI}$K=q$-49$($i$l$F$$$k$N$G!$%3!<%I$H$OI,$:$7$b(B
-% $B0lCW$7$F$$$J$$!%$7$+$74pK\E*$J=hM}$NN.$l$OJQ$o$C$F$$$J$$!%(B
+% 以下のアルゴリズムは日本語に対応する，新しく導入したスイッチ（変数）に対応
+% する，ためにコード部分が大幅に書き換えられているので，コードとは必ずしも
+% 一致していない．しかし基本的な処理の流れは変わっていない．
 %
 % VAR: nameptr, namesleft, numnames: INTEGER
 % pseudoVAR: nameresult: STRING		(it's what's accumulated on the stack)
@@ -1037,7 +1037,7 @@ FUNCTION {new.sentence.checkb}
 %	namesleft := numnames
 %	while namesleft > 0
 %	  do
-% $BL>A0$r%U%)!<%^%C%H$9$k7A<0$,Bg$-$/JQ99$5$l$F$$$k(B
+% 名前をフォーマットする形式が大きく変更されている
 %				% for full names:
 %	    t := format.name$(s, nameptr, "{ff~}{vv~}{ll}{, jj}")
 %				% for abbreviated first names:
@@ -1048,8 +1048,8 @@ FUNCTION {new.sentence.checkb}
 %		else if numnames > 2
 %		       then nameresult := nameresult * ","
 %		     fi
-%            % $B$3$NItJ,$bBg$-$/JQ99$5$l$F$$$k(B
-%            % $B4A;zCx<T$J$i(B and $B$rIU$1$J$$!$(B et~al. $B$G$J$/(B"$B$[$+(B/$BB>(B"$B$H$9$k!%(B
+%            % この部分も大きく変更されている
+%            % 漢字著者なら and を付けない， et~al. でなく"ほか/他"とする．
 %		     if t = "others"
 %		       then nameresult := nameresult * " et~al."
 %		       else nameresult := nameresult * " and " * t
@@ -1063,8 +1063,8 @@ FUNCTION {new.sentence.checkb}
 %	return nameresult
 %  END
 %
-% format.authors $B$O(B author $B$,$"$l$P(B format.names(author) $B$NCM$r!$$J$1$l$P(B
-% $B6uJ8;zNs$rJV$9(B
+% format.authors は author があれば format.names(author) の値を，なければ
+% 空文字列を返す
 %
 % format.authors ==
 %  BEGIN
@@ -1073,11 +1073,11 @@ FUNCTION {new.sentence.checkb}
 %	fi
 %  END
 %
-% format.editors $B$O(B format.authors $B$HF1$8$G$"$k$,!$(B editor $B%U%#!<%k%I$r(B
-% $B;H$$!$$^$?8e$m$K(B ed., eds. $B$J$I$rIU$1$k!%(B
+% format.editors は format.authors と同じであるが， editor フィールドを
+% 使い，また後ろに ed., eds. などを付ける．
 %
-% $BJT=8<T$r3g8L$KF~$l$k$J$I$N=hM}$,IU2C$5$l$F$$$k!%$^$?(Bed., eds. $B$J$I$N(B
-% $B>JN,7A$r;H$&$H$+!$4A;zCx<T$N>l9g$K$O!JJT!K$K$9$k$H$+$NJQ99$b$J$5$l$F$$$k!%(B
+% 編集者を括弧に入れるなどの処理が付加されている．またed., eds. などの
+% 省略形を使うとか，漢字著者の場合には（編）にするとかの変更もなされている．
 %
 % format.editors ==
 %  BEGIN
@@ -1091,12 +1091,12 @@ FUNCTION {new.sentence.checkb}
 %	fi
 %  END
 %
-% $BB>$N%U%)!<%^%C%H4X?t$bF1$8$h$&$J$b$N$J$N$G!$%3%a%s%H%P!<%8%g%s$O<($5$J$$!%(B
+% 他のフォーマット関数も同じようなものなので，コメントバージョンは示さない．
 %
-% $B$3$N4X?t$NCf$N(B `pop$' $BL$Dj5ACM$r<h$j5n$j6uJ8;zNs$rJV$9$?$a$K!$(B
-% `skip$' $B$O%3%T!<$7$?(B(duplicate$$B$7$?(B)$BCM$=$N$b$N$rJV$9$?$a$K;H$o$l$F$$$k!%(B
+% この関数の中の `pop$' 未定義値を取り去り空文字列を返すために，
+% `skip$' はコピーした(duplicate$した)値そのものを返すために使われている．
 
-% $BA43Q$N%3%m%s$r;H$o$J$1$l$P!$$3$NDj5A$O$3$3$K$"$l$P$h$$!%(B
+% 全角のコロンを使わなければ，この定義はここにあればよい．
 #if    !ZENKAKU_COLON
 FUNCTION {field.or.null}
 { duplicate$ empty$
@@ -1133,9 +1133,9 @@ FUNCTION {format.names}
   #1 'nameptr :=
   s num.names$ 'numnames :=
   numnames 'namesleft :=
-% $B$^$@L>A0$,;D$C$F$$$l$P(B
+% まだ名前が残っていれば
     { namesleft #0 > }
-% $B@h$:8=:_CmL\$7$F$$$k=gHV$NL>A0$r%U%)!<%^%C%H$9$k!%(B
+% 先ず現在注目している順番の名前をフォーマットする．
 #if NAME_FULL
     { s nameptr "{ff}{ll}" format.name$ is.kanji.str$
 	{s nameptr "{ff}{ll}" format.name$ 't :=}
@@ -1149,7 +1149,7 @@ FUNCTION {format.names}
  	{s nameptr "{ff}" format.name$ 't :=
  	  t empty$
  	    { s nameptr "{ll}" format.name$ 't :=
-	      t " $B$K$O!$@+$HL>$N4V$K6uGr$,$J$$$h!)(B in " * cite$ * warning$
+	      t " には，姓と名の間に空白がないよ？ in " * cite$ * warning$
 	    }
  	    'skip$
  	  if$
@@ -1170,34 +1170,34 @@ FUNCTION {format.names}
 #endif FAMILY_FIRST
       if$
 #endif NAME_FULL
-% $BBh#2HVL\0J9_!)(B
+% 第２番目以降？
       nameptr #1 >
-% $BBh#2HVL\0J9_(B
-% $B$^$@#2?M0J>e;D$C$F$$$k!)(B
+% 第２番目以降
+% まだ２人以上残っている？
 	{ namesleft #1 >
-%   $B$^$@#2?M0J>e;D$C$F$$$k(B
+%   まだ２人以上残っている
 #if    ZENKAKU_PUN
 	    { is.kanji.entry
-		{"$B!$(B" * t * }
+		{"，" * t * }
 		{", " * t * }
 	      if$
 	    }
 #else !ZENKAKU_PUN
 	    {", " * t * }
 #endif ZENKAKU_PUN
-%   $B$b$&:G8e$N#1?M$@!*(B
-%     $B:G8e$NL>A0$,(B others $B$+$J!)(B
+%   もう最後の１人だ！
+%     最後の名前が others かな？
 #if    FAMILY_FIRST
 	    { t "others" = t "others,~" = or
 #else !FAMILY_FIRST
 	    { t "others" =
 #endif FAMILY_FIRST
-%       $B$=$&$@!*(B
+%       そうだ！
  		{ s is.kanji.str$
 #if    USE_KANJI_HOKA
- 			{"$BB>(B" * }
+ 			{"他" * }
 #else !USE_KANJI_HOKA
- 			{"$B$[$+(B" * }
+ 			{"ほか" * }
 #endif USE_KANJI_HOKA
 #if    SMALL_CAP
  			{"{\rm, et~al.}" * }
@@ -1206,14 +1206,14 @@ FUNCTION {format.names}
 #endif SMALL_CAP
  		  if$
  		}
-%        others $B$G$J$$$>!*(B
+%        others でないぞ！
  		{ s is.kanji.str$
 #if    ZENKAKU_PUN
- 		    {"$B!$(B" * t * }
+ 		    {"，" * t * }
 #else !ZENKAKU_PUN
  		    {", " * t * }
 #endif ZENKAKU_PUN
-% Small caps $B$r;H$&>l9g$G$b(B and $B$O(B roman $B$G$J$$$H$$$1$J$$(B
+% Small caps を使う場合でも and は roman でないといけない
 #if    SMALL_CAP
 #if    NO_COM_AND
  		    {"{\rm\ and }" * t * }
@@ -1241,7 +1241,7 @@ FUNCTION {format.names}
 	    }
 	  if$
 	}
-% $B:G=i$NL>A0$@!*(B
+% 最初の名前だ！
 	't
       if$
       nameptr #1 + 'nameptr :=
@@ -1253,7 +1253,7 @@ FUNCTION {format.names}
 FUNCTION {format.authors}
 { author empty$
     { "" }
-% Small caps $B$N>l9g$K$O(B {\sc, } $B$G0O$`(B
+% Small caps の場合には {\sc, } で囲む
 #if    SMALL_CAP
     { "{\sc " author format.names * "}" * }
 #else !SMALL_CAP
@@ -1273,25 +1273,25 @@ FUNCTION {format.editors}
       editor num.names$ #1 >
  	{ editor is.kanji.str$
 #if    ED_SHORT
-% $BEE;R>pJsDL?.3X2qO@J8;o$G$O(B editor, editors $B$N7A<0$,0c$&!*(B
+% 電子情報通信学会論文誌では editor, editors の形式が違う！
 #ifdef TIEICE
- 		{"$B!JJT!K(B" * } {" Eds." * } if$
+ 		{"（編）" * } {" Eds." * } if$
 #else !TIEICE
- 		{"$B!JJT!K(B" * } {" eds." * } if$
+ 		{"（編）" * } {" eds." * } if$
 #endif TIEICE
 #else !ED_SHORT
- 		{"$B!JJT!K(B" * } {", editors" * } if$
+ 		{"（編）" * } {", editors" * } if$
 #endif ED_SHORT
  	}
  	{ editor is.kanji.str$
 #if    ED_SHORT
 #ifdef TIEICE
- 		{"$B!JJT!K(B" *} {" Ed." * } if$
+ 		{"（編）" *} {" Ed." * } if$
 #else !TIEICE
- 		{"$B!JJT!K(B" *} {" ed." * } if$
+ 		{"（編）" *} {" ed." * } if$
 #endif !EIEIC
 #else !ED_SHORT
- 		{"$B!JJT!K(B" *} {", editor" * } if$
+ 		{"（編）" *} {", editor" * } if$
 #endif ED_SHORT
  	}
       if$
@@ -1299,7 +1299,7 @@ FUNCTION {format.editors}
   if$
 }
 
-% $BJT=8<T$r3g8L$G$/$/$k>l9g(B
+% 編集者を括弧でくくる場合
 #if    ED_IN_PAR
 FUNCTION {format.in.ed.editors}
 { editor empty$
@@ -1307,18 +1307,18 @@ FUNCTION {format.in.ed.editors}
     { editor format.names
       editor num.names$ #1 >
 	{ editor is.kanji.str$
-% $BEE;R>pJsDL?.3X2qO@J8;o$G$O(B editor, editors $B$N7A<0$,0c$&!*(B
+% 電子情報通信学会論文誌では editor, editors の形式が違う！
 #ifdef TIEICE
-		{"$B!JJT!K(B" *} {"Eds.\ by " swap$ * } if$
+		{"（編）" *} {"Eds.\ by " swap$ * } if$
 #else !TIEICE
-		{"$B!JJT!K(B" *} {"eds." swap$ * } if$
+		{"（編）" *} {"eds." swap$ * } if$
 #endif TIEICE
 	}
 	{ editor is.kanji.str$
 #ifdef TIEICE
-		{"$B!JJT!K(B" *} {"Ed.\ by " swap$ *} if$
+		{"（編）" *} {"Ed.\ by " swap$ *} if$
 #else !TIEICE
-		{"$B!JJT!K(B" *} {"ed." swap$ *} if$
+		{"（編）" *} {"ed." swap$ *} if$
 #endif TIEICE
 	}
       if$
@@ -1328,16 +1328,16 @@ FUNCTION {format.in.ed.editors}
 
 #endif ED_IN_PAR
 
-% format.title $B4X?t$OK\$NCg4V$G$J$$$b$N$NI=Bj$r%U%)!<%^%C%H$9$k$N$K;H$o$l$k!%(B
-% $BKX$I$N%9%?%$%k$G$O!J:G=i$NJ8;z$H%3%m%s$N8e!J%9%Z!<%9$,B3$$$F$$$k$+$b(B
-% $B$7$l$J$$!K$N:G=i$NJ8;z$r=|$$$F!K!$JQ49$5$l$FM_$7$/$J$$BgJ8;z$OCf3g8L(B
-%  `{', `{' $B$G0O$^$l$F$$$k$H4|BT$7$F!$%?%$%H%k$NBgJ8;z$r>.J8;z$KJQ49$9$k!%(B
-% $B$$$/$D$+$N%9%?%$%k$G$O$3$NJQ49$O9T$o$:$K!$%G!<%?%Y!<%9Cf$N$^$^$H$9$k!%(B
+% format.title 関数は本の仲間でないものの表題をフォーマットするのに使われる．
+% 殆どのスタイルでは（最初の文字とコロンの後（スペースが続いているかも
+% しれない）の最初の文字を除いて），変換されて欲しくない大文字は中括弧
+%  `{', `{' で囲まれていると期待して，タイトルの大文字を小文字に変換する．
+% いくつかのスタイルではこの変換は行わずに，データベース中のままとする．
 %
-% $BEE;R>pJsDL?.3X2q$N%9%?%$%k$G$O%?%$%H%k$r(B``''$B$G0O$`!%(B
+% 電子情報通信学会のスタイルではタイトルを``''で囲む．
 
 FUNCTION {format.title}
-% $B#1J87A<0$N>l9g$K$O%?%$%H%k$N=PNO>uBV$r(B after.author $B$K$7$F$+$i!$=hM}3+;O(B
+% １文形式の場合にはタイトルの出力状態を after.author にしてから，処理開始
 #if    ONE_SENTENCE
 { after.author 'output.state :=
   title empty$
@@ -1357,12 +1357,12 @@ FUNCTION {format.title}
   if$
 }
 
-% $B%G%#%U%)%k%H$G(B (J)BibTeX $B$OBg0hJQ?t(B global.max$ $B$NCM$r(B (J)BibTeX $B$NDj?t$G$"$k(B
-% glob_str_size $B$K@_Dj$9$k!%F1MM$K(B entry.max$ $B$NCM$r%(%s%H%j$NJ8;zNs$N:GBgD9$G(B
-% $B$"$k(B ent_str_size $B$K@_Dj$9$k!%(B
-% $B$=$s$J$3$H$O$J$$$H$O;W$&$,!$$3$l$rJQ99$7$F$b$h$$!%(B
+% ディフォルトで (J)BibTeX は大域変数 global.max$ の値を (J)BibTeX の定数である
+% glob_str_size に設定する．同様に entry.max$ の値をエントリの文字列の最大長で
+% ある ent_str_size に設定する．
+% そんなことはないとは思うが，これを変更してもよい．
 %
-% n.dashify $B4X?t$OJ8;zNsCf$N(B `-' $B$r(B `--' $B$KJQ49$9$k!%(B
+% n.dashify 関数は文字列中の `-' を `--' に変換する．
 %
 % pseudoVAR: pageresult: STRING		(it's what's accumulated on the stack)
 %
@@ -1425,11 +1425,11 @@ FUNCTION {n.dashify}
   while$
 }
 
-% format.data $B4X?t$O7n$HG/$r%U%)!<%^%C%H$9$k$?$a$N$b$N$G$"$j!$7n$@$1$"$C$F!$(B
-% $BG/$,$J$$>l9g$K$O7Y9p%a%C%;!<%8$r=P$7!$$I$A$i$b$J$1$l$P6uJ8;zNs$rJV$9!%(B
+% format.data 関数は月と年をフォーマットするためのものであり，月だけあって，
+% 年がない場合には警告メッセージを出し，どちらもなければ空文字列を返す．
 %
-% $BJ88%$r(B1$BJ8$N7A<0$H$9$k>l9g$K$O86B'E*$K$OG/7n$O3g8L$KF~$l$k!%(B
-% $B$^$?>pJs=hM}3X2q1QJ8O@J8;o0J30$N(B1$BJ87A<0$G$O7n$OI=<($7$J$$!%(B
+% 文献を1文の形式とする場合には原則的には年月は括弧に入れる．
+% また情報処理学会英文論文誌以外の1文形式では月は表示しない．
 
 FUNCTION {format.date}
 #if    ONE_SENTENCE
@@ -1438,7 +1438,7 @@ FUNCTION {format.date}
      { "there's no year in " cite$ * warning$
        ""
      }
-% $B>pJs=hM}3X2q1QJ8O@J8;o$G$O3g8L$NCf$K(B month year $B$rJB$Y$k(B
+% 情報処理学会英文論文誌では括弧の中に month year を並べる
 #ifdef JIPSJ
      { month empty$
 	{ " (" year * ")" *}
@@ -1451,7 +1451,7 @@ FUNCTION {format.date}
 #else !YEAR_IN_PAR
 #if  ZENKAKU_PUN
      { is.kanji.entry
-	{"$B!$(B" year *  }
+	{"，" year *  }
 	{", " year *  }
        if$
      }
@@ -1480,11 +1480,11 @@ FUNCTION {format.date}
 }
 #endif ONE_SENTENCE
 
-% format.btitle $B4X?t$OK\$NCg4V$N%(%s%H%j$NI=Bj$r%U%)!<%^%C%H$9$k!%BgJ8;z(B
-% $B>.J8;z$O$=$N$^$^$K$7$F$*$-!$6/D4;XDj$rIU$1$k(B(NO_EM $B$,;XDj$5$l$F$$$l$P!$(B
-% \em $B$OIU2C$5$l$J$$$3$H$K$J$C$F$$$k!K!%(B
+% format.btitle 関数は本の仲間のエントリの表題をフォーマットする．大文字
+% 小文字はそのままにしておき，強調指定を付ける(NO_EM が指定されていれば，
+% \em は付加されないことになっている）．
 %
-% $BEE;R>pJsDL?.3X2qO@J8;o$G$O%?%$%H%k$OFs=E0zMQId$G0O$`(B
+% 電子情報通信学会論文誌ではタイトルは二重引用符で囲む
 
 FUNCTION {format.btitle}
 #if    ONE_SENTENCE
@@ -1500,12 +1500,12 @@ title emphasize
 }
 #endif ONE_SENTENCE
 
-% $B$$$/$D$+$N4X?t$G$O#2$D$NJ8;zNs$rO"7k$9$k;~$K!$8e$m$NJ8;zNs$,D9$$$b$N$G(B
-% $B$J$$!J#3J8;zL$K~!K$N;~$K%?%$(B(~)$B$r4V$KF~$l$F!$$=$l$h$jD9$1$l$P!$6uGr$r(B
-% $B4V$KF~$l$F!$O"7k$9$kI,MW$,$"$k!%O"7k7k2L$O%9%?%C%/$KCV$/!%(B
+% いくつかの関数では２つの文字列を連結する時に，後ろの文字列が長いもので
+% ない（３文字未満）の時にタイ(~)を間に入れて，それより長ければ，空白を
+% 間に入れて，連結する必要がある．連結結果はスタックに置く．
 %
-% \bibliography $B$G$O%T%j%*%I(B `.' $B$N8e$KM>J,$J6uGr$O$D$12C$($i$l$J$$$N$G!$(B
-% \sfcode`\.=1000 $B$,;XDj$5$l$F$$$k$N$G!$>JN,7A$N8e$G$bC1$J$k6uGr$G$h$$!%(B
+% \bibliography ではピリオド `.' の後に余分な空白はつけ加えられないので，
+% \sfcode`\.=1000 が指定されているので，省略形の後でも単なる空白でよい．
 %
 % tie.or.space.connect(str1,str2) ==
 %    BEGIN
@@ -1522,12 +1522,12 @@ FUNCTION {tie.or.space.connect}
   swap$ * *
 }
 
-% either.or.check $B4X?t$O$$$:$l$+0lJ}$7$+;H$($J$$%U%#!<%k%I$,N>J};H$o$l$F(B
-% $B$$$?>l9g$KJ86g$r$$$&!%(B
+% either.or.check 関数はいずれか一方しか使えないフィールドが両方使われて
+% いた場合に文句をいう．
 %
 % either.or.check(t,s) ==
 %  BEGIN
-%	if not empty$(s) then   --- $B%*%j%8%J%k$G$O(B not $B$,H4$1$F$$$?!J%P%0!K(B
+%	if not empty$(s) then   --- オリジナルでは not が抜けていた（バグ）
 %	    warning$(can't use both " * t * " fields in " * cite$)
 %	fi
 %  END
@@ -1539,14 +1539,14 @@ FUNCTION {either.or.check}
   if$
 }
 
-% format.bvolume $B4X?t$O(B volume, $B$=$7$F$*$=$i$/$OJ#?t4,$+$i$J$k%7%j!<%:$N(B
-% $B%7%j!<%:L>$r%U%)!<%^%C%H$9$k$?$a$K;H$o$l$k!%(Bvolume $B$H(B series $B$N%U%#!<%k%I$,(B
-% $BN>J}$"$k>l9g$K$O!$(Bseries $B$O%7%j!<%:$NI=Bj$G$"$k(B($B;2>H$7$F$$$k4,$NI=Bj$O(B title
-% $B$K=q$+$l$F$$$k!K$H2>Dj$7(B "of $B%7%j!<%:I=Bj(B" $B$rIU2C$9$k!%$3$N4X?t$OJ8$NESCf$G(B
-% $B8F$P$l$k!%(B
+% format.bvolume 関数は volume, そしておそらくは複数巻からなるシリーズの
+% シリーズ名をフォーマットするために使われる．volume と series のフィールドが
+% 両方ある場合には，series はシリーズの表題である(参照している巻の表題は title
+% に書かれている）と仮定し "of シリーズ表題" を付加する．この関数は文の途中で
+% 呼ばれる．
 %
-% $BF|K\8l$N%9%?%$%k$G$O!$(Bvolume $B$G$J$/!$(B Vol. $B$r;H$&!%%7%j!<%:L>(B, Vol. $B$N(B
-% $B7A<0$H$9$k!%(B
+% 日本語のスタイルでは，volume でなく， Vol. を使う．シリーズ名, Vol. の
+% 形式とする．
 
 FUNCTION {format.bvolume}
 { volume empty$
@@ -1554,7 +1554,7 @@ FUNCTION {format.bvolume}
     { volume is.kanji.str$
 	{ volume }
 	{ is.kanji.entry
-	    {"$BBh(B" volume * "$B4,(B" *}
+	    {"第" volume * "巻" *}
 	    {"Vol." volume tie.or.space.connect}
 	  if$
 	}
@@ -1565,7 +1565,7 @@ FUNCTION {format.bvolume}
 	    { volume empty$
 		{series swap$ * }
 #if    ZENKAKU_PUN
-		{series "$B!$(B" * swap$ * }
+		{series "，" * swap$ * }
 #else !ZENKAKU_PUN
 		{series ", " * swap$ * }
 #endif ZENKAKU_PUN
@@ -1580,16 +1580,16 @@ FUNCTION {format.bvolume}
   if$
 }
 
-% format.number.series $B4X?t$O%7%j!<%:L>(B, $B$=$7$F$*$=$i$/$O%7%j!<%:Cf$G$NHV9f$r(B
-% $B%U%)!<%^%C%H$9$k$?$a$K;H$o$l$k!%$3$l$O(B format.bvolume $B$K;w$F$$$k$,!$(B
-% $B$3$N4X?t$G$O(B series $B$OB8:_$7!$(Bvolume $B$O$"$C$F$O$J$i$J$$(B(volume $B$,$"$l$P(B
-% $B6uJ8;zNs$rJV$9(B)$B!%(Bnumber $B%U%#!<%k%I$,6u$G$"$l$P!$(Bseries $B$r$=$N$^$^=PNO$9$k(B
-% ($B6u$+$bCN$l$J$$(B)$B!%(Bseries $B$K$O%7%j!<%:$NI=Bj$,F~$C$F$$$k(B(title $B%U%#!<%k%I$K(B
-% $B;2>H$7$F$$$k$b$N$NI=Bj$,F~$C$F$$$k!K$H2>Dj$7$F!$(B"in <series>" $B$N7A$G=PNO$9$k!%(B
-% $B$3$N4X?t$OJ8$N@hF,$G;H$o$l$k$N$G!$(B Number $B$N:G=i$OBgJ8;z$G$"$k!%(B
+% format.number.series 関数はシリーズ名, そしておそらくはシリーズ中での番号を
+% フォーマットするために使われる．これは format.bvolume に似ているが，
+% この関数では series は存在し，volume はあってはならない(volume があれば
+% 空文字列を返す)．number フィールドが空であれば，series をそのまま出力する
+% (空かも知れない)．series にはシリーズの表題が入っている(title フィールドに
+% 参照しているものの表題が入っている）と仮定して，"in <series>" の形で出力する．
+% この関数は文の先頭で使われるので， Number の最初は大文字である．
 %
-% $BF|K\8l$N%7%j!<%:I=Bj$J$i!$(B<series>, <number> $B$N7A$K$J$k!%(B
-% $BF|K\8l$N%9%?%$%k$G$O(B number, Number $B$G$J$/!$(B No. $B$r;H$&$h$&$KJQ99$7$?!%(B
+% 日本語のシリーズ表題なら，<series>, <number> の形になる．
+% 日本語のスタイルでは number, Number でなく， No. を使うように変更した．
 
 FUNCTION {format.number.series}
 { volume empty$
@@ -1603,7 +1603,7 @@ FUNCTION {format.number.series}
 	    { "there's a number but no series in " cite$ * warning$ }
 	    { series is.kanji.str$
 #if    ZENKAKU_PUN
-	        { series "$B!$(B" * swap$ * }
+	        { series "，" * swap$ * }
 #else !ZENKAKU_PUN
 	        { series ", " * swap$ * }
 #endif ZENKAKU_PUN
@@ -1618,9 +1618,9 @@ FUNCTION {format.number.series}
   if$
 }
 
-% format.edition $B4X?t$O(B edition $B$,$"$l$P(B " edition " $BJ8;zNs$rIU2C$9$k!%(B
-% $B$3$l$OJ8$N@hF,$G;H$o$l$J$$$N$G!$(Bedition $B$O>.J8;z$KJQ49$9$k!%(B
-% $BF|K\8l$N(B edition $B$KBP$7$F$O(B " edition" $B$OIU2C$7$J$$!%(B
+% format.edition 関数は edition があれば " edition " 文字列を付加する．
+% これは文の先頭で使われないので，edition は小文字に変換する．
+% 日本語の edition に対しては " edition" は付加しない．
 
 FUNCTION {format.edition}
 { edition empty$
@@ -1628,7 +1628,7 @@ FUNCTION {format.edition}
     { edition is.kanji.str$
 	{ edition }
         { is.kanji.entry
-	    {"$BBh(B" edition * "$BHG(B" *}
+	    {"第" edition * "版" *}
 	    { output.state mid.sentence =
 	      { edition "l" change.case$ " edition" * }
 	      { edition "t" change.case$ " edition" * }
@@ -1641,14 +1641,14 @@ FUNCTION {format.edition}
   if$
 }
 
-% format.pages $B4X?t$OK\$N%Z!<%8HO0O$r%U%)!<%^%C%H$9$k!J4u$KO@J8(B/$B5-;v$N%Z!<%8(B
-% $BHO0O$N%U%)!<%^%C%H$K$b;H$o$l$k(B).
+% format.pages 関数は本のページ範囲をフォーマットする（希に論文/記事のページ
+% 範囲のフォーマットにも使われる).
 %
-% multi.page.check $B4X?t$O(B "page/p." $B$+(B "pages/pp. " $B$N$I$A$i$r;H$&$N$,E,@Z$+(B
-% $BH=CG$9$k$?$a$K(B page $B%U%#!<%k%I$K(B "-", ",", "+" $B$NJ8;z$,4^$^$l$F$$$k$+$I$&$+(B
-% $BD4$Y$k!%F|K\8lMQ$N%9%?%$%k$G$O(B page/pages $B$NBe$o$j$K(B p./pp. $B$r;H$C$F$$$k!%(B
+% multi.page.check 関数は "page/p." か "pages/pp. " のどちらを使うのが適切か
+% 判断するために page フィールドに "-", ",", "+" の文字が含まれているかどうか
+% 調べる．日本語用のスタイルでは page/pages の代わりに p./pp. を使っている．
 %
-% $BCm0U!'$3$3$G;H$C$F$$$k(B global.max$ $B$OJ8;zNs$N;D$jA4It$H$$$&0UL#$G;H$C$F$$$k!%(B
+% 注意：ここで使っている global.max$ は文字列の残り全部という意味で使っている．
 %
 % VAR: multiresult: INTEGER	(actually, a boolean)
 %
@@ -1688,8 +1688,8 @@ FUNCTION {multi.page.check}
   multiresult
 }
 
-% $BF|K\8l$N%9%?%$%k$G$O86B'$H$7$F(B page/pages $B$G$J$/(B p./pp. $B$r;H$&!%(B
-% $B>pJs=hM}3X2q1QJ8O@J8;o$G$O(B pp. $B$O>JN,$9$k!%(B
+% 日本語のスタイルでは原則として page/pages でなく p./pp. を使う．
+% 情報処理学会英文論文誌では pp. は省略する．
 
 FUNCTION {format.pages}
 { pages empty$
@@ -1707,16 +1707,16 @@ FUNCTION {format.pages}
   if$
 }
 
-% format.vol.num.pages $B4X?t$OO@J8;o!$;(;o$NO@J8!$5-;v$N(B volume, number,
-% $B%Z!<%8HO0O$r%U%)!<%^%C%H$9$k!%$=$N7A<0$O%9%?%$%k$G0[$J$k$N$G!$%3!<%I$r(B
-% $B;2>H$N$3$H!%(B
+% format.vol.num.pages 関数は論文誌，雑誌の論文，記事の volume, number,
+% ページ範囲をフォーマットする．その形式はスタイルで異なるので，コードを
+% 参照のこと．
 %
-% $B!!>pJs=hM}3X2q1QJ8O@J8;o$G$O(B volume, number (year), pages $B$N7A$GJB$Y$k(B
-% $B$^$?(B volume $B$O(B Vol.$B$rIU$1$:$K(B bold $B$G%?%$%W%;%C%H$9$k!%(B No. $B$bIU$1$J$$!%(B
-% $B!!EE;R>pJsDL?.3X2qO@J8;o$G$O(B volume $B$O(B Vol.$B$rIU$1$:$K(B bold $B$G%?%$%W%;%C%H$7!$(B
-% No. $B$bIU$1$J$$!%(B
-% $B!!F|K\%*%Z%l!<%7%g%s%:%j%5!<%A3X2qO@J8;o$G$O!$>pJs=hM}3X2q1QJ8O@J8;o$H(B
-% $BF1$8$h$&$J7A$G$"$k$,!$(Bvolume $B$r(B bold $B$G%?%$%W%;%C%H$;$:$K!$(B Vol. $B$r;H$&!%(B
+% 　情報処理学会英文論文誌では volume, number (year), pages の形で並べる
+% また volume は Vol.を付けずに bold でタイプセットする． No. も付けない．
+% 　電子情報通信学会論文誌では volume は Vol.を付けずに bold でタイプセットし，
+% No. も付けない．
+% 　日本オペレーションズリサーチ学会論文誌では，情報処理学会英文論文誌と
+% 同じような形であるが，volume を bold でタイプセットせずに， Vol. を使う．
 
 #ifdef JABBRV
 
@@ -1766,8 +1766,8 @@ FUNCTION {format.vol.num.year.pages}
   year empty$
     { "there's no year in " cite$ * warning$ }
 %
-% JORSJ $B$G$O(B book $B$NCg4V$OG/$r3g8L$KF~$l$J$$$N$G!$O@J8$J$I$O$3$3$GG/$K(B
-% $B3g8L$rIU$1$k(B
+% JORSJ では book の仲間は年を括弧に入れないので，論文などはここで年に
+% 括弧を付ける
 %
 #ifdef JORSJ
     { " (" year * ")" * *}
@@ -1796,12 +1796,12 @@ FUNCTION {format.vol.num.pages}
 #if    ZENKAKU_PUN
      { volume is.kanji.str$
 	{ is.kanji.entry
-	    {volume "$B!$(B" * }
+	    {volume "，" * }
 	    {volume ", " * }
 	  if$
 	}
 	{ is.kanji.entry
-	    {"Vol." volume tie.or.space.connect "$B!$(B" * }
+	    {"Vol." volume tie.or.space.connect "，" * }
 	    {"Vol." volume tie.or.space.connect ", " * }
 	  if$
 	}
@@ -1839,7 +1839,7 @@ FUNCTION {format.vol.num.pages}
 #if    ZENKAKU_PUN
   	    { format.pages * }
 	    { is.kanji.entry
- 		{ "$B!$(B" * format.pages * }
+ 		{ "，" * format.pages * }
  		{ ", " * format.pages * }
 	      if$
 	    }
@@ -1857,11 +1857,11 @@ FUNCTION {format.vol.num.pages}
 
 #endif JABBRV
 
-% format.chapter.pages $B4X?t$O(B chapter $B$,6u$G$J$1$l$P!$$=$NA0$K(B type $B%U%#!<%k%I(B
-% $B$NJ8;zNs!J$=$l$,6u$J$i(B "chapter"$B$r(B)$BIU2C$9$k!%(Bpages $B$,$"$l$P$=$l$r8e$m$K(B
-% $B2C$($k!%?7$?$JJ8$r3+;O$7$?$j$7$J$$!%(B
+% format.chapter.pages 関数は chapter が空でなければ，その前に type フィールド
+% の文字列（それが空なら "chapter"を)付加する．pages があればそれを後ろに
+% 加える．新たな文を開始したりしない．
 %
-% chapter $B$,F|K\8lJ8;zNs$N>l9g$K$O(B "chapter" $B$OIU2C$7$J$$!%(B
+% chapter が日本語文字列の場合には "chapter" は付加しない．
 
 FUNCTION {format.chapter.pages}
 { chapter empty$
@@ -1870,7 +1870,7 @@ FUNCTION {format.chapter.pages}
 	{ chapter is.kanji.str$
 	    { "" }
 	    { is.kanji.entry
-		{"$B>O(B"}
+		{"章"}
 		{"chapter"}
 	      if$
 	    }
@@ -1879,7 +1879,7 @@ FUNCTION {format.chapter.pages}
 	{ type "l" change.case$ }
       if$
       chapter is.kanji.str$ not is.kanji.entry and
-          {"$BBh(B" chapter * swap$ *}
+          {"第" chapter * swap$ *}
           { chapter is.kanji.str$
 		{chapter *}
 		{chapter tie.or.space.connect}
@@ -1890,7 +1890,7 @@ FUNCTION {format.chapter.pages}
 	'skip$
 #if    ZENKAKU_PUN
 	{ is.kanji.entry
-	    { "$B!$(B" * format.pages * }
+	    { "，" * format.pages * }
 	    { ", " * format.pages * }
 	  if$
 	}
@@ -1902,13 +1902,13 @@ FUNCTION {format.chapter.pages}
   if$
 }
 
-% format.in.ed.booktitle $B4X?t$O!$(Beditor $B%U%#!<%k%I$,$"$l$P$=$l$rI=Bj$NA0$K(B
-% $BCV$$$F!$(B"In <booktitle>" $B$N7A$G;O$^$kJ8$r3+;O$9$k$?$a$K;H$o$l$k!%(B
+% format.in.ed.booktitle 関数は，editor フィールドがあればそれを表題の前に
+% 置いて，"In <booktitle>" の形で始まる文を開始するために使われる．
 %
-% $B>pJs=hM}3X2q1QJ8O@J8;o!$EE;R>pJsDL?.3X2qO@J8;o$J$I$G$O(B ED_IN_PAR $B$r(B 1 $B$K(B
-% $B$7$F$*$/$3$H$G!$JT=8<TL>$O3g8L$KF~$l$k(B
-% $BK\$N%?%$%H%k$,F|K\8l$J$i(B In$B!!$OIU$1$J$$!##1J87A<0$G%U%)!<%^%C%H$9$k>l9g$J$I$K(B
-% In... $B$G$J$/(B in ... $B$N7A<0$H$9$k$K$O!$(BIN_LOWER $B$r(B 1 $B$K$7$F$*$/!%(B
+% 情報処理学会英文論文誌，電子情報通信学会論文誌などでは ED_IN_PAR を 1 に
+% しておくことで，編集者名は括弧に入れる
+% 本のタイトルが日本語なら In　は付けない。１文形式でフォーマットする場合などに
+% In... でなく in ... の形式とするには，IN_LOWER を 1 にしておく．
 
 #if    ED_IN_PAR
 FUNCTION {format.in.ed.booktitle}
@@ -1937,7 +1937,7 @@ FUNCTION {format.in.ed.booktitle}
  	}
  	{ booktitle is.kanji.str$
 #if    ZENKAKU_PUN
- 	    { " " format.editors * "$B!$(B" * booktitle * }
+ 	    { " " format.editors * "，" * booktitle * }
 #else !ZENKAKU_PUN
  	    { " " format.editors * ", " * booktitle * }
 #endif ZENKAKU_PUN
@@ -1954,9 +1954,9 @@ FUNCTION {format.in.ed.booktitle}
 }
 #endif ED_IN_PAR
 
-% empty.misc.check $B4X?t$O%=!<%H$5$l$k;~!$J8;zNs%i%Y%k;H$&;~$K(B key $B%U%#!<%k%I$,(B
-% $B6u$G$J$$$N$K!$#6$D$N%U%#!<%k%I$,A4It6u$J$iJ86g$r$$$&!%%=!<%H$5$l$J$$!$(B
-% $B?tCM%i%Y%k$N;~$K$O#6$D$N%U%#!<%k%I$,A4It6u$J$iJ86g$r$$$&!%(B
+% empty.misc.check 関数はソートされる時，文字列ラベル使う時に key フィールドが
+% 空でないのに，６つのフィールドが全部空なら文句をいう．ソートされない，
+% 数値ラベルの時には６つのフィールドが全部空なら文句をいう．
 
 FUNCTION {empty.misc.check}
 { author empty$ title empty$ howpublished empty$
@@ -1974,9 +1974,9 @@ FUNCTION {empty.misc.check}
   if$
 }
 
-% format.thesis.type $B4X?t$O(B type $B%U%#!<%k%I$,6u$G$J$1$l$P(B($BBgJ8;z!$>.J8;zJQ49(B
-% $B$7$?(B) type $B%U%#!<%k%I$NCM$r!$$=$&$G$J$1$l$P4{$K%9%?%C%/$K@Q$^$l$F$$$k(B
-% ("Master's thesis" $B$d(B "PhD thesis"$B$J$I$N(B)$BJ8;zNs$rJV$9!%(B
+% format.thesis.type 関数は type フィールドが空でなければ(大文字，小文字変換
+% した) type フィールドの値を，そうでなければ既にスタックに積まれている
+% ("Master's thesis" や "PhD thesis"などの)文字列を返す．
 
 FUNCTION {format.thesis.type}
 { type empty$
@@ -1987,9 +1987,9 @@ FUNCTION {format.thesis.type}
   if$
 }
 
-% format.tr.number $B4X?t$O(B type $B$,6u$G$J$1$l$P$=$NCM$G!$6u$J$i(B "Technical Report"
-% $B$G;O$^$j!$(Bnumber $B$,$"$l$P$=$l$,8e$KB3$/J8;zNs$rJV$9!%(B number $B$,$J$1$l$P(B
-% $B@hF,$rBgJ8;z$K$7$?A0=R$NJ8;zNs$rJV$9!%J8$N@hF,$G;H$o$l$k!%(B
+% format.tr.number 関数は type が空でなければその値で，空なら "Technical Report"
+% で始まり，number があればそれが後に続く文字列を返す． number がなければ
+% 先頭を大文字にした前述の文字列を返す．文の先頭で使われる．
 
 FUNCTION {format.tr.number}
 { type empty$
@@ -2002,23 +2002,23 @@ FUNCTION {format.tr.number}
   if$
 }
 
-% $B$5$FJ88%%j%9%HFb;2>HMQ$N4X?t$N@bL@$G$"$k!%$3$l$i$N4X?t$OJ88%%G!<%?%Y!<%9(B
-% $BCf$N%(%s%H%j$G!$B>$N%(%s%H%j$N%G!<%?%Y!<%9%-!<$,(B crossref $B%U%#!<%k%I$K(B
-% $B=q$+$l$F$$$k;~$K!$5/F0$5$l$k!%$3$N5!G=$K$h$C$FO@J8=8$J$I$NCf$NO@J8$+$i(B
-% $BO@J8=8$J$I$r;2>H$9$k$3$H$,$G$-$k!%$3$N%U%!%$%kCf$N%9%?%$%k$G$O0J2<$N(B
-% $B#5$D$N%1!<%9$,A[Dj$5$l$F$$$k!%(B
-% (1) ARTICLE $B$,B>$N(B ARTICLE $B$r;2>H$7$F$$$k(B;(2) BOOK, (3) INBOOK, $B$"$k$$$O(B
-% (4) INCOLLECTION $B$,B>$N(B BOOK $B$r;2>H$7$F$$$k(B;(5) INPROCEEDINGS $B$,(B PROCEEDINGS
-% $B$r;2>H$7$F$$$k!%$=$l$>$l$K$D$$$F8e$G>\$7$/@bL@$9$k!%(B
+% さて文献リスト内参照用の関数の説明である．これらの関数は文献データベース
+% 中のエントリで，他のエントリのデータベースキーが crossref フィールドに
+% 書かれている時に，起動される．この機能によって論文集などの中の論文から
+% 論文集などを参照することができる．このファイル中のスタイルでは以下の
+% ５つのケースが想定されている．
+% (1) ARTICLE が他の ARTICLE を参照している;(2) BOOK, (3) INBOOK, あるいは
+% (4) INCOLLECTION が他の BOOK を参照している;(5) INPROCEEDINGS が PROCEEDINGS
+% を参照している．それぞれについて後で詳しく説明する．
 %
-% ARTICLE $B%(%s%H%j%?%$%W$OB>$N(B ARTICLE $B%(%s%H%j$rJ88%%j%9%HFb;2>H$7$F$b$h$$!%(B
-% $B$3$l$OO@J8;o(B/$B;(;o$,$"$k#1$D$NOCBj$NFC=8$K$J$C$F$$$k;~$K!$(BJOURNAL $B%?%$%W$J$I(B
-% $B$H$$$&$b$N$O$J$$$+$i!$$3$l$rCx<T!$I=Bj$N$J$$(B ARTICLE $B$H$7$F07$o$J$1$l$P$J$i(B
-% $B$J$$$+$i$G$"$k!%$3$N;~$K$O$=$N(B journal $B$,;2>HJ88%%j%9%H$K4^$^$l$F$$$k>l9g$K!$(B
-% $B7Y9p%a%C%;!<%8$,(B2$B$D=P$5$l$k!%$G$b@$$NCf$J$s$F$7$g$;$s$3$s$J$b$N$5!%(B
+% ARTICLE エントリタイプは他の ARTICLE エントリを文献リスト内参照してもよい．
+% これは論文誌/雑誌がある１つの話題の特集になっている時に，JOURNAL タイプなど
+% というものはないから，これを著者，表題のない ARTICLE として扱わなければなら
+% ないからである．この時にはその journal が参照文献リストに含まれている場合に，
+% 警告メッセージが2つ出される．でも世の中なんてしょせんこんなものさ．
 %
-% "In" $B$G$J$/(B "in $B$K$9$k$H$+!$(B\em $B$rIU$1$J$$$h$&$K$9$k$H$+$G$-$k$h$&$K(B
-% $B%3!<%I$OJQ99$5$l$F$*$j!$I,$:$7$b0J2<$N%"%k%4%j%:%`$H0lCW$7$J$$!%(B
+% "In" でなく "in にするとか，\em を付けないようにするとかできるように
+% コードは変更されており，必ずしも以下のアルゴリズムと一致しない．
 %
 % format.article.crossref ==
 %  BEGIN
@@ -2036,7 +2036,7 @@ FUNCTION {format.tr.number}
 %	fi
 %  END
 %
-% $BB>$NJ88%%j%9%HFb;2>HMQ$N4X?t$bF1$8$h$&$J$b$N$J$N$G!$%3%a%s%H%P!<%8%g%s$O$J$$!%(B
+% 他の文献リスト内参照用の関数も同じようなものなので，コメントバージョンはない．
 
 FUNCTION {format.article.crossref}
 { key empty$
@@ -2073,10 +2073,10 @@ FUNCTION {format.article.crossref}
   " \cite{" * crossref * "}" *
 }
 
-% $BJ88%%j%9%HFb;2>H$5$l$F$$$k$b$N$NJT<TL>$H$7$F$O@+$N$_$r!$JT<T$N?M?t$K(B
-% $B1~$8$F!$(B"editor", "editor1 and editor2", "editor1 et~al." $B$N7A<0$GI=8=$9$k!%(B
+% 文献リスト内参照されているものの編者名としては姓のみを，編者の人数に
+% 応じて，"editor", "editor1 and editor2", "editor1 et~al." の形式で表現する．
 %
-% $BEE;R>pJsDL?.3X2qO@J8;o$G$O;2>H@h$NCx<TL>$b%U%k%M!<%`$G=PNO$9$k!%(B
+% 電子情報通信学会論文誌では参照先の著者名もフルネームで出力する．
 
 FUNCTION {format.crossref.editor}
 { editor is.kanji.str$
@@ -2100,9 +2100,9 @@ FUNCTION {format.crossref.editor}
   #2 >
     { editor is.kanji.str$
 #if    USE_KANJI_HOKA
-	  {pop$ "$BB>(B" *} {pop$ ", et~al." * } if$
+	  {pop$ "他" *} {pop$ ", et~al." * } if$
 #else !USE_KANJI_HOKA
-	  {pop$ "$B$[$+(B" *} {pop$ ", et~al." * } if$
+	  {pop$ "ほか" *} {pop$ ", et~al." * } if$
 #endif USE_KANJI_HOKA
     }
     { #2 <
@@ -2114,15 +2114,15 @@ FUNCTION {format.crossref.editor}
 #endif TIEICE
  	    { editor is.kanji.str$
 #if    USE_KANJI_HOKA
- 		{"$BB>(B" *} {", et~al." * } if$
+ 		{"他" *} {", et~al." * } if$
 #else !USE_KANJI_HOKA
- 		{"$B$[$+(B" *} {", et~al." * } if$
+ 		{"ほか" *} {", et~al." * } if$
 #endif USE_KANJI_HOKA
  	    }
  	    { editor is.kanji.str$
  		{
 #if    ZENKAKU_PUN
-		  "$B!$(B" *
+		  "，" *
 #else !ZENKAKU_PUN
 		  ", " *
 #endif ZENKAKU_PUN
@@ -2143,11 +2143,11 @@ FUNCTION {format.crossref.editor}
   if$
 }
 
-% BOOK (INBOOK) $B%(%s%H%j7?$G$O(B($BJ#?t4,$+$i$J$k$b$N$N0lIt$G$"$k$H$7$F(B)$BB>$N(B
-% BOOK($BJ#?t4,A4It(B) $B$rJ88%%j%9%HFb;2>H$7$F$b$h$$!%(B
-% $BIaDL$O(B editor $B$,$"$k$+$i!$$=$N;~$O;2>H>pJs$K$=$l$r;H$&!%$J$1$l$P(B key
-% $B%U%#!<%k%I$,6u$G$J$1$l$P(B key $B$r!$(Bkey $B$,6u$J$i(B($B%7%j!<%:$KJ#?t4,$NI=Bj$,F~$C$F(B
-% $B$$$k$O$:$@$+$i(B) series $B%U%#!<%k%I$r;H$&!%(B
+% BOOK (INBOOK) エントリ型では(複数巻からなるものの一部であるとして)他の
+% BOOK(複数巻全部) を文献リスト内参照してもよい．
+% 普通は editor があるから，その時は参照情報にそれを使う．なければ key
+% フィールドが空でなければ key を，key が空なら(シリーズに複数巻の表題が入って
+% いるはずだから) series フィールドを使う．
 
 FUNCTION {format.book.crossref}
 { volume empty$
@@ -2162,7 +2162,7 @@ FUNCTION {format.book.crossref}
     { volume is.kanji.str$
 	{ volume }
 	{ is.kanji.entry
-	    {"$BBh(B" volume * "$B4,(B" *}
+	    {"第" volume * "巻" *}
 	    {"Vol." volume tie.or.space.connect " of " *  }
 	  if$
 	}
@@ -2181,7 +2181,7 @@ FUNCTION {format.book.crossref}
 #if    NO_EM
 	    { series is.kanji.str$
 #if    ZENKAKU_PUN
-		{ series "$B!$(B" * swap$ * }
+		{ series "，" * swap$ * }
 #else !ZENKAKU_PUN
 		{ series ", " * swap$ * }
 #endif ZENKAKU_PUN
@@ -2191,7 +2191,7 @@ FUNCTION {format.book.crossref}
 #else !NO_EM
 	    { series is.kanji.str$
 #if    ZENKAKU_PUN
-		{ series "$B!$(B" * swap$ * }
+		{ series "，" * swap$ * }
 #else !ZENKAKU_PUN
 		{ series ", " * swap$ * }
 #endif ZENKAKU_PUN
@@ -2209,11 +2209,11 @@ FUNCTION {format.book.crossref}
   " \cite{" * crossref * "}" *
 }
 
-% INCOLLECTION $B%(%s%H%j7?$G$O(B BOOK ($BO@J8=8$G$"$k$H$7$F(B) $B$rJ88%%j%9%HFb;2>H$7$F(B
-% $B$b$h$$!$$"$k$$$O(B INPROCEEDINGS $B$O(B PROCEEDING $B$rJ88%%j%9%HFb;2>H$7$F$b$h$$!%(B
-% editor $B$,IaDL$O$"$k$+$i!$$=$l$r;2>H>pJs$H$7$F;H$&!%(Bkey $B%U%#!<%k%I$,6u$G$J$1(B
-% $B$l$P(B key $B$r!$(Bkey $B$,6u$J$i(B($B$=$3$K;2>H$7$F$$$k$b$N$NI=Bj$,F~$C$F$$$k$O$:$@$+$i(B)
-% booktitle $B%U%#!<%k%I$r;H$&!%(B
+% INCOLLECTION エントリ型では BOOK (論文集であるとして) を文献リスト内参照して
+% もよい，あるいは INPROCEEDINGS は PROCEEDING を文献リスト内参照してもよい．
+% editor が普通はあるから，それを参照情報として使う．key フィールドが空でなけ
+% れば key を，key が空なら(そこに参照しているものの表題が入っているはずだから)
+% booktitle フィールドを使う．
 
 FUNCTION {format.incoll.inproc.crossref}
 { editor empty$
@@ -2264,19 +2264,19 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
-% $B$3$3$+$i(B .BIB $B%U%!%$%kCf$K=q$+$l$k2DG=@-$N$"$k%(%s%H%j$N7?(B(ARTICLE $B$H$+(B
-% BOOK $B$H$+(B)$BKh$K!$4X?t$rDj5A$9$k!%$3$l$i$N4X?t$,(B .BBL $B%U%!%$%k$K=PNO$r9T$&!%(B
-% $B$3$l$i$N4X?t$NDj5A$O(B READ $B%3%^%s%I$h$jA0$K$J$1$l$P$J$i$J$$!%$5$i$K%9%?%$%k(B
-% $B@_7W<T$H$7$F$O!$L$Dj5A$N7?MQ$K(B default.type $B$H$$$&4X?t$bDj5A$9$kI,MW$,$"$k!%(B
-% $BCm0U(B: $B0J2<$G<($5$l$F$$$k%U%#!<%k%I$N=gHV$O(B(inbook, proceedings$B$GFC$K(B
-%       $BCG$C$F$J$$8B$j(B)$B!$=PNO$5$l$k=gHV$KJB$s$G$$$k!%(B
+% ここから .BIB ファイル中に書かれる可能性のあるエントリの型(ARTICLE とか
+% BOOK とか)毎に，関数を定義する．これらの関数が .BBL ファイルに出力を行う．
+% これらの関数の定義は READ コマンドより前になければならない．さらにスタイル
+% 設計者としては，未定義の型用に default.type という関数も定義する必要がある．
+% 注意: 以下で示されているフィールドの順番は(inbook, proceedingsで特に
+%       断ってない限り)，出力される順番に並んでいる．
 %
-% $B3X2q;o$N7A<0$K9g$o$;$F%3!<%I$,=$@5$5$l$F$$$k$N$G!$%"%k%4%j%:%`$H$OI,$:$7$b(B
-% $B0lCW$7$J$$!%(B
+% 学会誌の形式に合わせてコードが修正されているので，アルゴリズムとは必ずしも
+% 一致しない．
 %
-% article $B4X?t$O(B ARTICLE $BMQ$G$"$j!$B>$N(B ARTICLE $B$rJ88%%j%9%HFb;2>H$7$F$h$$!%(B
-%	$BI,?\(B: author, title, journal, year
-%	$BG$0U(B: volume, number, pages, month, note
+% article 関数は ARTICLE 用であり，他の ARTICLE を文献リスト内参照してよい．
+%	必須: author, title, journal, year
+%	任意: volume, number, pages, month, note
 %
 % article ==
 %  BEGIN
@@ -2298,10 +2298,10 @@ FUNCTION {format.incoll.inproc.crossref}
 %	fin.entry
 %  END
 %
-% book $B4X?t$OK\A4BN$N;2>HMQ!%(BBOOK $B$G$OB>$N(B BOOK $B$rJ88%%j%9%HFb;2>H$7$F$h$$!%(B
-%	$BI,?\(B: author or editor, title, publisher, year
-%	$BG$0U(B: volume or number, series, address, edition, month, note
-%             SHOW_BOOK_PAGES $B$,(B 1 $B$J$i!$(Bpages $B$bG$0U%U%#!<%k%I(B
+% book 関数は本全体の参照用．BOOK では他の BOOK を文献リスト内参照してよい．
+%	必須: author or editor, title, publisher, year
+%	任意: volume or number, series, address, edition, month, note
+%             SHOW_BOOK_PAGES が 1 なら，pages も任意フィールド
 %
 % book ==
 %  BEGIN
@@ -2334,8 +2334,8 @@ FUNCTION {format.incoll.inproc.crossref}
 %	fin.entry
 %  END
 %
-% $BB>$N%(%s%H%j4X?t$bF1$8$h$&$JJ*$J$N$G!$%3%a%s%H%P!<%8%g%s$O$J$$!%(B
-% $B>pJs=hM}3X2q1QJ8O@J8;o$G$O(B volume, number, year, pages $B$N=g$G=PNO$9$k!%(B
+% 他のエントリ関数も同じような物なので，コメントバージョンはない．
+% 情報処理学会英文論文誌では volume, number, year, pages の順で出力する．
 
 FUNCTION {article}
 { output.bibitem
@@ -2415,9 +2415,9 @@ FUNCTION {book}
   fin.entry
 }
 
-% booklet $B$O@=K\$5$l$F$O$$$k$,!$=PHG<R!$%9%]%s%5!<5!4XL>$N$J$$$b$N(B
-%	$BI,?\(B: title
-%	$BG$0U(B: author, howpublished, address, month, year, note
+% booklet は製本されてはいるが，出版社，スポンサー機関名のないもの
+%	必須: title
+%	任意: author, howpublished, address, month, year, note
 
 FUNCTION {booklet}
 { output.bibitem
@@ -2436,13 +2436,13 @@ FUNCTION {booklet}
   fin.entry
 }
 
-% conference $B%?%$%W$K$D$$$F$O(B inproceedings $B$r;2>H$;$h!%(B
+% conference タイプについては inproceedings を参照せよ．
 
-% inbook $B$OK\$N#1It(B($B>O!$@a(B and/or $B%Z!<%8HO0O(B)$B$r;2>H$9$k$?$a$N$b$N$G$"$j!$(B
-% BOOK $B$rJ88%%j%9%HFb;2>H$7$F$$$F$b$h$$!%(B volume $B%U%#!<%k%I$,$J$$>l9g$K$O!$(B
-% type $B%U%#!<%k%I$N>pJs$,(B number $B$d(B series $B$h$j$bA0$KJB$Y$i$l$k!%(B
-%	$BI,?\(B: author or editor, title, chapter and/or pages, publisher,year
-%	$BG$0U(B: volume or number, series, type, address, edition, month, note
+% inbook は本の１部(章，節 and/or ページ範囲)を参照するためのものであり，
+% BOOK を文献リスト内参照していてもよい． volume フィールドがない場合には，
+% type フィールドの情報が number や series よりも前に並べられる．
+%	必須: author or editor, title, chapter and/or pages, publisher,year
+%	任意: volume or number, series, type, address, edition, month, note
 
 FUNCTION {inbook}
 { output.bibitem
@@ -2494,11 +2494,11 @@ FUNCTION {inbook}
   fin.entry
 }
 
-% INCOLLECTION $B$O(B INBOOK $B$HF1$8$h$&$J$b$N$G$O$"$k$,!$;2>H$7$F$$$k$b$N$,(B
-% $B$=$l8GM-$NI=Bj$r;}$D$b$N$G$"$k(B($B$?$V$sA4BN$NJT<T$b$"$k(B)$B!%(B
-% INCOLLECTION $B$O(B BOOK $B$rJ88%%j%9%HFb;2>H$7$F$b$h$$!%(B 
-%	$BI,?\(B: author, title, booktitle, publisher, year
-%	$BG$0U(B: editor, volume or number, series, type, chapter, pages,
+% INCOLLECTION は INBOOK と同じようなものではあるが，参照しているものが
+% それ固有の表題を持つものである(たぶん全体の編者もある)．
+% INCOLLECTION は BOOK を文献リスト内参照してもよい． 
+%	必須: author, title, booktitle, publisher, year
+%	任意: editor, volume or number, series, type, chapter, pages,
 %			address, edition, month, note
 
 FUNCTION {incollection}
@@ -2544,11 +2544,11 @@ FUNCTION {incollection}
   fin.entry
 }
 
-% INPROCEEDINGS $B$O2q5D$NO@J8(B/$BM=9F=8$K:\$C$F$$$kO@J8$G!$O@J8(B/$BM=9F=8$rJ88%%j%9%H(B
-% $BFb;2>H$7$F$b$h$$!%(Baddress $B%U%#!<%k%I$,$J$1$l$P(B month (&year) $B$,(B note $B$ND>A0(B
-% $BCV$+$l$k!%(B
-%	$BI,?\(B: author, title, booktitle, year
-%	$BG$0U(B: editor, volume or number, series, pages, address, month,
+% INPROCEEDINGS は会議の論文/予稿集に載っている論文で，論文/予稿集を文献リスト
+% 内参照してもよい．address フィールドがなければ month (&year) が note の直前
+% 置かれる．
+%	必須: author, title, booktitle, year
+%	任意: editor, volume or number, series, pages, address, month,
 %	      organization, publisher, note
 
 FUNCTION {inproceedings}
@@ -2629,13 +2629,13 @@ FUNCTION {inproceedings}
   fin.entry
 }
 
-% conference $B4X?t$O(B Scribe $B$H$N8_49@-$N$?$a$K$"$k!%(B
+% conference 関数は Scribe との互換性のためにある．
 
 FUNCTION {conference} { inproceedings }
 
-% manual $B$O%^%K%e%"%k!%(B
-%	$BI,?\(B: title
-%	$BG$0U(B: author, organization, address, edition, month, year, note
+% manual はマニュアル．
+%	必須: title
+%	任意: author, organization, address, edition, month, year, note
 
 FUNCTION {manual}
 { output.bibitem
@@ -2674,9 +2674,9 @@ FUNCTION {manual}
   fin.entry
 }
 
-% mastersthesis $B$O=$;NO@J8(B
-%	$BI,?\(B: author, title, school, year
-%	$BG$0U(B: type, address, month, note
+% mastersthesis は修士論文
+%	必須: author, title, school, year
+%	任意: type, address, month, note
 
 FUNCTION {mastersthesis}
 { output.bibitem
@@ -2696,9 +2696,9 @@ FUNCTION {mastersthesis}
   fin.entry
 }
 
-% misc $B$OB>$N$I$l$K$b$"$F$O$^$i$J$$J*(B
-%	$BI,?\(B: $BG$0U%U%#!<%k%I$N>/$J$/$H$b#1$D(B
-%	$BG$0U(B: author, title, howpublished, month, year, note
+% misc は他のどれにもあてはまらない物
+%	必須: 任意フィールドの少なくとも１つ
+%	任意: author, title, howpublished, month, year, note
 
 FUNCTION {misc}
 { output.bibitem
@@ -2717,9 +2717,9 @@ FUNCTION {misc}
   empty.misc.check
 }
 
-% phdthesis($BGn;NO@J8(B) $B$O(B mastersthesis $B$N$h$&$JJ*!%(B
-%	$BI,?\(B: author, title, school, year
-%	$BG$0U(B: type, address, month, note
+% phdthesis(博士論文) は mastersthesis のような物．
+%	必須: author, title, school, year
+%	任意: type, address, month, note
 
 FUNCTION {phdthesis}
 { output.bibitem
@@ -2739,13 +2739,13 @@ FUNCTION {phdthesis}
   fin.entry
 }
 
-% proceedings $B$O2q5D$NO@J8(B/$BM=9F=8$G$"$k!%(B
-% organization $B%U%#!<%k%I$,$"$C$F!$(B editor $B%U%#!<%k%I$,$J$$;~$K$O!$(B
-% organization $B%U%#!<%k%I$,G$0U%U%#!<%k%I$N:G=i$N$b$N$H$7$F;H$o$l$k(B
-% ($B:G=i$N%V%m%C%/$r6u$K$O$7$J$$$h$&$K$9$k!K!%(B
-% address $B%U%#!<%k%I$,$J$1$l$P!$(Bmonth (& year) $B$,(B note $B$ND>A0$KJB$V!%(B
-%	$BI,?\(B: title, year
-%	$BG$0U(B: editor, volume or number, series, address, month,
+% proceedings は会議の論文/予稿集である．
+% organization フィールドがあって， editor フィールドがない時には，
+% organization フィールドが任意フィールドの最初のものとして使われる
+% (最初のブロックを空にはしないようにする）．
+% address フィールドがなければ，month (& year) が note の直前に並ぶ．
+%	必須: title, year
+%	任意: editor, volume or number, series, address, month,
 %	      organization, publisher, note
 
 FUNCTION {proceedings}
@@ -2793,9 +2793,9 @@ FUNCTION {proceedings}
   fin.entry
 }
 
-% techreport $B$O%F%/%K%+%k%l%]!<%H(B
-%	$BI,?\(B: author, title, institution, year
-%	$BG$0U(B: type, number, address, month, note
+% techreport はテクニカルレポート
+%	必須: author, title, institution, year
+%	任意: type, number, address, month, note
 
 FUNCTION {techreport}
 { output.bibitem
@@ -2815,9 +2815,9 @@ FUNCTION {techreport}
   fin.entry
 }
 
-% unpublished $B$O=PHG$5$l$F$$$J$$$b$N!%(B
-%	$BI,?\(B: author, title, note
-%	$BG$0U(B: month, year
+% unpublished は出版されていないもの．
+%	必須: author, title, note
+%	任意: month, year
 
 FUNCTION {unpublished}
 { output.bibitem
@@ -2830,14 +2830,14 @@ FUNCTION {unpublished}
   fin.entry
 }
 
-% $BJ,N`ITL@$N%(%s%H%j$KBP$7$F$O(B `misc' $B$r;H$&!%(B(J)BibTeX $B$O7Y9p$r=P$9!%(B
+% 分類不明のエントリに対しては `misc' を使う．(J)BibTeX は警告を出す．
 
 FUNCTION {default.type} { misc }
 
-% $B%9%?%$%k$G0[$J$k$+$bCN$l$J$$$,!$0lHLE*$J%^%/%m$,0J2<$KJB$s$G$$$k!%(B
-% $BMxMQ<T$O$3$l$i$N%^%/%m$r;H$&$N$,K>$^$7$$!%(B
+% スタイルで異なるかも知れないが，一般的なマクロが以下に並んでいる．
+% 利用者はこれらのマクロを使うのが望ましい．
 %
-% $B7n$NL>A0$O%U%k%9%Z%k$+>JN,7A$G=q$/!%(B
+% 月の名前はフルスペルか省略形で書く．
 
 #if MONTH_FULL
 
@@ -2893,10 +2893,10 @@ MACRO {dec} {"Dec."}
 
 #endif MONTH_FULL
 
-% $BO@J8;oL>$O%U%k%9%Z%k$+>JN,7A$GI=<($9$k!%>JN,7A$O(B ACM $B$N=PHGJ*$K$"$k7A!%(B
-% $B$3$l$H$^$C$?$/0c$&%;%C%H$N>JN,7A$r;H$&>l9g$K$O!$$=$NDj5A$N$_$+$i$J$k(B
-% .bib $B%U%!%$%k$r:n$k$N$,0lHV$$$$$@$m$&!%$=$&$9$l$PMxMQ<T$O(B \bibliography
-% $B%3%^%s%I$N#1HVL\$N0z?t$H$7$F$=$l$r;XDj$7$F!$$3$l$i$r<h$j9~$a$k!%(B
+% 論文誌名はフルスペルか省略形で表示する．省略形は ACM の出版物にある形．
+% これとまったく違うセットの省略形を使う場合には，その定義のみからなる
+% .bib ファイルを作るのが一番いいだろう．そうすれば利用者は \bibliography
+% コマンドの１番目の引数としてそれを指定して，これらを取り込める．
 
 #if JOUR_FULL
 
@@ -2941,8 +2941,8 @@ MACRO {toplas} {"ACM Transactions on Programming Languages and Systems"}
 
 MACRO {tcs} {"Theoretical Computer Science"}
 
-MACRO {tieice} {"$BEE;R>pJsDL?.3X2qO@J8;o(B"}
-MACRO {tipsj}  {"$B>pJs=hM}3X2qO@J8;o(B"}
+MACRO {tieice} {"電子情報通信学会論文誌"}
+MACRO {tipsj}  {"情報処理学会論文誌"}
 MACRO {jipsj}  {"Journal of Informatin Processing Society of Japan"}
 MACRO {jorsj}  {"Journal of the Operations Research Society of Japan"}
 
@@ -2989,19 +2989,19 @@ MACRO {toplas} {"ACM Trans. Prog. Lang. Syst."}
 
 MACRO {tcs} {"Theoretical Comput. Sci."}
 
-MACRO {tieice} {"$B?.3XO@(B"}
-MACRO {tipsj}  {"$B>pJs=hM}3X2qO@J8;o(B"}
+MACRO {tieice} {"信学論"}
+MACRO {tipsj}  {"情報処理学会論文誌"}
 MACRO {jipsj}  {"J.~Info. Proc. Soc. of Japan"}
 MACRO {jorsj}  {"Journal of the O. R. Society of Japan"}
 
 #endif JOUR_FULL
 
-% .BBL $B%U%!%$%k$N%(%s%H%j$rFI$_9~$`(B
+% .BBL ファイルのエントリを読み込む
 
 READ
 
-% $BFI$_9~$^$l$?J88%$N%G!<%?$,4A;z$N$b$N$+$I$&$+%A%'%C%/$7$F%U%i%0$r@_Dj$9$k!%(B
-% ASCII $BHG$N(B 0.98 $BMQ$N$b$N$r=$@5$7$?!%(B
+% 読み込まれた文献のデータが漢字のものかどうかチェックしてフラグを設定する．
+% ASCII 版の 0.98 用のものを修正した．
 
 FUNCTION {set.is.kanji.entry}
 {
@@ -3016,12 +3016,12 @@ FUNCTION {set.is.kanji.entry}
 
 ITERATE {set.is.kanji.entry}
 
-% sortify $B4XAG$O0z?t$r(B purify$ $B$7$?8e$K>.J8;z$KJQ49$9$k!%%=!<%H$N$?$a!$(B
-% $B$"$k$$$O%=!<%H8e$K%i%Y%k$r:n$k;~$K;H$o$l$k!%(B
+% sortify 関素は引数を purify$ した後に小文字に変換する．ソートのため，
+% あるいはソート後にラベルを作る時に使われる．
 %
-% chop.word(w,len,s) $B$O(B s $B$=$N$b$N$+!$$"$k$$$O(B s $B$N:G=i$N(B len $BJ8;z$,(B w $B$H(B
-% $BEy$7$1$l$P(B($B$3$NHf3S$O4X?t$NDj5A$N(B3$B9TL\$G9T$o$l$k(B w $B$h$j8e$m$N(B s $B$N(B
-% $BItJ,J8;zNs$rJV$9(B
+% chop.word(w,len,s) は s そのものか，あるいは s の最初の len 文字が w と
+% 等しければ(この比較は関数の定義の3行目で行われる w より後ろの s の
+% 部分文字列を返す
 
 #if SORTED
 
@@ -3044,8 +3044,8 @@ FUNCTION {chop.word}
 #else !SORTED
 #if LAB_ALPH
 
-% $B%=!<%H$5$l$J$$J8;zNs%i%Y%k$D$-J88%%j%9%HMQ$N(B chop.word
-% $B$3$s$J$NC/$,;H$&$N!)(B
+% ソートされない文字列ラベルつき文献リスト用の chop.word
+% こんなの誰が使うの？
 
 INTEGERS { len }
 
@@ -3061,23 +3061,23 @@ FUNCTION {chop.word}
 #endif LAB_ALPH
 #endif SORTED
 
-% $B0J2<$ND9$$%3%a%s%H$OJ8;zNs%i%Y%k$N>l9g$N$_$K$"$F$O$^$k!%(B
+% 以下の長いコメントは文字列ラベルの場合のみにあてはまる．
 %
-% format.lab.names $B4X?t$OL>A0$N(B von $B$H(B last $B%Q!<%H$NF,J8;z$r;H$C$FC;$$%i%Y%k(B
-% $B$r:n$k(B($BL>A0$N?t$,#40J>e$N>l9g$K$O#3$D$G@Z$j!$(B"+" $B$r8*IU$-$G2C$($k!%L>A0$,(B
-% $BJ#?t$"$j!$:G8e$,(B "others" $B$G$"$k>l9g$bF1MM$K(B "+" $B$rIU$1$k!K!%(B
-% $BL>A0$,#1$D$7$+$J$/!$(Bvon $B$H(B last $B%Q!<%H$+$i$J$kL>A0%H!<%/%s$,#1$D$7$+$J$$$H!$(B
-% ("Knuth" $B$O#1$D!$(B"Brinch Hansen"$B$O#2$D(B) $B@+(B(last name)$B$NF,#3J8;z$+$i%i%Y%k$r(B
-% $B:n$k!%(Bet.al.char.used $B$OI,MW$K1~$8$F(B LaTeX $B%^%/%m$r=q$-=P$9$?$a$K!$(B"+" $B$,(B
-% $B;H$o$l$?$+$I$&$+$rJ];}$9$kO@M}7?$NJQ?t$G$"$k!%(B
+% format.lab.names 関数は名前の von と last パートの頭文字を使って短いラベル
+% を作る(名前の数が４以上の場合には３つで切り，"+" を肩付きで加える．名前が
+% 複数あり，最後が "others" である場合も同様に "+" を付ける）．
+% 名前が１つしかなく，von と last パートからなる名前トークンが１つしかないと，
+% ("Knuth" は１つ，"Brinch Hansen"は２つ) 姓(last name)の頭３文字からラベルを
+% 作る．et.al.char.used は必要に応じて LaTeX マクロを書き出すために，"+" が
+% 使われたかどうかを保持する論理型の変数である．
 % 
-% $B4A;zCx<TL>$N>l9g$K$O(B yomi $B%U%#!<%k%I$N>pJs$r;H$C$F>e$HF1MM$K%i%Y%k$r:n$k!%(B
-% yomi $B%U%#!<%k%I$,$J$1$l$P!$Bh0lCx<T$N@+$N$_$+$i%i%Y%k$r:n$k!%(B
+% 漢字著者名の場合には yomi フィールドの情報を使って上と同様にラベルを作る．
+% yomi フィールドがなければ，第一著者の姓のみからラベルを作る．
 %
 % format.lab.names(s) ==
 %  BEGIN
 %    if not empty$(yomi) then s := yomi fi
-%    if is.kanji.str$(s) then return $BBh0lCx<T$N@+(B fi
+%    if is.kanji.str$(s) then return 第一著者の姓 fi
 %    else do
 %	numnames := num.names$(s)
 %	if numnames > 1 then
@@ -3113,37 +3113,37 @@ FUNCTION {chop.word}
 %    od
 %  END
 %
-% $B%i%Y%k$N<gMWItJ,$r:n$k;~$K$I$N%U%#!<%k%I$KCmL\$9$k$+$O%(%s%H%j$N7?$G0[$J$k!%(B
-% $B$3$l$K$h$C$F!$$I$N7?$G$bF1$8>pJs$r;H$&(B($BNc$($P(B author, editor, key $B$N=g$K;H$&(B)
-% $B>l9g$KHf$Y$F!$(BLaTeX book $B$G=R$Y$i$l$F$$$k!VL5;k$5$l$k!W%U%#!<%k%I$,K\Ev$K(B
-% $B!VL5;k$G$-$k!W$h$&$K$J$C$F$$$k!%(BMISC $B$NH=Dj$O(B calc.label $B4X?tCf$N(B if $B$N(B
-%  $B:G8e$N(B else $BIt$KCV$+$l$F$$$k$+$i!$%G!<%?%Y!<%9Cf$N@5$7$/$J$$%(%s%H%j7?$G$b(B
-% $B$A$c$s$H=hM}$G$-$k$h$&$K$J$C$F$$$k!%(B
+% ラベルの主要部分を作る時にどのフィールドに注目するかはエントリの型で異なる．
+% これによって，どの型でも同じ情報を使う(例えば author, editor, key の順に使う)
+% 場合に比べて，LaTeX book で述べられている「無視される」フィールドが本当に
+% 「無視できる」ようになっている．MISC の判定は calc.label 関数中の if の
+%  最後の else 部に置かれているから，データベース中の正しくないエントリ型でも
+% ちゃんと処理できるようになっている．
 %
-% $B%U%#!<%k%I$r8+$F$$$/=gHV$O#4$D$"$k$,!$$=$l$>$l$KBP1~$7$?Jd=u4X?t$,MQ0U$5$l$F(B
-% $B$$$k!%:G=i$N4X?t$O@h$:(B author $B%U%#!<%k%I$rD4$Y!$I,MW$J>l9g$K$O(B key $B%U%#!<%k%I(B
-% $B$rD4$Y$k!%B>$N#3$D$NJd=u4X?t$bF1$8$h$&$J$b$N$G$"$k$,!$:G=i$K#2$D$N%U%#!<%k%I(B
-% $B$rD4$Y!$$=$N8e$K(B key $B%U%#!<%k%I$rD4$Y$k$h$&$K$J$C$F$$$?$j!$(Bkey $B%U%#!<%k%I(B
-% $B$r(B organization $B%U%#!<%k%I$h$j@h$KD4$Y$k$h$&$J7A$K$J$C$F$$$k$N$b$"$k!%(B
-% (key $B$,@h$J$N$O%i%Y%k$KBP$7$F$NOC$G!$%=!<%HMQ$N%i%Y%k$G$O$J$$$3$H$KCm0U!K!%(B
+% フィールドを見ていく順番は４つあるが，それぞれに対応した補助関数が用意されて
+% いる．最初の関数は先ず author フィールドを調べ，必要な場合には key フィールド
+% を調べる．他の３つの補助関数も同じようなものであるが，最初に２つのフィールド
+% を調べ，その後に key フィールドを調べるようになっていたり，key フィールド
+% を organization フィールドより先に調べるような形になっているのもある．
+% (key が先なのはラベルに対しての話で，ソート用のラベルではないことに注意）．
 %
-% calc.label $B4X?t$O0J2<$N$h$&$K$7$F%(%s%H%j$NM=HwE*$J%i%Y%k$r:n$k!%(B
-% ($B$I$N%U%#!<%k%I$,6u$+$K$h$k$,!$$^$?(B organization $BCf$N(B "The"$B$OL5;k$9$k$,(B)
-% author $B$"$k$$$O(B editor $B$"$k$$$O(B organization $B$+$i#3J8;z<h$j=P$7(B($B$3$l$i$,(B
-% $B4A;z$N>l9g$K$O!$(Byomi $B%U%#!<%k%I$,6u$G$J$1$l$P(B yomi $B%U%#!<%k%I$r(B author,
-% editor, organization $B$NBe$o$j$K;H$C$F#3J8;z<h$j=P$7!$6u$J$i$P#24A;z<h$j=P$7(B)
-% $B$F:n$C$?$b$N$N8e$m$K(B year $B$N:G8e$N#2J8;z$rIU$12C$($k!%I,MW$J(B author, editor,
-% organization, key $B$,$J$1$l$P%(%i!<$G$"$k$,!$$=$N>l9g$K$O(B citt$ $B$N:G=i$N(B
-% $B#3J8;z$r;H$&!%(B 
+% calc.label 関数は以下のようにしてエントリの予備的なラベルを作る．
+% (どのフィールドが空かによるが，また organization 中の "The"は無視するが)
+% author あるいは editor あるいは organization から３文字取り出し(これらが
+% 漢字の場合には，yomi フィールドが空でなければ yomi フィールドを author,
+% editor, organization の代わりに使って３文字取り出し，空ならば２漢字取り出し)
+% て作ったものの後ろに year の最後の２文字を付け加える．必要な author, editor,
+% organization, key がなければエラーであるが，その場合には citt$ の最初の
+% ３文字を使う． 
 %
-% $BF@$i$l$k%i%Y%k$N(B year $BItJ,$K$O(B purify$ $B$,E,MQ$5$l$F$$$k$,!$(B name $BItJ,$K$O(B
-% purify$ $B$OE,MQ$5$l$F$$$J$$!%(B(year $B$KBP$7$F(Bpurify$ $B$rE,MQ$9$k$N$G!$$3$l$rMxMQ(B
-% $B$7$FMxMQ<T$O%=!<%H4X?t$r$@$^$7$F!$=gHV$r<+J,$NET9g$NNI$$$h$&$K$G$-$k!K!%(B
+% 得られるラベルの year 部分には purify$ が適用されているが， name 部分には
+% purify$ は適用されていない．(year に対してpurify$ を適用するので，これを利用
+% して利用者はソート関数をだまして，順番を自分の都合の良いようにできる）．
 %
-% $B$3$l$i$N4X?t$G$O%=!<%H$G;H$&%i%Y%k$b:n@.$9$k!%(B
+% これらの関数ではソートで使うラベルも作成する．
 %
-% $B:G=*E*$J%i%Y%k$K$O6hJL$N$?$a$K(B 'a', 'b' $B$J$I$r8e$m$K$D$1$kI,MW$b$"$k$,!$(B
-% $B$3$N(B extra.label $B$O%=!<%H$7$?8e$G:n$k!%(B
+% 最終的なラベルには区別のために 'a', 'b' などを後ろにつける必要もあるが，
+% この extra.label はソートした後で作る．
 %
 % calc.label ==
 %  BEGIN
@@ -3173,30 +3173,30 @@ EXECUTE {initialize.et.al.char.used}
 
 FUNCTION {format.lab.names}
 { 's :=
-% yomi $B%U%#!<%k%I$,6u$G$J$1$l$P$=$l$r;H$&(B
+% yomi フィールドが空でなければそれを使う
   yomi empty$
      'skip$
      { yomi 's :=}
   if$
 #if   USE_FIRST_ONLY
 %
-% $BF|K\8lJ8;zNs$N>l9g$K$O!$Bh0lCx<T$N@+$N$_$H$9$k(B
+% 日本語文字列の場合には，第一著者の姓のみとする
 %
   s  is.kanji.str$
     { s #1 "{ff}" format.name$ #4 text.prefix$ duplicate$ empty$
 	{ pop$ s #1 "{ll}" format.name$ #4 text.prefix$
-	  s #1 "{ll}" format.name$ " $B$K$O!$@+$HL>$N4V$K6uGr$,$J$$$h!)(B in " *
+	  s #1 "{ll}" format.name$ " には，姓と名の間に空白がないよ？ in " *
              cite$ * warning$
         }
 	'skip$
      if$
     }
-% $BF|K\8lJ8;zNs$G$J$$>l9g$N=hM}(B
+% 日本語文字列でない場合の処理
     { s #1 "{ll}" format.name$ #3 text.prefix$ }
   if$
 #else !USE_FIRST_ONLY
 %
-% $BF|K\8lJ8;zNs$N>l9g$K$O!$Bh0lCx<T$N@+$N$_$H$9$k(B
+% 日本語文字列の場合には，第一著者の姓のみとする
 %
   s  is.kanji.str$
     { s #1 "{ff}" format.name$ #4 text.prefix$ duplicate$ empty$
@@ -3204,7 +3204,7 @@ FUNCTION {format.lab.names}
 	'skip$
      if$
     }
-% $BF|K\8lJ8;zNs$G$J$$>l9g$N=hM}(B
+% 日本語文字列でない場合の処理
     {
       s num.names$ 'numnames :=
       numnames #1 >
@@ -3254,7 +3254,7 @@ FUNCTION {author.key.label}
     { key empty$
 #if SORTED
 	{ cite$ #1 #3 substring$ }
-#else !SORTED		% $B8e$G$O7Y9p$r=P$5$J$$$+$i$3$3$G=P$7$F$*$/(B
+#else !SORTED		% 後では警告を出さないからここで出しておく
 	{ "for label, need author or key in " cite$ * warning$
 	  cite$ #1 #3 substring$
 	}
@@ -3272,7 +3272,7 @@ FUNCTION {author.editor.key.label}
 	{ key empty$
 #if SORTED
 	    { cite$ #1 #3 substring$ }
-#else !SORTED		% $B8e$G$O7Y9p$r=P$5$J$$$+$i$3$3$G=P$7$F$*$/(B
+#else !SORTED		% 後では警告を出さないからここで出しておく
 	    { "for label, need author, editor, or key in " cite$ * warning$
 	      cite #1 #3 substring$
 	    }
@@ -3293,7 +3293,7 @@ FUNCTION {author.key.organization.label}
 	{ organization empty$
 #if SORTED
 	    { cite$ #1 #3 substring$ }
-#else !SORTED		% $B8e$G$O7Y9p$r=P$5$J$$$+$i$3$3$G=P$7$F$*$/(B
+#else !SORTED		% 後では警告を出さないからここで出しておく
 	    { "for label, need author, key, or organization in " cite$ *
 								warning$
 	      cite #1 #3 substring$
@@ -3315,7 +3315,7 @@ FUNCTION {editor.key.organization.label}
 	{ organization empty$
 #if SORTED
 	    { cite$ #1 #3 substring$ }
-#else !SORTED		% $B8e$G$O7Y9p$r=P$5$J$$$+$i$3$3$G=P$7$F$*$/(B
+#else !SORTED		% 後では警告を出さないからここで出しておく
 	    { "for label, need editor, key, or organization in " cite$ *
 								warning$
 	      cite #1 #3 substring$
@@ -3355,8 +3355,8 @@ FUNCTION {calc.label}
   sortify 'sort.label :=
 }
 
-% $BJ8;zNs%i%Y%k$r;H$&>l9g$K!$0zMQ=g$KJB$Y$k$N$ONI$$$H$O;W$($J$$$,!$(B
-% $B$=$N>l9g$K$O!$$A$g$C$HJL$N$d$jJ}$G%i%Y%k$r:n$i$J$/$F$O$J$i$J$$!%(B
+% 文字列ラベルを使う場合に，引用順に並べるのは良いとは思えないが，
+% その場合には，ちょっと別のやり方でラベルを作らなくてはならない．
 
 #if !SORTED
 
@@ -3366,24 +3366,24 @@ ITERATE {calc.label}
 
 #endif LAB_ALPH
 
-% $B%=!<%F%#%s%0$G$O(B presort $B$r3F!9$N%(%s%H%j$KBP$7$F<B9T$9$k$3$H$G(B sortkey
-% $B$r5a$a$k!%(Bpresort $B%-!<$K$OJ#?t$N%V%i%s%/$G6h@Z$i$l$?(B sortify $B$5$l$?(B
-% $B$$$/$D$+$NJ8;zNs$,4^$^$l$k!%$3$l$K$h$C$F(B "brinch  per" $B$NJ}$,(B
-% "brinch hansen  per" $B$h$jA0$K$J$k!%(B
+% ソーティングでは presort を各々のエントリに対して実行することで sortkey
+% を求める．presort キーには複数のブランクで区切られた sortify された
+% いくつかの文字列が含まれる．これによって "brinch  per" の方が
+% "brinch hansen  per" より前になる．
 %
-% $B$3$3$G;H$o$l$F$$$k%U%#!<%k%I72$O0J2<$NDL$j!%J8;zNs%i%Y%k$N>l9g$K$O(B
-% (calc.label $B$G5a$a$?(B) sort.label, $BB3$$$F%(%s%H%j$N7?$"$k$$$O2?$,7g$1$F$$$k$+(B
-% $B$G0[$J$k$,!$Cx<TL>(B($BJT<T!$@hF,$N(B "The" $B$r=|$$$?5!4XL>$N$3$H$b$"$k(B)$B$^$?$O(B
-% key $B%U%#!<%k%I!$<!$,G/!$$=$7$F(B($B@hF,$N(B "The ", "A ", or "An " $B$r=|$$$?(B)
-% $BI=Bj$N0lItJ,$G$"$k!%(B.
-% $BL>A0$O(B Von Last First Junior $B$N$h$&$K%U%)!<%^%C%H$5$l$k!%(B
-% $BL>A0$NCGJR$O(B("brinch hansen")$B$N$h$&$K#1$D$N6uGr$G6h@Z$i$l!$L>A0$N9=@.MWAG$O(B
-% (von $B$H@+$NItJ,$r=|$$$F(B)$B#2$D$N6uGr$G6h@Z$i$l!$J#?t$NL>A0$N4V$K$O#3$D$N6uGr(B
-% $B$,A^F~$5$l!$L>A0$HG/(B($BJ8;zNs%i%Y%k$N>l9g$K$O%i%Y%k$HL>A0!K$N4V$K$O(B
-% $B#4$D$N6uGr$,A^F~$5$l!$$^$?G/$HI=Bj$N4V$K$b#4$D$N6uGr$,A^F~$5$l$k!%(B
+% ここで使われているフィールド群は以下の通り．文字列ラベルの場合には
+% (calc.label で求めた) sort.label, 続いてエントリの型あるいは何が欠けているか
+% で異なるが，著者名(編者，先頭の "The" を除いた機関名のこともある)または
+% key フィールド，次が年，そして(先頭の "The ", "A ", or "An " を除いた)
+% 表題の一部分である．.
+% 名前は Von Last First Junior のようにフォーマットされる．
+% 名前の断片は("brinch hansen")のように１つの空白で区切られ，名前の構成要素は
+% (von と姓の部分を除いて)２つの空白で区切られ，複数の名前の間には３つの空白
+% が挿入され，名前と年(文字列ラベルの場合にはラベルと名前）の間には
+% ４つの空白が挿入され，また年と表題の間にも４つの空白が挿入される．
 %
-% sort.format.names $B4X?t$O(B (J)BibTeX $B$NL>A07A<0$G=q$+$l$?0z?t$r$H$j!$(B
-% $B>e=R$N7A<0$N(B "  " $B$G6h@Z$i$l$?J8;zNs$rJV$9!%(B format.names$B$H$[$H$s$IF1$8!%(B
+% sort.format.names 関数は (J)BibTeX の名前形式で書かれた引数をとり，
+% 上述の形式の "  " で区切られた文字列を返す． format.namesとほとんど同じ．
 %
 %
 #if SORTED
@@ -3391,7 +3391,7 @@ ITERATE {calc.label}
 FUNCTION {sort.format.names}
 { 's :=
 %
-% yomi $B%U%#!<%k%I$,6u$G$J$1$l$P$=$l$r;H$&(B
+% yomi フィールドが空でなければそれを使う
 %
   yomi empty$
      'skip$
@@ -3414,9 +3414,9 @@ FUNCTION {sort.format.names}
       nameptr numnames = t "others" = and
  	{ s is.kanji.str$
 #if    USE_KANJI_HOKA
- 		{"$BB>(B" * }
+ 		{"他" * }
 #else !USE_KANJI_HOKA
- 		{"$B$[$+(B" * }
+ 		{"ほか" * }
 #endif USE_KANJI_HOKA
  		{"et~al." *}
 	  if$
@@ -3429,9 +3429,9 @@ FUNCTION {sort.format.names}
   while$
 }
 
-% sort.format.title $B$O0z?t$+$i@hF,$N(B "A ", "An ", "The " $B$r<h$j=|$$$?(B
-% $BJ8;zNs$rJV$9!%(B
-% chop.word $B$,JQ?t(B s $B$r;H$C$F$$$k$N$G!$JL$NJ8;zNsJQ?t(B t $B$r;H$&!%(B
+% sort.format.title は引数から先頭の "A ", "An ", "The " を取り除いた
+% 文字列を返す．
+% chop.word が変数 s を使っているので，別の文字列変数 t を使う．
 
 FUNCTION {sort.format.title}
 { 't :=
@@ -3444,10 +3444,10 @@ FUNCTION {sort.format.title}
   #1 global.max$ substring$
 }
 
-% $B$3$3$N%=!<%H$NA0=hM}MQ$NJd=u4X?t72$O!$(Bcalc.label $B$N$b$N$HF1$8$h$&$J(B
-% $B$b$N$G$"$k$,!$$3$3$G$O(B key $B%U%#!<%k%I$h$j(B organization $B%U%#!<%k%I$,M%@h(B
-% $B$9$k!%$^$?%=!<%H$N$?$a$K(B organization $B%U%#!<%k%I$N@hF,$N(B "The "$B$O(B
-% $B<h$j=|$/!%(B
+% ここのソートの前処理用の補助関数群は，calc.label のものと同じような
+% ものであるが，ここでは key フィールドより organization フィールドが優先
+% する．またソートのために organization フィールドの先頭の "The "は
+% 取り除く．
 
 FUNCTION {author.sort}
 { author empty$
@@ -3513,9 +3513,9 @@ FUNCTION {editor.organization.sort}
   if$
 }
 
-% sort.key$ $B$J$I$N%(%s%H%j$NJ8;zNsJQ?t$ND9$5$K$O(B entry.max$ $B$N>e8B$,$"$k!%(B
-% $B$=$3$G!$@8@.$9$k%-!<$ND9$5$r$=$l0JFb$H$9$k!%$=$l$@$1$ND9$5$,$"$l$P(B
-% 1$B$D$7$+%^%C%A$9$k$3$H$O$J$$$H2>Dj$9$k!%(B
+% sort.key$ などのエントリの文字列変数の長さには entry.max$ の上限がある．
+% そこで，生成するキーの長さをそれ以内とする．それだけの長さがあれば
+% 1つしかマッチすることはないと仮定する．
 
 FUNCTION {presort}
 #if LAB_ALPH
@@ -3558,19 +3558,19 @@ FUNCTION {presort}
 
 ITERATE {presort}
 
-% $B%=!<%H$N=`Hw$O@0$C$?!%(B
+% ソートの準備は整った．
 
 SORT
 
 #endif SORTED
 
-% $B$3$NCm<a$O%=!<%H$5$l$?J8;zNs%i%Y%k$r:n$k;~$N$_$"$F$O$^$k!%(B
+% この注釈はソートされた文字列ラベルを作る時のみあてはまる．
 %
-% $BJ8;zNs%i%Y%k$N:G=*%9%F!<%8$G$"$j!$I,MW$K1~$8$F(B 'a', 'b' $B$J$I$r(B
-% $BIU2C$9$k!%(B2$B$D$N%Q%9$+$i$J$k!%(B 'b', 'c' $B$rIU2C$9$k$?$a$NA08~$-%Q%9$H!$(B
-% 'a' $B$rIU2C$9$k$?$a$N8e8~$-%Q%9$+$i$J$k!%(B('b' $B$,$J$1$l$P(B'a'$B$OIU2C$9$k(B
-% $BI,MW$O$J$$(B)
-% "thebibliography"$B4D6-$N$?$a$K(B width$ $B$G7W$C$F:G$bD9$$%i%Y%k$r5a$a$F$*$/!%(B
+% 文字列ラベルの最終ステージであり，必要に応じて 'a', 'b' などを
+% 付加する．2つのパスからなる． 'b', 'c' を付加するための前向きパスと，
+% 'a' を付加するための後向きパスからなる．('b' がなければ'a'は付加する
+% 必要はない)
+% "thebibliography"環境のために width$ で計って最も長いラベルを求めておく．
 %
 % VAR: longest.label, last.sort.label, next.extra: string
 %      longest.label.width, last.extra.num: integer
@@ -3660,8 +3660,8 @@ REVERSE {reverse.pass}
 
 #else !SORTED
 
-% $BJ8;zNs%i%Y%k$r;H$&;~$K$O!V0zMQ=g!W$N;29MJ88%%j%9%H$H$9$k$N$O(B
-% $B$"$^$jNI$/$J$$!%$7$+$7$=$N>l9g$KHw$($F:G$bD9$$%i%Y%k$r5a$a$F$*$/!%(B
+% 文字列ラベルを使う時には「引用順」の参考文献リストとするのは
+% あまり良くない．しかしその場合に備えて最も長いラベルを求めておく．
 
 STRINGS { longest.label }
 
@@ -3690,9 +3690,9 @@ ITERATE {longest.label.pass}
 #else !LAB_ALPH
 
 
-% $B?t;z%i%Y%k$r5a$a$k!%%=!<%H$5$l$?=gHV!$$"$k$$$O85$N=gHV$G=hM}$9$k!%(B
-% "thebibliography" environment $B$GI,MW$J>pJs$G$"$k!$(B
-% width$ $B$G7W$C$F:G$bD9$$%i%Y%k$bF1;~$K5a$a$F$*$/!%(B
+% 数字ラベルを求める．ソートされた順番，あるいは元の順番で処理する．
+% "thebibliography" environment で必要な情報である，
+% width$ で計って最も長いラベルも同時に求めておく．
 
 STRINGS { longest.label }
 
@@ -3721,12 +3721,12 @@ ITERATE {longest.label.pass}
 
 #endif LAB_ALPH
 
-% .BBL $B%U%!%$%k$K=q$-=P$9=`Hw$,@0$C$?!%(B
-% $B@h$:J8;zNs%i%Y%k$G>JN,$5$l$?L>A0$r<($9$N$K;H$&(B LaTeX $B%^%/%m$rI,MW$K(B
-% $B1~$8$F=q$-$@$7!$<!$K%G!<%?%Y!<%9Cf$N(B `preamble' $B%3%^%s%I$NCf?H$r=q$-=P$9!%(B
-% $B$=$7$F(B
+% .BBL ファイルに書き出す準備が整った．
+% 先ず文字列ラベルで省略された名前を示すのに使う LaTeX マクロを必要に
+% 応じて書きだし，次にデータベース中の `preamble' コマンドの中身を書き出す．
+% そして
 %     \begin{thebibliography}{...}
-% $B$r=q$-=P$9!%$3$3$G(B `...'$B$O(B width$ $B$G7W;;$7$F:G$bD9$$%i%Y%k$G$"$k!%(B
+% を書き出す．ここで `...'は width$ で計算して最も長いラベルである．
 
 FUNCTION {begin.bib}
 #if LAB_ALPH
@@ -3748,11 +3748,11 @@ EXECUTE {begin.bib}
 
 EXECUTE {init.state.consts}
 
-% $BA4$F$N%(%s%H%j$r=PNO$9$k!%(B
+% 全てのエントリを出力する．
 
 ITERATE {call.type$}
 
-% $B:G8e$K(B `\end{thebibliography}' $B%3%^%s%I$r=q$-=P$7$F$*$7$^$$!*(B
+% 最後に `\end{thebibliography}' コマンドを書き出しておしまい！
 
 FUNCTION {end.bib}
 { newline$
