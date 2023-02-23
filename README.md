@@ -12,6 +12,8 @@ All the text files containing Japanese characters are encoded in
 UTF-8. This is because UTF-8 encoded texts are most suitable
 for the latest pTeX and pBibTeX programs
 with feature of automatic encoding conversion.
+If you are using older versions (TeX Live 2022 or older),
+please download files in jis/ directory.
 
 ## Repository
 
