@@ -161,3 +161,6 @@ TSWLatexianTemp*
 
 # tests
 tests/*.pdf
+
+# temporary directory
+jis0/*
